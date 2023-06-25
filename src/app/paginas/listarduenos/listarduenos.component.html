@@ -1,250 +1,358 @@
-
+<section class="content">
+  <div class="container-fluid">
     <div class="content-header">
-        <div class="container-  fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dueños de mascotas</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Listar dueños</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dueños de mascotas</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Listar dueños</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content container">
-        <div class="card card-danger">
-
-            <div class="card-header" style="background-color: #16817A; ">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="input-group mb-2">
-                            <input type="text" class="form-control rounded-0" placeholder="Buscar dueño">
-                            <span class="input-group-append">
-                                <button type="button" class="btn btn-info btn-flat">Buscar!</button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-block bg-gradient-info " data-toggle="modal" data-target="#modalDueno">
-                            <i class="fa-solid fa-plus"></i> Registrar Dueño
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-block bg-gradient-primary " data-toggle="modal" data-target="#modalDueno">
-                            <i class="fa-regular fa-file"></i> Dueños Registrados PDF
-                        </button>
-                    </div>
-
-                </div>
+    <div class="card card-danger">
+      <div class="card-header" style="background-color: #16817a">
+        <div class="row">
+          <div class="col-md-7">
+            <div class="input-group mb-2">
+              <input
+                type="text"
+                class="form-control rounded-0"
+                placeholder="Buscar dueño"
+              />
+              <span class="input-group-append">
+                <button type="button" class="btn btn-info btn-flat">
+                  Buscar!
+                </button>
+              </span>
             </div>
-            <!-- MODAL PARA REGISTAR LOS DUEÑOS -->
-            <div class="modal fade" id="modalDueno">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header colorVerdeBackground " >
-                            <h4 class="modal-title colorVerdeLetras padding-right">Registrar Dueños</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control" placeholder="Ingrese el nombre del due&ntilde;o" name="nombreD">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-
-                                        <div class="form-group">
-                                            <label>Apellido Paterno</label>
-                                            <input type="text" class="form-control" placeholder="Ingrese el apellido paterno" name="apPD">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Apellido materno</label>
-                                            <input type="text" class="form-control" placeholder="Ingrese el apellido materno" name="apMD">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Carnet</label>
-                                            <input type="text" class="form-control" placeholder="Ingrese el número de carnet" name="carnetD">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Teléfono o celular</label>
-                                            <input type="text" class="form-control" placeholder="Ingrese el teléfono" name="telD">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" class="form-control" name="dirD" placeholder="Ingrese la dirección de su domicilio">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-12">
-                                        <!-- text input -->
-                                        <div class="form-group">
-                                            <label>Correo</label>
-                                            <input type="text" class="form-control" name="correoD" placeholder="Ingrese un correo">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-danger " data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar datos</button>
-                                </div>
-                                
-                            </form>
-                        </div>
-
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- MOSTRAR LOS DUEÑOS -->
-            <div class="card-body p-0">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 1%">
-                                #
-                            </th>
-                            <th style="width: 15%">
-                                Dueño
-                            </th>
-                            <th style="width: 10%">
-                                Carnet
-                            </th>
-                            <th style="width: 15%">
-                                Direccion
-                            </th>
-                            <th style="width: 15%">
-                                Correo
-                            </th>
-                            <th style="width: 15%">
-                                Celular
-                            </th>
-                            <th style="width: 25%">
-                                acciones
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-
-                    </tbody>
-                </table>
-            </div>
-            <!-- MODAL PARA EDITAR LOS DUEÑOS -->
-            <div class="modal fade" id="modalEditarDueno">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #16817A;">
-                            <h4 class="modal-title" style="color:aliceblue; padding-right: 50px ;">Editar Dueño</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <input type="hidden" class="form-control" value="" name="idEd" id="idEd">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Nombre</label>
-                                            <input type="text" class="form-control" value="" name="editarnombreD" id="editarnombreD">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-
-                                        <div class="form-group">
-                                            <label>Apellido Paterno</label>
-                                            <input type="text" class="form-control" value="" id="editarapPD" name="editarapPD">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Apellido materno</label>
-                                            <input type="text" class="form-control" value="" id="editarapMD" name="editarapMD">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Carnet</label>
-                                            <input type="number" class="form-control" value="" name="editarcarnetD" id="editarcarnetD">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Telefono</label>
-                                            <input type="number" class="form-control" value="" id="editartelD" name="editartelD">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" class="form-control" id="editardirD" name="editardirD" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-12">
-                                        <!-- text input -->
-                                        <div class="form-group">
-                                            <label>Correo</label>
-                                            <input type="email" class="form-control" id="editarcorreoD" name="editarcorreoD" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-danger " data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar datos</button>
-                                </div>
-                               
-                            </form>
-                        </div>
-
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
+          </div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn btn-block bg-gradient-info"
+              data-toggle="modal"
+              data-target="#modalDueno"
+            >
+              <i class="fa-solid fa-plus"></i> Registrar Dueño
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-block bg-gradient-primary"
+              data-toggle="modal"
+              data-target="#modalDueno"
+            >
+              <i class="fa-regular fa-file"></i> Dueños Registrados PDF
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
+      <!-- MODAL PARA REGISTAR LOS DUEÑOS -->
+      <div class="modal fade" id="modalDueno">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header colorVerdeBackground">
+              <h4 class="modal-title colorVerdeLetras padding-right">
+                Registrar Dueños
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="post">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Nombre</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingrese el nombre del due&ntilde;o"
+                        name="nombreD"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Apellido Paterno</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingrese el apellido paterno"
+                        name="apPD"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Apellido materno</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingrese el apellido materno"
+                        name="apMD"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Carnet</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingrese el número de carnet"
+                        name="carnetD"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Teléfono o celular</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ingrese el teléfono"
+                        name="telD"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label>Dirección</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="dirD"
+                        placeholder="Ingrese la dirección de su domicilio"
+                      />
+                    </div>
+                  </div>
+                </div>
 
+                <div class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Correo</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="correoD"
+                        placeholder="Ingrese un correo"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Cerrar
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Guardar datos
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- MOSTRAR LOS DUEÑOS -->
+      <div class="card-body p-0">
+        <table id="example2" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th style="width: 1%">#</th>
+              <th style="width: 15%">Dueño</th>
+              <th style="width: 10%">Carnet</th>
+              <th style="width: 15%">Direccion</th>
+              <th style="width: 15%">Correo</th>
+              <th style="width: 15%">Celular</th>
+              <th style="width: 25%">acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <!-- MODAL PARA EDITAR LOS DUEÑOS -->
+      <div class="modal fade" id="modalEditarDueno">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #16817a">
+              <h4
+                class="modal-title"
+                style="color: aliceblue; padding-right: 50px"
+              >
+                Editar Dueño
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="post">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <input
+                        type="hidden"
+                        class="form-control"
+                        value=""
+                        name="idEd"
+                        id="idEd"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Nombre</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        value=""
+                        name="editarnombreD"
+                        id="editarnombreD"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Apellido Paterno</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        value=""
+                        id="editarapPD"
+                        name="editarapPD"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Apellido materno</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        value=""
+                        id="editarapMD"
+                        name="editarapMD"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Carnet</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        value=""
+                        name="editarcarnetD"
+                        id="editarcarnetD"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="form-group">
+                      <label>Telefono</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        value=""
+                        id="editartelD"
+                        name="editartelD"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                      <label>Dirección</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editardirD"
+                        name="editardirD"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 col-md-6 col-lg-12">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Correo</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="editarcorreoD"
+                        name="editarcorreoD"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Cerrar
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Guardar datos
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+  </div>
+</section>

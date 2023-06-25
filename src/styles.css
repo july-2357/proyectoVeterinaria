@@ -9,3 +9,16 @@
     background: #024249;
 }
 
+.naranjaBackground{
+    background: #fa744f;
+}
+.colorBlancoLetras{
+    color: #ffffff;
+}
+.headerCardConsultas{
+    background: #16817A;
+    color: #ffffff;
+}
+.headerCardConsultas .ul.li{
+    color: #ffffff;
+}

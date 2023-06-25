@@ -1,0 +1,636 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Consultas</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+          <li class="breadcrumb-item active">Consultas</li>
+        </ol>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</div>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header p-2 ">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a class="nav-link active" href="#consultas" data-toggle="tab"
+                  >CONSULTA</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#vacunas" data-toggle="tab"
+                  >VACUNAS</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#cirugias" data-toggle="tab"
+                  >Cirugias</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#otros" data-toggle="tab">Otros</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content">
+              <!-- Ventana  Vacunas -->
+              <div class="active tab-pane" id="consultas">
+                <div class="card-body p-0">
+                  <form method="POST">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-12">
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <label>ANAMNESIS</label>
+                            <hr />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>¿Come?</label>
+                              <div class="icheck-success d-inline">
+                                <input type="checkbox" id="comeSi" />
+                                <label for="checkboxSuccess2"> SI </label>
+                              </div>
+                              <div class="icheck-danger d-inline">
+                                <input type="checkbox" id="comeNo" checked />
+                                <label for="checkboxPrimary1"> NO </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>¿Está activo?</label>
+                              <div class="icheck-success d-inline">
+                                <input type="checkbox" id="activoSi" checked />
+                                <label for="checkboxSuccess2"> SI </label>
+                              </div>
+                              <div class="icheck-danger d-inline">
+                                <input type="checkbox" id="activoNo" />
+                                <label for="checkboxPrimary1"> NO </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>¿Vomitos?</label>
+                              <div class="icheck-danger d-inline">
+                                <input type="checkbox" id="vomitosSI" />
+                                <label for="checkboxPrimary1"> SI </label>
+                              </div>
+                              <div class="icheck-success d-inline">
+                                <input type="checkbox" id="VomitosNo" checked />
+                                <label for="checkboxSuccess2"> NO </label>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>¿Diarrea? </label>
+                              <div class="icheck-danger d-inline">
+                                <input type="checkbox" id="diarreaSi" checked />
+                                <label for="checkboxPrimary1"> SI </label>
+                              </div>
+                              <div class="icheck-success d-inline">
+                                <input type="checkbox" id="diarreaNo" />
+                                <label for="checkboxSuccess2"> NO </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <label>CONTROL MÉDICO</label>
+                            <hr />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Temperatura</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="contraV"
+                                id="contraV"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Frecuencia cardiaca</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="contraV"
+                                id="contraV"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Frecuencia respiratoria</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="contraV"
+                                id="contraV"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group">
+                              <label>Peso</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="contraV"
+                                id="contraV"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <label>CONSULTA</label>
+                            <hr />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Motivo de la consulta</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="laboratorio"
+                                id="laboratorio"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Diágnostico</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="laboratorio"
+                                id="laboratorio"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Tratamiento</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="laboratorio"
+                                id="laboratorio"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-4 col-lg-4">
+                            <button
+                              type="button"
+                              class="btn btn-block btn-danger disabled"
+                            >
+                              Cerrar
+                            </button>
+                          </div>
+                          <div class="col-sm-12 col-md-8 col-lg-8">
+                            <button
+                              type="submit"
+                              class="btn btn-block btn-info"
+                              name="GUARDAR"
+                            >
+                              REGISTRAR
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!----- Ventana  Desparacitaciones -->
+              <div class="tab-pane" id="vacunas">
+                <div class="card-body p-0">
+                  <form method="POST">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-12">
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg 2">
+                            <label>CONTRA</label>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-10">
+                            <div class="row">
+                              <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                    <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                    <label for="customCheckbox1" class="custom-control-label">Coronavirus</label>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                    <label for="customCheckbox1" class="custom-control-label">Hepatitis</label>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12 col-md-6 col-lg-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                    <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
+                                  </div>
+                              </div>
+                            </div>
+                            <br><br>                        
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                  <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                      <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                  <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                      <label for="customCheckbox1" class="custom-control-label">Coronavirus</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                  <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                      <label for="customCheckbox1" class="custom-control-label">Hepatitis</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                  <div class="custom-control custom-checkbox">
+                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                      <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-4 col-lg-4">
+                            <button
+                              type="button"
+                              class="btn btn-block btn-danger disabled"
+                            >
+                              Cerrar
+                            </button>
+                          </div>
+                          <div class="col-sm-12 col-md-8 col-lg-8">
+                            <button
+                              type="submit"
+                              class="btn btn-block btn-info"
+                              name="GUARDAR"
+                            >
+                              REGISTRAR
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.tab-pane -->
+              <!-- Ventana  Cirugias -->
+              <div class="tab-pane" id="cirugias">
+                <div class="card-body p-0">
+                  <form method="POST">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-12">
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Nombre mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="nombreD"
+                                placeholder="Jalar los datos de la mascota"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Datos del propietario</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="apePD"
+                                placeholder="jalar datos del propietario"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-2">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Edad de la mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-2">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Peso de la mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <label>Datos de la vacuna</label>
+                            <hr />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Fecha</label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Observación</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Proxima visita</label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group">
+                              <label>Tipo cirugia</label>
+                              <div class="input-group">
+                                <select
+                                  class="form-control input-lg"
+                                  name="sexoM"
+                                >
+                                  <option value="">Seleccione</option>
+                                  <option value="Desparacitación">
+                                    Castrar
+                                  </option>
+                                  <option value="Vitaminas">
+                                    Esterilización
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-12 col-md-4 col-lg-4">
+                            <button
+                              type="button"
+                              class="btn btn-block btn-danger disabled"
+                            >
+                              Cerrar
+                            </button>
+                          </div>
+                          <div class="col-sm-12 col-md-8 col-lg-8">
+                            <button
+                              type="submit"
+                              class="btn btn-block btn-info"
+                              name="GUARDAR"
+                            >
+                              REGISTRAR
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="tab-pane" id="otros">
+                <div class="card-body p-0">
+                  <form method="POST">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-12">
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Nombre mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="nombreD"
+                                placeholder="Jalar los datos de la mascota"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Datos del propietario</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="apePD"
+                                placeholder="jalar datos del propietario"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-2">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Edad de la mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-2">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Peso de la mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <label>Datos</label>
+                            <hr />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Fecha</label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-9">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Motivo visita</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm-12 col-md-4 col-lg-4">
+                            <button
+                              type="button"
+                              class="btn btn-block btn-danger disabled"
+                            >
+                              Cerrar
+                            </button>
+                          </div>
+                          <div class="col-sm-12 col-md-8 col-lg-8">
+                            <button
+                              type="submit"
+                              class="btn btn-block btn-info"
+                              name="GUARDAR"
+                            >
+                              REGISTRAR
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-------------  datos de la mascota -->
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-header naranjaBackground">
+            <h3 class="card-title colorBlancoLetras">Mascota</h3>
+          </div>
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <td><img src="" class="img-thumbnail" width="150px" /></td>
+              <td>
+                <img
+                  src="vistas\assets\dist\img\logoPerroyGato.png"
+                  class="img-thumbnail"
+                  width="150px"
+                />
+              </td>
+            </div>
+            <h3
+              class="profile-username text-center"
+              id="nombreM"
+              name="nombreM"
+            ></h3>
+            <ul class="list-group list-group-unbordered sm-3">
+              <li class="list-group-item">
+                <b>Nombre mascota</b>
+                <a class="float-right" style="color: #000000"></a>
+              </li>
+              <li class="list-group-item">
+                <b>Fecha</b> <a class="float-right" style="color: #000000"></a>
+              </li>
+              <li class="list-group-item">
+                <b>Edad</b>
+                <a class="float-right" style="color: #000000"></a>
+              </li>
+              <li class="list-group-item">
+                <b>Tatuaje</b>
+                <a class="float-right" style="color: #000000"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>

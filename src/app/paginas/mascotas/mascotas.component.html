@@ -1,0 +1,381 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="content-header">
+      <div class="container- fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Mascotas</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Mascotas</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+
+    <div class="card card-danger">
+      <div class="card-header" style="background-color: #16817a">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <button
+              type="button"
+              class="btn btn-block bg-gradient-info"
+              data-toggle="modal"
+              data-target="#registrarMascota"
+            >
+              <i class="fa-solid fa-dog"></i> Registrar nueva mascota
+              <i class="fa-solid fa-cat"></i>
+            </button>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-3">
+            <button
+              type="button"
+              class="btn btn-block bg-gradient-success"
+              data-toggle="modal"
+              data-target="#registrarMascota"
+            >
+              <i class="fa-solid fa-dog"></i> Mascotas Registradas PDF
+              <i class="fa-solid fa-cat"></i>
+            </button>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control rounded-0" />
+              <span class="input-group-append">
+                <button
+                  type="submit"
+                  class="btn btn-info btn-flat"
+                  style="background-color: #fa744f"
+                >
+                  Buscar
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.tarjeta de datos de la mascota -->
+      <div class="card-body pb-0">
+        <div class="row">
+          <div
+            class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column"
+            style="width: 600px"
+          >
+            <div class="card bg-light d-flex flex-fill">
+              <div
+                class="card-header text-muted border-bottom-0 text-center"
+                style="background-color: #fa744f"
+              >
+                <h3 class="m-0" style="color: #ffffff">Datos del paciente</h3>
+              </div>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col-8">
+                    <!-- /<p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p> -->
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="large">
+                        <span class="fa-li"
+                          ><i class="fa-solid fa-user"></i
+                        ></span>
+                        <b>Dueño:&nbsp;&nbsp;&nbsp;</b>
+                      </li>
+                      <li class="medium">
+                        <span class="fa-li"
+                          ><i class="fa-solid fa-droplet"></i
+                        ></span>
+                        <b>Color: </b>
+                      </li>
+                      <li class="medium">
+                        <span class="fa-li"
+                          ><i class="fa-solid fa-hashtag"></i
+                        ></span>
+                        <b>Tatuaje:&nbsp;&nbsp;</b>
+                      </li>
+                      <li class="medium">
+                        <span class="fa-li"
+                          ><i class="fa-solid fa-list-ol"></i></span
+                        ><b>Edad:&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                      </li>
+                      <li class="medium">
+                        <span class="fa-li"
+                          ><i class="fa-brands fa-medium"></i
+                        ></span>
+                        <b>Especie:&nbsp;&nbsp;</b>
+                      </li>
+                      <li class="medium">
+                        <span class="fa-li"
+                          ><i class="fa-solid fa-venus-mars"></i></span
+                        ><b>Sexo:&nbsp;&nbsp;</b>
+                      </li>
+                      <li class="medium">
+                        <span class="fa-li"
+                          ><i class="fa-solid fa-splotch"></i
+                        ></span>
+                        <b>Raza:&nbsp;&nbsp;</b>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4 text-center">
+                    <h3 class="profile-username text-center"><b> </b></h3>
+                    ';
+
+                    <td>
+                      <img src="" class="img-circle img-fluid" width="150px" />
+                    </td>
+                    ';
+                    <td>
+                      <img
+                        src="vistas\assets\dist\img\logoPerroyGato.png"
+                        class="img-circle img-fluid"
+                        width="150px"
+                      />
+                    </td>
+                    ';
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer" style="background-color: #ffc3a1">
+                <div class="text-right">
+                  <a
+                    class="btn btn-success btn-sm btnRegistrarConsulta"
+                    idMascota=""
+                  >
+                    <i class="fa-solid fa-stethoscope"></i>
+                    Nueva consulta
+                  </a>
+                  <a
+                  routerLink="/historial"  
+                  class="btn btn-primary bg-indigo btn-sm btnHistorial"
+                    idMascota=""
+                  >
+                    <i class="fa-solid fa-eye"></i>
+                    Historial
+                  </a>
+                  <a
+                    class="btn btn-info btn-sm btnEditarmascota"
+                    idMascota=""
+                    data-toggle="modal"
+                    data-target="#modalEditarMascota"
+                  >
+                    <i class="fas fa-pencil-alt"></i>
+                    Editar
+                  </a>
+                  <a
+                    class="btn btn-danger btn-sm btnEliminarmascota"
+                    idMascota=""
+                  >
+                    <i class="fas fa-trash"> </i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registar Mascota -->
+      <div class="modal fade" id="registrarMascota">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #16817a">
+              <h4 class="modal-title" style="color: #ffffff">
+                Registrar Nueva Mascota
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                  <div class="col-sm-12 col-md-6 col-lg-8">
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Nombre de la mascota</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="nombreM"
+                            placeholder="Ingrese el nombre de la mascota"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Dueño</label>
+                          <div class="input-group">
+                            <select class="form-control input" name="duenoM">
+                              <option value="">Seleccione el dueño</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Color</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="colorM"
+                            placeholder="Ingrese color(es) de la mascota"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6">
+                        <!-- text input -->
+                        <label>Edad</label>
+                        <!-- text input -->
+                        <br />
+                        <div class="form-group">
+                          <div class="input-group">
+                            <select class="form-control input" name="aniosM">
+                              <option value="0">Selecionar años</option>
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                              <option value="11">11</option>
+                              <option value="12">12</option>
+                              <option value="13">13</option>
+                              <option value="14">14</option>
+                              <option value="15">15</option>
+                            </select>
+                            <select class="form-control input" name="mesesM">
+                              <option value="0">Selecionar meses</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                              <option value="11">11</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Especie</label>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <select
+                                class="form-control input"
+                                name="especieM"
+                              >
+                                <option value="">Selecione especie</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Raza</label>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <select class="form-control input" name="razaM">
+                                <option value="">Selecione raza</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Sexo de la mascota</label>
+                          <div class="input-group">
+                            <select class="form-control input-lg" name="sexoM">
+                              <option value="">Selecionar sexo</option>
+                              <option value="Macho">Macho</option>
+                              <option value="Hembra">Hembra</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-sm-4 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Tatuaje (Opcional)</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="tatuajeM"
+                            placeholder="Ingrese el tatuaje si la mascota lo tiene."
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="form-group justify-content-between">
+                        <div class="panel">SUBIR FOTO</div>
+
+                        <input type="file" class="nuevaFoto" name="nuevaFoto" />
+
+                        <p class="help-block">Peso máximo de la foto 2MB</p>
+
+                        <img
+                          src="vistas\assets\dist\img\logoPerroyGato.png"
+                          class="img-thumbnail previsualizar"
+                          width="100px"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Cerrar
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Guardar datos
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+    </div>
+  </div>
+</section>
