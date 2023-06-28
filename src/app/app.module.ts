@@ -10,6 +10,9 @@ import { MascotasComponent } from './paginas/mascotas/mascotas.component';
 import { ConsultasComponent } from './paginas/consultas/consultas.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { HistorialComponent } from './paginas/historial/historial.component';
+import { UsuariosComponent } from './paginas/usuarios/usuarios.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,17 @@ import { HistorialComponent } from './paginas/historial/historial.component';
     MascotasComponent,
     ConsultasComponent,
     LoginComponent,
-    HistorialComponent
+    HistorialComponent,
+    UsuariosComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ElementosModule
+    ElementosModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

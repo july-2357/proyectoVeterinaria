@@ -1,0 +1,237 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="content-header">
+      <div class="container- fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Usuarios</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Usuario</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="card card-solid">
+          <!-- /.Cabecera buscar -->
+          <div class="card card-danger">
+            <div class="card-header" style="background-color: #16817a">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="input-group mb-3">
+                      <!--  -->
+                      <input
+                        type="text"
+                        class="form-control rounded-0"
+                        placeholder="Buscar usuario"
+                      />
+                      <span class="input-group-append">
+                        <button type="button" class="btn btn-info btn-flat">
+                          Buscar!
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <button
+                      type="button"
+                      class="btn btn-block bg-gradient-info"
+                      data-toggle="modal"
+                      data-target="#modal-lg"
+                    >
+                      <i class="fa-solid fa-plus"></i> Nuevo veterinario
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.Modal registrar usuario -->
+          <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #16817a">
+                  <h4 class="modal-title" style="color: aliceblue">
+                    Registrar nuevo usuario
+                  </h4>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="formRegistrar">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Nombre(s)</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Ingrese nombre"
+                            formControlName="primerNombreU"
+                            />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Apellido Paterno</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="primerApellidoU"
+
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Apellido materno</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="segundoApellidoU"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Carnet</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="carnet"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Célular / Teléfono</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="celular"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Dirección</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="direccion"
+                            placeholder=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Correo electrónico</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="correo"
+                            placeholder="Ingrese un nombre de usuario para ingresar al sistema"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Contraseña</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            formControlName="contrasena"
+                            placeholder="Ingrese una contraseña para ingresar al sistema"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-4">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Asignar rol</label>
+                          <span class="input-group-addon"></span>
+                          <select class="form-control input-lg" name="rolU">
+                            <option>Roles</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Veterinario</option>
+                            <option value="3">Vendedor</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <div class="row">
+                      <div class="col-sm-6 col-md-6 col-lg-12">
+                        <div class="form-group">
+                          <label>Subir foto del usuario a registrar</label>
+                          <input
+                            type="file"
+                            class="nuevaFoto"
+                            name="nuevaFoto"
+                          />
+                          <p class="help-block">Peso máximo de la foto 2MB</p>
+                          <img
+                            src="vistas/assets/dist/img/avatar3.png"
+                            class="img-thumbnail previsualizar"
+                            width="100px"
+                          />
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="modal-footer justify-content-between">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Cerrar
+                      </button>
+                      <button type="button" (click)="guardar()" class="btn btn-primary">
+                        Guardar datos
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+          <!-- MODAL PARA EDITAR USUARIOS-->
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+  </div>
+</section>

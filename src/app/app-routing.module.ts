@@ -6,6 +6,7 @@ import { MascotasComponent } from './paginas/mascotas/mascotas.component';
 import { ConsultasComponent } from './paginas/consultas/consultas.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { HistorialComponent } from './paginas/historial/historial.component';
+import { UsuariosComponent } from './paginas/usuarios/usuarios.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' }, // Ruta predeterminada, redirige a /home
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'consultas', component: ConsultasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'historial', component: HistorialComponent },
+  { path: 'usuarios', component: UsuariosComponent }
 ];
 
 @NgModule({
