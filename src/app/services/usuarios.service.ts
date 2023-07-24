@@ -18,8 +18,8 @@ export class UsuariosService {
 //   "idCuentaIdentity": "a"
 // }
 
-async enviarCrearUsuarioService(contrasena:string, cuerpo:crearUsuario){
-  let crear=`https://localhost:7101/api/Cuentas/CrearCuentaUsuario?password=${contrasena}`;
+async enviarCrearUsuarioService(contrasena:string, rol:string, cuerpo:FormData){
+  let crear=`https://localhost:7101/api/Cuentas/CrearCuentaUsuario?password=${contrasena}&rol=${rol}`;
   let resultado= await this.http.post<any>(crear,cuerpo).toPromise();
   return resultado;
 }

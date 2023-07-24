@@ -1,0 +1,9 @@
+.fotoPrevisualizacion {
+  width: 75px; /* Ancho deseado para la previsualización */
+  height: 75px; /* Altura deseada para la previsualización */
+  border: 1px solid #ccc;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

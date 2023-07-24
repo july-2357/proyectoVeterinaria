@@ -1,0 +1,33 @@
+/*Para consultas*/
+.pregunta {
+  color: #578072;
+  font-size: 15px;
+  padding: 5px 0;
+  font-weight: bold;
+}
+.form-check-input[type="radio"]:checked {
+  background-color: rgb(
+    203,
+    215,
+    203
+  ); /* Cambia el color de fondo al seleccionar */
+  border-color: rgb(
+    221,
+    231,
+    221
+  ); /* Cambia el color del borde al seleccionar */
+}
+
+.form-check-input[type="radio"]:checked::before {
+  transform: scale(1.4); /* Aumenta el tamaño del check */
+}
+/* .laberForm {
+  color: #030303;
+  font-size: 15px;
+  padding: 5px 0;
+  font-weight: bold;
+} */
+.formVac {
+  margin: 0px 0px 5px 5px; /* Espacio arriba y abajo de 10px, sin espacio a los lados */
+  padding: 10px; /* Espacio interno de 10px en todas las direcciones */
+}

@@ -1,75 +1,41 @@
-/* body {
-  background: url();
-  background-size: cover;
+
+.container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  width: 300px;
 }
 
 h1 {
-  color: #fa744f;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-h3 {
-  color: #fa744f;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 
-.main-section {
-  margin: 0 auto;
-  margin-top: 25%;
-  padding: 0;
+label {
+  display: block;
+  margin-bottom: 10px;
 }
 
-.modal-content {
-  background-color: #024249;
-  opacity: 0.85;
-  padding: 0 20px;
-  box-shadow: 0px 0px 3px #fa744f;
-}
-
-.user-img {
-  margin-top: -50px;
-  margin-bottom: 35px;
-}
-
-.user-img img {
-  width: 100xp;
-  height: 100px;
-  box-shadow: 0px 0px 3px #fa744f;
-  border-radius: 50%;
-}
-
-.form-group input {
-  height: 42px;
-  font-size: 18px;
-  border: 0;
-  padding-left: 54px;
-  border-radius: 5px;
-}
-
-.form-group::before {
-  font-family: "Font Awesome\ 5 Free";
-  position: absolute;
-  left: 28px;
-  font-size: 22px;
-  padding-top: 4px;
-}
-
-.form-group#user-group::before {
-  content: "\f007";
-}
-
-.form-group#contrasena-group::before {
-  content: "\f023";
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
 }
 
 button {
-  width: 60%;
-  margin: 5px 0 25px;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
-.forgot {
-  padding: 5px 0;
+button:hover {
+  background-color: #45a049;
 }
-
-.forgot a {
-  color: white;
-} */

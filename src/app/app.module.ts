@@ -13,6 +13,7 @@ import { HistorialComponent } from './paginas/historial/historial.component';
 import { UsuariosComponent } from './paginas/usuarios/usuarios.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PrincipalComponent } from './paginas/principal/principal.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     ConsultasComponent,
     LoginComponent,
     HistorialComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    PrincipalComponent
 
   ],
   imports: [

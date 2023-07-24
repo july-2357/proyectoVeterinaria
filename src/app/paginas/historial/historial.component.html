@@ -1,15 +1,4 @@
-<div class="content-header">
-  <div class="container- fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1 class="m-0">Mascotas</h1>
-      </div>
-      <!-- /.col -->
-    </div>
-    <!-- /.row -->
-  </div>
-  <!-- /.container-fluid -->
-</div>
+<div class="content-header"></div>
 <!-- /.content-header -->
 
 <!-- Main content -->
@@ -19,20 +8,16 @@
     <div class="row">
       <div class="col-md-3">
         <!-------------  datos de la mascota -->
-        <div class="card card-primary">
-          <div class="card-header" style="background-color: #fa744f">
-            <h3 class="card-title">Mascota</h3>
-          </div>
+        <div class="card lineaArriba">
           <div class="card-body box-profile">
             <div class="text-center">
-              <td><img src="" class="img-thumbnail" width="150px" /></td>
-              <td>
+              <div class="text-center">
                 <img
-                  src="vistas\assets\dist\img\logoPerroyGato.png"
-                  class="img-thumbnail"
-                  width="150px"
+                  class="profile-user-img img-fluid"
+                  src="assets/dist/img/logoPerroyGato.png"
+                  alt="User profile picture"
                 />
-              </td>
+              </div>
             </div>
             <h3
               class="profile-username text-center"
@@ -64,27 +49,22 @@
           </div>
         </div>
         <!------------------- DATOS DEL DUENO--->
-        <div class="card card-primary">
-          <div class="card-header" style="background-color: #fa744f">
+        <div class="card lineaArriba">
+          <div class="card-header ">
             <h3 class="card-title">Propietario</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <strong><i class="fas fa-book mr-1"></i> Nombre</strong>
-            <p class="text-muted"></p>
-            <hr />
-            <strong
-              ><i class="fas fa-map-marker-alt mr-1"></i> Dirección</strong
-            >
-            <p class="text-muted"></p>
-            <hr />
-            <strong><i class="fa-solid fa-phone"></i> Telefono/Celular</strong>
-            <p class="text-muted">
-              <span class="tag tag-danger"> </span>
-            </p>
-            <hr />
-            <strong><i class="fa-solid fa-at"></i> Correo electrónico</strong>
-            <p class="text-muted"></p>
+            <dl class="row">
+              <dt class="col-sm-5">Nombre</dt>
+              <dd class="col-sm-7">Nombre del dueño</dd>
+              <dt class="col-sm-5">Dirección</dt>
+              <dd class="col-sm-7">dir</dd>
+              <dt class="col-sm-5">Teléfono</dt>
+              <dd class="col-sm-7">222565899</dd>
+              <dt class="col-sm-5">Correo Electronico</dt>
+              <dd class="col-sm-7">02/05/1998</dd>
+            </dl>
           </div>
           <!-- /.card-body -->
         </div>

@@ -21,26 +21,39 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-9">
-        <div class="card">
-          <div class="card-header p-2 ">
-            <ul class="nav nav-pills">
+        <div class="card card-outline">
+          <div class="card-header p-0 pt-1 border-bottom-0 headerCardConsultas">
+            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" href="#consultas" data-toggle="tab"
+                <a
+                  class="nav-link textoNav active"
+                  href="#consultas"
+                  data-toggle="tab"
                   >CONSULTA</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#vacunas" data-toggle="tab"
+                <a class="nav-link textoNav" href="#vacunas" data-toggle="tab"
                   >VACUNAS</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#cirugias" data-toggle="tab"
+                <a
+                  class="nav-link textoNav"
+                  href="#desparacitaciones"
+                  data-toggle="tab"
+                  >DESPARACITACIONES</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link textoNav" href="#cirugias" data-toggle="tab"
                   >Cirugias</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#otros" data-toggle="tab">Otros</a>
+                <a class="nav-link textoNav" href="#otros" data-toggle="tab"
+                  >Otros</a
+                >
               </li>
             </ul>
           </div>
@@ -50,132 +63,401 @@
               <!-- Ventana  Vacunas -->
               <div class="active tab-pane" id="consultas">
                 <div class="card-body p-0">
-                  <form method="POST">
+                  <form [formGroup]="formRegistrarConsulta">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-12">
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-12">
-                            <label>ANAMNESIS</label>
-                            <hr />
+                            <div class="titulo">Anamnesis</div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>¿Come?</label>
-                              <div class="icheck-success d-inline">
-                                <input type="checkbox" id="comeSi" />
-                                <label for="checkboxSuccess2"> SI </label>
+                            <div class="form-group centrar">
+                              <div class="pregunta">Apetito</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="mayorAp"
+                                  name="apetitoName"
+                                  formControlName="apetito"
+                                  value="Mayor Apetito"
+                                />
+                                <label class="form-check-label"
+                                  >Mayor apetito</label
+                                >
                               </div>
-                              <div class="icheck-danger d-inline">
-                                <input type="checkbox" id="comeNo" checked />
-                                <label for="checkboxPrimary1"> NO </label>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="normalAp"
+                                  name="apetitoName"
+                                  formControlName="apetito"
+                                  value="Normal"
+                                />
+                                <label class="form-check-label">Normal</label>
                               </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>¿Está activo?</label>
-                              <div class="icheck-success d-inline">
-                                <input type="checkbox" id="activoSi" checked />
-                                <label for="checkboxSuccess2"> SI </label>
-                              </div>
-                              <div class="icheck-danger d-inline">
-                                <input type="checkbox" id="activoNo" />
-                                <label for="checkboxPrimary1"> NO </label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>¿Vomitos?</label>
-                              <div class="icheck-danger d-inline">
-                                <input type="checkbox" id="vomitosSI" />
-                                <label for="checkboxPrimary1"> SI </label>
-                              </div>
-                              <div class="icheck-success d-inline">
-                                <input type="checkbox" id="VomitosNo" checked />
-                                <label for="checkboxSuccess2"> NO </label>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="menorAp"
+                                  name="apetitoName"
+                                  formControlName="apetito"
+                                  value="Menor apetito"
+                                />
+                                <label class="form-check-label">Menor</label>
                               </div>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>¿Diarrea? </label>
-                              <div class="icheck-danger d-inline">
-                                <input type="checkbox" id="diarreaSi" checked />
-                                <label for="checkboxPrimary1"> SI </label>
+                            <div class="form-group centrar">
+                              <div class="pregunta">Ingesta de agua</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="aguaIn"
+                                  name="agua"
+                                  formControlName="agua"
+                                  value="Incremento"
+                                />
+                                <label for="aguaIn" class="form-check-label"
+                                  >Incremento</label
+                                >
                               </div>
-                              <div class="icheck-success d-inline">
-                                <input type="checkbox" id="diarreaNo" />
-                                <label for="checkboxSuccess2"> NO </label>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="aguaNor"
+                                  name="agua"
+                                  formControlName="agua"
+                                  value="Normal"
+                                />
+                                <label for="aguaNor" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="aguaDis"
+                                  name="agua"
+                                  formControlName="agua"
+                                  value="Disminuyó"
+                                />
+                                <label for="aguaDis" class="form-check-label"
+                                  >Disminuyó</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Conducta</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="conductaLet"
+                                  name="conducta"
+                                  formControlName="conducta"
+                                  value="Letargo o apatía"
+                                />
+                                <label
+                                  for="conductaLet"
+                                  class="form-check-label"
+                                >
+                                  Letargo o apatía</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="conductaNor"
+                                  name="conducta"
+                                  formControlName="conducta"
+                                  value="Normal"
+                                />
+                                <label
+                                  for="conductaNor"
+                                  class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="conductaAgre"
+                                  name="conducta"
+                                  formControlName="conducta"
+                                  value="Agresividad o irritabilidad"
+                                />
+                                <label
+                                  for="conductaAgre"
+                                  class="form-check-label"
+                                  >Agresividad o irritabilidad</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Defecación</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="defEs"
+                                  name="defecacion"
+                                  formControlName="defecacion"
+                                  value="Estreñimiento"
+                                />
+                                <label for="defEs" class="form-check-label"
+                                  >Estreñimiento</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="defNor"
+                                  name="defecacion"
+                                  formControlName="defecacion"
+                                  value="Normal"
+                                />
+                                <label for="defNor" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="defDia"
+                                  name="defecacion"
+                                  formControlName="defecacion"
+                                  value="Diarrea"
+                                />
+                                <label for="defDia" class="form-check-label"
+                                  >Diarrea</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group centrar">
+                              <div class="pregunta">
+                                Alteraciones neurológicas
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="neuCon"
+                                  name="alteracionesNeuro"
+                                  formControlName="alteracionesNeuro"
+                                  value="Convulsiones"
+                                />
+                                <label for="neuCon" class="form-check-label"
+                                  >Convulsiones</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="neuNor"
+                                  name="alteracionesNeuro"
+                                  formControlName="alteracionesNeuro"
+                                  value="Normal"
+                                />
+                                <label for="neuNor" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="neuFCoor"
+                                  name="alteracionesNeuro"
+                                  formControlName="alteracionesNeuro"
+                                  value="Falta de coordinación"
+                                />
+                                <label for="neuFCoor" class="form-check-label"
+                                  >Falta de coordinación</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Problemas urinarios</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="frecA"
+                                  name="problemasUr"
+                                  formControlName="problemasUr"
+                                  value="Frecuencia aumentada"
+                                />
+                                <label for="frecA" class="form-check-label"
+                                  >Frecuencia aumentada</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="dificO"
+                                  name="problemasUr"
+                                  formControlName="problemasUr"
+                                  value="Dificultad para orinar"
+                                />
+                                <label for="dificO" class="form-check-label"
+                                  >Dificultad para orinar</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="sangreO"
+                                  name="problemasUr"
+                                  formControlName="problemasUr"
+                                  value="Presencia de sangre en la orina"
+                                />
+                                <label for="sangreO" class="form-check-label"
+                                  >Presencia de sangre en la orina</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="normalO"
+                                  name="problemasUr"
+                                  formControlName="problemasUr"
+                                  value="Normal"
+                                />
+                                <label for="normalO" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group centrar">
+                              <div class="pregunta">
+                                Alteraciones respiratorias
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="resDif"
+                                  name="alteracionesRes"
+                                  formControlName="alteracionesRes"
+                                  value="Dificultad para respirar"
+                                />
+                                <label for="resDif" class="form-check-label"
+                                  >Dificultad para respirar</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="resNor"
+                                  name="alteracionesRes"
+                                  formControlName="alteracionesRes"
+                                  value="Normal"
+                                />
+                                <label for="resNor" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="resTos"
+                                  name="alteracionesRes"
+                                  formControlName="alteracionesRes"
+                                  value="Tos o estornudos frecuentes"
+                                />
+                                <label for="resTos" class="form-check-label"
+                                  >Tos o estornudos frecuentes</label
+                                >
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-12">
-                            <label>CONTROL MÉDICO</label>
-                            <hr />
+                            <div class="titulo">Control medico</div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-3">
                             <!-- text input -->
                             <div class="form-group">
-                              <label>Temperatura</label>
+                              <div class="pregunta">Temperatura</div>
                               <input
-                                type="text"
+                                type="number"
                                 class="form-control"
-                                name="contraV"
-                                id="contraV"
+                                formControlName="temperatura"
                               />
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
                             <!-- text input -->
                             <div class="form-group">
-                              <label>Frecuencia cardiaca</label>
+                              <div class="pregunta">Frecuencia cardiaca</div>
                               <input
                                 type="text"
                                 class="form-control"
-                                name="contraV"
-                                id="contraV"
+                                formControlName="frecCardiaca"
                               />
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
                             <!-- text input -->
                             <div class="form-group">
-                              <label>Frecuencia respiratoria</label>
+                              <div class="pregunta">
+                                Frecuencia respiratoria
+                              </div>
                               <input
                                 type="text"
                                 class="form-control"
-                                name="contraV"
-                                id="contraV"
+                                formControlName="frecRespiratoria"
                               />
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group">
-                              <label>Peso</label>
+                              <div class="pregunta">Peso</div>
                               <input
                                 type="text"
                                 class="form-control"
-                                name="contraV"
-                                id="contraV"
+                                formControlName="peso"
                               />
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-12">
-                            <label>CONSULTA</label>
-                            <hr />
+                            <div class="titulo">Consulta Medica</div>
                           </div>
                         </div>
                         <div class="row">
@@ -186,8 +468,7 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                name="laboratorio"
-                                id="laboratorio"
+                                formControlName="motivoConsulta"
                               />
                             </div>
                           </div>
@@ -200,20 +481,29 @@
                               <input
                                 type="text"
                                 class="form-control"
-                                name="laboratorio"
-                                id="laboratorio"
+                                formControlName="diagnosticoConsulta"
                               />
                             </div>
                           </div>
-                          <div class="col-sm-12 col-md-6 col-lg-6">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
                             <!-- text input -->
                             <div class="form-group">
                               <label>Tratamiento</label>
                               <input
                                 type="text"
                                 class="form-control"
-                                name="laboratorio"
-                                id="laboratorio"
+                                formControlName="tratamiento"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Proxima visita</label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                formControlName="proxVisita"
                               />
                             </div>
                           </div>
@@ -229,9 +519,9 @@
                           </div>
                           <div class="col-sm-12 col-md-8 col-lg-8">
                             <button
-                              type="submit"
+                              type="button"
                               class="btn btn-block btn-info"
-                              name="GUARDAR"
+                              (click)="guardarAnamnesis()"
                             >
                               REGISTRAR
                             </button>
@@ -242,91 +532,412 @@
                   </form>
                 </div>
               </div>
-              <!----- Ventana  Desparacitaciones -->
+              <!----- Ventana  VACUNAS -->
               <div class="tab-pane" id="vacunas">
                 <div class="card-body p-0">
                   <form method="POST">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="row">
-                          <div class="col-sm-12 col-md-6 col-lg 2">
-                            <label>CONTRA</label>
-                          </div>
-                          <div class="col-sm-12 col-md-6 col-lg-10">
-                            <div class="row">
-                              <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                    <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                    <label for="customCheckbox1" class="custom-control-label">Coronavirus</label>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                    <label for="customCheckbox1" class="custom-control-label">Hepatitis</label>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                    <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
-                                  </div>
-                              </div>
-                            </div>
-                            <br><br>                        
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                  <div class="custom-control custom-checkbox">
-                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                      <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                  <div class="custom-control custom-checkbox">
-                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                      <label for="customCheckbox1" class="custom-control-label">Coronavirus</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                  <div class="custom-control custom-checkbox">
-                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                      <label for="customCheckbox1" class="custom-control-label">Hepatitis</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6 col-lg-3">
-                                  <div class="custom-control custom-checkbox">
-                                      <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
-                                      <label for="customCheckbox1" class="custom-control-label">Parvovirus</label>
-                                    </div>
-                                </div>
-                              </div>
-                          </div>
+                        <div class="titulo">Consulta Medica</div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <div class="pregunta">Temperatura</div>
+                          <input
+                            type="number"
+                            class="form-control"
+                            formControlName="temperatura"
+                          />
                         </div>
-                        <div class="row">
-                          <div class="col-sm-12 col-md-4 col-lg-4">
-                            <button
-                              type="button"
-                              class="btn btn-block btn-danger disabled"
-                            >
-                              Cerrar
-                            </button>
-                          </div>
-                          <div class="col-sm-12 col-md-8 col-lg-8">
-                            <button
-                              type="submit"
-                              class="btn btn-block btn-info"
-                              name="GUARDAR"
-                            >
-                              REGISTRAR
-                            </button>
-                          </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <div class="pregunta">Frecuencia cardiaca</div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="frecCardiaca"
+                          />
                         </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <div class="pregunta">Frecuencia respiratoria</div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="frecRespiratoria"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group">
+                          <div class="pregunta">Peso</div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="peso"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg 12">
+                        <div class="titulo">VACUNA</div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="parvovirus"
+                            name="vacunas"
+                            formControlName="vacunaCan"
+                            value="Parvovirus"
+                          />
+                          <label for="parvovirus" class="form-check-label"
+                            >Parvovirus</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="vacunas"
+                            id="distemper"
+                            formControlName="vacunaCan"
+                            value="Distemper"
+                          />
+                          <label for="distemper" class="form-check-label"
+                            >Distemper</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="hepatitisInf"
+                            name="vacunas"
+                            formControlName="vacunaCan"
+                            value="Hepatitis infecciosa canina"
+                          />
+                          <label for="hepatitisInf" class="form-check-label"
+                            >Hepatitis infecciosa canina</label
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="coronavirus"
+                            name="vacunas"
+                            formControlName="vacunaCan"
+                            value="Coronavirus"
+                          />
+                          <label for="coronavirus" class="form-check-label"
+                            >Coronavirus</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="rabia"
+                            name="vacunas"
+                            formControlName="vacunaCan"
+                            value="Rabia"
+                          />
+                          <label for="rabia" class="form-check-label laberForm"
+                            >Rabia</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="parvovirus"
+                            name="vacunas"
+                            formControlName="vacunaCan"
+                            value="Parvovirus"
+                          />
+                          <label for="parvovirus" class="form-check-label"
+                            >Triple felina</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="vacunas"
+                            id="distemper"
+                            formControlName="vacunaCan"
+                            value="Distemper"
+                          />
+                          <label for="distemper" class="form-check-label"
+                            >Rabia</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="hepatitisInf"
+                            name="vacunas"
+                            formControlName="vacunaCan"
+                            value="Hepatitis infecciosa canina"
+                          />
+                          <label for="hepatitisInf" class="form-check-label"
+                            >Leucemia felina</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Laboratorio</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Fecha de refuerzo</label>
+                          <input
+                            type="date"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>fecha de revacunacion</label>
+                          <input
+                            type="date"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4 col-lg-4">
+                        <button
+                          type="button"
+                          class="btn btn-block btn-danger disabled"
+                        >
+                          Cerrar
+                        </button>
+                      </div>
+                      <div class="col-sm-12 col-md-8 col-lg-8">
+                        <button
+                          type="submit"
+                          class="btn btn-block btn-info"
+                          name="GUARDAR"
+                        >
+                          REGISTRAR
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!----- Ventana  DESPARACITACIONES -->
+              <div class="tab-pane" id="desparacitaciones">
+                <div class="card-body p-0">
+                  <form method="POST">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-12">
+                        <div class="titulo">Examén fisico</div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <div class="pregunta">Temperatura</div>
+                          <input
+                            type="number"
+                            class="form-control"
+                            formControlName="temperatura"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <div class="pregunta">Frecuencia cardiaca</div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="frecCardiaca"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <div class="pregunta">Frecuencia respiratoria</div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="frecRespiratoria"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group">
+                          <div class="pregunta">Peso</div>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="peso"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg 12">
+                        <div class="titulo">Datos desparacitacion</div>
+                      </div>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="despExterna"
+                            name="desparacitacion"
+                            formControlName="desparacitaciones"
+                            value="Interna"
+                          />
+                          <label for="parvovirus" class="form-check-label"
+                            >Desparacitación Interna</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="desparacitacion"
+                            id="despInterna"
+                            formControlName="desparacitaciones"
+                            value="Externa"
+                          />
+                          <label for="distemper" class="form-check-label"
+                            >Desparacitación Externa</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Producto</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Principio activo</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Vía</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Fecha de vacunación</label>
+                          <input
+                            type="date"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Próxima Aplicación</label>
+                          <input
+                            type="date"
+                            class="form-control"
+                            formControlName="diagnosticoConsulta"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-4 col-lg-4">
+                        <button
+                          type="button"
+                          class="btn btn-block btn-danger disabled"
+                        >
+                          Cerrar
+                        </button>
+                      </div>
+                      <div class="col-sm-12 col-md-8 col-lg-8">
+                        <button
+                          type="submit"
+                          class="btn btn-block btn-info"
+                          name="GUARDAR"
+                        >
+                          REGISTRAR
+                        </button>
                       </div>
                     </div>
                   </form>
@@ -590,44 +1201,24 @@
       </div>
       <!-------------  datos de la mascota -->
       <div class="col-md-3">
-        <div class="card">
-          <div class="card-header naranjaBackground">
-            <h3 class="card-title colorBlancoLetras">Mascota</h3>
+        <div class="card lineaArriba">
+          <div class="card-header">
+            <h3 class="card-title">INFORMACION DE LA MASCOTA</h3>
           </div>
-          <div class="card-body box-profile">
-            <div class="text-center">
-              <td><img src="" class="img-thumbnail" width="150px" /></td>
-              <td>
-                <img
-                  src="vistas\assets\dist\img\logoPerroyGato.png"
-                  class="img-thumbnail"
-                  width="150px"
-                />
-              </td>
-            </div>
-            <h3
-              class="profile-username text-center"
-              id="nombreM"
-              name="nombreM"
-            ></h3>
-            <ul class="list-group list-group-unbordered sm-3">
-              <li class="list-group-item">
-                <b>Nombre mascota</b>
-                <a class="float-right" style="color: #000000"></a>
-              </li>
-              <li class="list-group-item">
-                <b>Fecha</b> <a class="float-right" style="color: #000000"></a>
-              </li>
-              <li class="list-group-item">
-                <b>Edad</b>
-                <a class="float-right" style="color: #000000"></a>
-              </li>
-              <li class="list-group-item">
-                <b>Tatuaje</b>
-                <a class="float-right" style="color: #000000"></a>
-              </li>
-            </ul>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <dl class="row">
+              <dt class="col-sm-4">Mascota</dt>
+              <dd class="col-sm-8">Nombre de la mascota</dd>
+              <dt class="col-sm-4">Edad</dt>
+              <dd class="col-sm-8">Edad de la mascota</dd>
+              <dt class="col-sm-4">Dueño</dt>
+              <dd class="col-sm-8">Nombre del dueño</dd>
+              <dt class="col-sm-4">Fecha de nacimiento</dt>
+              <dd class="col-sm-4">02/05/1998</dd>
+            </dl>
           </div>
+          <!-- /.card-body -->
         </div>
       </div>
     </div>
