@@ -142,8 +142,14 @@
               </div>
               <div class="col-3">
                 <img
-                  [src]="datosMascota.foto"
-                  alt="user-avatar"
+                [src]="
+                  datosMascota.foto
+                      ? datosMascota?.foto
+                      : datosMascota?.idEspecie === 1
+                      ? '../../../assets/dist/img/avatarPerro.png'
+                      : '../../../assets/dist/img/avatarGato.png'
+                  "
+                  alt="mascotaFoto"
                   class="profile-user-img img-fluid"
                   style="width: 80px"
                 />
