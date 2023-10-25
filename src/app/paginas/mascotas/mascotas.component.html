@@ -2,9 +2,9 @@
   <div class="container-fluid">
     <div class="content-header">
       <div class="container- fluid">
-        <div class="row mb-2">
+        <div class="row ">
           <div class="col-sm-6">
-            <h1 class="m-0">Mascotas</h1>
+            <h5 class="m-0">Mascotas</h5>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -23,27 +23,28 @@
     <div class="card">
       <div class="card-header headerCardConsultas">
         <div class="row">
-          <div *ngIf="esRol('Administrador') || esRol('Veterinario')">
+          <div
+            *ngIf="esRol('Administrador') || esRol('Veterinario')"
+            class="col-3"
+          >
             <button
               type="button"
-              class="btn bg-gradient-info btn-sm"
+              class="btn bg-gradient-info btn-sm btn-block"
               data-toggle="modal"
               data-target="#registrarMascota"
             >
               <i class="nav-icon fas fa-solid fa-plus"></i> Registrar nueva
               mascota
             </button>
-            <!-- <app-camara></app-camara> -->
-            <!-- <app-registrar-mascotas></app-registrar-mascotas> -->
           </div>
-          <div>
+          <div class="col-3">
             <app-lista-mascotas-pdf></app-lista-mascotas-pdf>
           </div>
-          <div class="col-sm-6 col-md-6 col-lg-6">
-            <div class="input-group input-group-sm mb-3">
+          <div class="col-6">
+            <div class="input-group input-group-sm ">
               <input
                 type="text"
-                class="form-control rounded-0"
+                class="form-control "
                 [(ngModel)]="buscarTexto"
                 (input)="buscarMascota()"
                 placeholder="Buscar mascota por nombre"
@@ -51,7 +52,9 @@
             </div>
           </div>
         </div>
+
       </div>
+
       <!-- /.tarjeta de datos de la mascota -->
       <div class="card-body pb-0">
         <div class="row">
@@ -108,6 +111,7 @@
                       class="btn btn-sm btn-outline-info"
                       data-toggle="modal"
                       data-target="#modalActualizarFoto"
+                      (click)="abrirActualizarFoto(item)"
                     >
                       <i class="fas fa-camera"></i> Subir foto
                     </a>
@@ -149,14 +153,7 @@
                   >
                     Historial
                   </a>
-                  &nbsp;
-                  <a
-                    class="btn btn-info btn-sm btnEditarmascota"
-                    idMascota=""
-                    *ngIf="!item.foto"
-                  >
-                    Foto
-                  </a>
+
                   &nbsp;
                   <a
                     class="btn btn-info btn-sm btnEditarmascota"
@@ -692,14 +689,12 @@
         </div>
         <!-- /.modal-dialog -->
       </div>
-      <!-- Editar Mascota -->
+      <!-- Actualizar foto Mascota -->
       <div class="modal fade" id="modalActualizarFoto">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-            <div class="modal-header" style="background-color: #16817a">
-              <h4 class="modal-title" style="color: #ffffff">
-                Actualizar Foto
-              </h4>
+            <div class="modal-header">
+              <h4 class="modal-title">Actualizar Foto</h4>
               <button
                 type="button"
                 class="close"
@@ -758,10 +753,9 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                (click)="actualizarMascota()"
+                (click)="actualizarFotoMascota(mascotaFotoSeleccionada)"
                 data-dismiss="modal"
                 aria-label="Close"
-                [disabled]="!formActualizarMascota.valid"
               >
                 Guardar datos
               </button>

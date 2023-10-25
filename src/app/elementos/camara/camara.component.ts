@@ -21,9 +21,7 @@ export class CamaraComponent implements OnInit {
   camaraAbierta: boolean = false;
   fotoTomada: boolean = false;
   imagenBase64: string;
-  ngOnInit(): void {
-    this.startCamera();
-  }
+  ngOnInit(): void {}
 
   async startCamera() {
     try {
@@ -31,8 +29,6 @@ export class CamaraComponent implements OnInit {
       this.videoElement.nativeElement.srcObject = this.stream;
       this.fotoTomada = false;
       this.camaraAbierta = true;
-      console.log('En abrir camara camara abierta');
-      console.log(this.camaraAbierta);
     } catch (error) {
       console.error('Error al acceder a la cámara: ', error);
     }
@@ -42,14 +38,14 @@ export class CamaraComponent implements OnInit {
     canvas.width = this.videoElement.nativeElement.videoWidth;
     canvas.height = this.videoElement.nativeElement.videoHeight;
     const context = canvas.getContext('2d');
-
     if (context) {
       context.drawImage(this.videoElement.nativeElement, 0, 0);
       this.photo = canvas.toDataURL('image/jpeg');
+      this.detenerCamara();
+
       this.imagenCapturada.emit(this.photo); // Emitir directamente la URL de datos en formato base64
       this.fotoTomada = true;
       this.camaraAbierta = false;
-      this.detenerCamara();
     } else {
       console.error('Contexto 2D no encontrado en el elemento canvas.');
     }
@@ -63,12 +59,6 @@ export class CamaraComponent implements OnInit {
     });
   }
 
-  eliminarFoto(): void {
-    this.fotoTomada = false;
-    this.photo = null;
-    this.camaraAbierta = false; // Cierra la cámara al eliminar la foto
-    this.detenerCamara(); // Detiene la cámara al eliminar la foto
-  }
   detenerCamara() {
     if (this.stream) {
       const tracks = this.stream.getTracks();

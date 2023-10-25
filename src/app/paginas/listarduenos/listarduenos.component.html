@@ -2,9 +2,9 @@
   <div class="container-fluid">
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">Dueños de mascotas</h1>
+            <h5 class="m-0">Dueños de mascotas</h5>
           </div>
           <!-- /.col -->
           <div class="col-sm-6">
@@ -13,32 +13,14 @@
               <li class="breadcrumb-item active">Dueños</li>
             </ol>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <div class="card">
-      <!-- HEADER DEL LISTAR USUARIOS -->
       <div class="card-header headerCardConsultas">
         <div class="row">
-          <div class="col-md-5">
-            <div class="input-group mb-2">
-              <input
-                type="text"
-                class="form-control rounded-0"
-                placeholder="Buscar dueño"
-                [(ngModel)]="buscarTexto"
-                (input)="buscarDueno()"
-                placeholder="Buscar dueño por nombre"
-              />
 
-            </div>
-          </div>
           <div class="col-md-3">
             <button
               type="button"
@@ -52,6 +34,19 @@
           <div class="col-md-3">
             <app-lista-duenos></app-lista-duenos>
           </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control rounded-0"
+                placeholder="Buscar dueño"
+                [(ngModel)]="buscarTexto"
+                (input)="buscarDueno()"
+                placeholder="Buscar dueño por nombre"
+              />
+
+            </div>
+          </div>
         </div>
       </div>
       <!-- MOSTRAR LOS DUEÑOS -->
@@ -59,7 +54,6 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header"></div>
-            <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
               <table class="table table-head-fixed text-nowrap table-hover">
                 <thead>
@@ -111,9 +105,7 @@
                 ></pagination-controls>
               </div>
             </div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
         </div>
       </div>
     </div>
@@ -247,8 +239,9 @@
                     ></app-error-message>
                   </div>
                 </div>
-              </div>
 
+              </div>
+            </form>
               <div class="modal-footer justify-content-between">
                 <button
                   type="button"
@@ -267,14 +260,11 @@
                   Guardar datos
                 </button>
               </div>
-            </form>
+
           </div>
         </div>
-        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
     </div>
-
     <!-- MODAL PARA EDITAR LOS DUEÑOS -->
     <!-- <div class="modal fade" id="modalEditarDueno">
       <div class="modal-dialog modal-lg">

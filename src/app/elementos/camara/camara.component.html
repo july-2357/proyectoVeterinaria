@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-lg-6 text-center">
-    <!-- <div *ngIf="!camaraAbierta && !fotoTomada">
-      <button (click)="startCamera()">Abrir Cámara</button>
-    </div> -->
-    <video #videoElement class="camera-preview" autoplay></video>
+    <div *ngIf="!camaraAbierta && !fotoTomada">
+      <button class="btn btn-info" (click)="startCamera()">Abrir Cámara</button>
+    </div>
+    <video #videoElement class="camera-preview" autoplay >  </video>
 
     <div class="row">
       <div class="col-12 " *ngIf="camaraAbierta">

@@ -1,13 +1,13 @@
 .cod{
-
   font-size: 13px;
   font-family:'Courier New', Courier, monospace;
   color: rgb(155, 154, 154);
 }
 .imagen-container {
-  width: 100px; /* Ancho deseado */
-  height: 100px; /* Alto deseado */
+  width: 140px; /* Ancho deseado */
+  height: 140px; /* Alto deseado */
   overflow: hidden; /* Para recortar la imagen si es más grande que el contenedor */
+  padding-top: 5px;
 
 }
 

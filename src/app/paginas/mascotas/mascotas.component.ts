@@ -2,16 +2,10 @@ import { EnviarDatosService } from './../../services/enviar-datos.service';
 import { RazasService } from './../../services/razas.service';
 import { DuenosService } from './../../services/duenos.service';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import * as moment from 'moment';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EspeciesService } from 'src/app/services/especies.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -21,19 +15,20 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./mascotas.component.css'],
 })
 export class MascotasComponent implements OnInit {
-  [x: string]: any;
   formRegistrarMascota: FormGroup;
   formActualizarMascota: FormGroup;
   selectedFile: File | undefined;
-  listaDuenos: any = []; //   Variable global para guardar la inf
-  listaEspecies: any = []; //   Variable global para guardar la inf
+  listaDuenos: any = [];
+  listaEspecies: any = [];
   listaRazas: any = [];
   listaMascotas: any = [];
   especieSeleccionada: string = '';
   idRazaForm: string = '';
   base64String: any;
   especieDes: any;
+  //para abrir los modales
   mascotaSeleccionada: number | null = null;
+  mascotaFotoSeleccionada: number | null = null;
   detalleMascotas: any;
   //Para los errores
   verNombreError = false;
@@ -50,17 +45,16 @@ export class MascotasComponent implements OnInit {
     private formBuilder: FormBuilder,
     private duenosService: DuenosService,
     private especiesService: EspeciesService,
-    private razasService: RazasService,
     private mascotasService: MascotasService,
     private enviarDatosService: EnviarDatosService,
-    private router: Router, private cookieService:CookieService
+    private router: Router,
+    private cookieService: CookieService
   ) {}
   opcionSeleccionada = 'none';
 
   onChangeOption(event: Event) {
     this.opcionSeleccionada = (event.target as HTMLSelectElement).value;
   }
-
   construirFormulario() {
     this.formRegistrarMascota = this.formBuilder.group({
       nombreM: ['', [Validators.required]],
@@ -102,11 +96,13 @@ export class MascotasComponent implements OnInit {
     this.verEdadError = false;
     this.verEdadAniosError = false;
     this.verEdadMesesError = false;
-    this.base64String=null;
+    this.base64String = null;
   }
-
+  resetFormFoto() {
+    this.mascotaFotoSeleccionada=null;
+    this.base64String = null;
+  }
   ngOnInit(): void {
-
     this.construirFormulario();
     this.construirFormularioActualizarDatos();
     this.mostrarDuenos();
@@ -185,33 +181,7 @@ export class MascotasComponent implements OnInit {
     }
   }
   async abrirActualizarFoto(itemId: number) {
-    this.mascotaSeleccionada = itemId;
-    this.detalleMascotas = this.listaMascotas.find(
-      (mascota: any) => mascota.idMascota === this.mascotaSeleccionada
-    );
-    console.log(this.detalleMascotas);
-    this.formActualizarMascota.patchValue({
-      editarnombreM: this.detalleMascotas.nombreMascota,
-      editarduenoM:
-        this.detalleMascotas.dueno.nombres +
-        ' ' +
-        this.detalleMascotas.dueno.apellidoMaterno +
-        ' ' +
-        this.detalleMascotas.dueno.apellidoPaterno,
-      editarcolorM: this.detalleMascotas.color,
-      editarfechaNac: this.detalleMascotas.fecha_nacimiento,
-      editarespecieM: this.detalleMascotas.raza.descripcion,
-      editarrazaM: this.detalleMascotas.raza.descripcion,
-      editarsexoM: this.detalleMascotas.sexo,
-      editaredadAnios: this.calcularEdad(this.detalleMascotas.fecha_nacimiento)
-        .anios,
-      editaredadMeses: this.calcularEdad(this.detalleMascotas.fecha_nacimiento)
-        .meses,
-      editartatuajeM: this.detalleMascotas.tatuaje,
-      editarconductaM: this.detalleMascotas.conducta,
-      editarimagen: this.detalleMascotas.foto,
-    });
-    console.log(this.formActualizarMascota.value);
+    this.mascotaFotoSeleccionada = itemId;
   }
   async abrirModalEditarMascota(itemId: number) {
     this.mascotaSeleccionada = itemId;
@@ -244,7 +214,7 @@ export class MascotasComponent implements OnInit {
   }
   async actualizarMascota() {
     let fechaNacimiento =
-    this.formActualizarMascota.get('editarfechaNac')?.value;
+      this.formActualizarMascota.get('editarfechaNac')?.value;
     let mascotaEditarEnviar: any = {
       color: this.formActualizarMascota.get('editarcolorM')?.value,
       fecha_nacimiento: '',
@@ -284,7 +254,46 @@ export class MascotasComponent implements OnInit {
       });
     }
   }
+  async actualizarFotoMascota(mascota: any) {
 
+    let mascotaEditarEnviar: any = {
+      color: mascota.color,
+      fecha_nacimiento:'',
+      nombreMascota: mascota.nombreMascota,
+      sexo: mascota.sexo,
+      tatuaje: mascota.tatuaje,
+      conducta: mascota.conducta,
+      foto: this.base64String,
+      idDueno: mascota.idDueno,
+      idRaza: mascota.idRaza,
+    };
+    mascotaEditarEnviar.fecha_nacimiento = new Date(mascota.fecha_nacimiento)
+    .toISOString()
+    .substring(0, 10);
+    let respuesta = await this.mascotasService.actualizarMascotasServices(
+      mascota.idMascota,
+      mascotaEditarEnviar
+    );
+    if ((respuesta.statusCode = 200)) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Se actualizo la foto de la mascota',
+        showConfirmButton: true,
+        timer: 1500,
+      });
+      this.obtenerMascotas();
+      this.resetFormFoto();
+    } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Revise los datos.',
+        showConfirmButton: true,
+        timer: 1500,
+      });
+    }
+  }
   convertirAMayusculas() {
     this.textoEnMayusculas = this.textoEnMayusculas.toUpperCase();
   }
@@ -367,7 +376,6 @@ export class MascotasComponent implements OnInit {
       // en caso de error
       //  alert(JSON.stringify(error));
     }
-
   }
   calcularEdad(fechaNacimiento: string): { anios: number; meses: number } {
     const fechaNac = new Date(fechaNacimiento);
@@ -413,5 +421,4 @@ export class MascotasComponent implements OnInit {
     const roles = this.cookieService.get('rol');
     return roles === rol;
   }
-
 }
