@@ -1,0 +1,447 @@
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="content-header">
+      <div class="container- fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Recordatorios</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Recordatorios</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+
+    <div class="row">
+      <!-- PARA LAS VACUNAS -->
+      <section class="col-sm-3 col-lg-12 connectedSortable">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title text-center">
+              <i class="fas fa-syringe"></i>
+              MASCOTAS CON VACUNAS
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div
+                class="col-sm-3 col-12"
+                *ngFor="let item of listaMascotasVacunas"
+              >
+                <div class="info-box">
+                  <span class="info-box-icon"
+                    ><img
+                      [src]="
+                        item.foto
+                          ? item?.foto
+                          : item?.raza.idEspecie === 1
+                          ? '../../../assets/dist/img/avatarPerro.png'
+                          : '../../../assets/dist/img/avatarGato.png'
+                      "
+                      style="width: 60px; height: 70px"
+                  /></span>
+
+                  <div class="info-box-content">
+                    <ul class="ml-0 mb-0 fa-ul text-muted">
+                      <li class="small">
+                        <b>Mascota: </b>
+                        {{ item.nombreMascota }}
+                      </li>
+                      <li class="small">
+                        <b>Dueño: </b>
+                        {{ item.dueno.nombres }}
+                        {{ item.dueno.apellidoPaterno }}
+                      </li>
+                      <li class="small">
+                        <b>Revacunación: </b>
+                        {{ item.vacuna.fecha_revacunacion }}
+                      </li>
+                    </ul>
+                    <button
+                      type="button"
+                      class="btn btn-sm bg-gradient-info"
+                      data-toggle="modal"
+                      data-target="#enviarCorreoVacunas"
+                      (click)="abrirModalCorreoVacunas(item)"
+                    >
+                      <i class="nav-icon fas fa-envelope"></i> Enviar correo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PARA LAS DESPARACITACIONES -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-pills mr-1"></i>
+              MASCOTAS CON DESPARASITACIONES
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div
+                class="col-sm-3 col-l-3"
+                *ngFor="let item of listaMascotasDesparacitaciones"
+              >
+                <div class="info-box">
+                  <span class="info-box-icon"
+                    ><img
+                      [src]="
+                        item.foto
+                          ? item?.foto
+                          : item?.raza.idEspecie === 1
+                          ? '../../../assets/dist/img/avatarPerro.png'
+                          : '../../../assets/dist/img/avatarGato.png'
+                      "
+                      style="width: 60px; height: 70px"
+                  /></span>
+
+                  <div class="info-box-content">
+                    <ul class="ml-0 mb-0 fa-ul text-muted">
+                      <li class="small">
+                        <b>Mascota: </b>
+                        {{ item.nombreMascota }}
+                      </li>
+                      <li class="small">
+                        <b>Dueño: </b>
+                        {{ item.dueno.nombres }}
+                        {{ item.dueno.apellidoPaterno }}
+                      </li>
+                      <li class="small">
+                        <b>Proxima visita: </b>
+                        {{ item.desparacitacion.fecha_proxima_desparacitacion }}
+                      </li>
+                    </ul>
+                    <button
+                      type="button"
+                      class="btn btn-sm bg-gradient-info"
+                      data-toggle="modal"
+                      data-target="#enviarCorreoDesparacitacion"
+                      (click)="abrirModalCorreoDespa(item)"
+                    >
+                      <i class="nav-icon fas fa-envelope"></i> Enviar correo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PARA LAS CONSULTAS -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-stethoscope mr-1"></i>
+              MASCOTAS CON CONSULTAS
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div
+                class="col-sm-3 col-l-3"
+                *ngFor="let item of listaMascotasConsultas"
+              >
+                <div class="info-box">
+                  <span class="info-box-icon"
+                    ><img
+                      [src]="
+                        item.foto
+                          ? item?.foto
+                          : item?.raza.idEspecie === 1
+                          ? '../../../assets/dist/img/avatarPerro.png'
+                          : '../../../assets/dist/img/avatarGato.png'
+                      "
+                      style="width: 60px; height: 70px"
+                  /></span>
+
+                  <div class="info-box-content">
+                    <ul class="ml-0 mb-0 fa-ul text-muted">
+                      <li class="small">
+                        <b>Mascota: </b>
+                        {{ item.nombreMascota }}
+                      </li>
+                      <li class="small">
+                        <b>Dueño: </b>
+                        {{ item.dueno.nombres }}
+                        {{ item.dueno.apellidoPaterno }}
+                      </li>
+                      <li class="small">
+                        <b>Proxima consulta: </b>
+                        {{ item.consulta.fecha_prox_visita }}
+                      </li>
+                    </ul>
+                    <button
+                      type="button"
+                      class="btn btn-sm bg-gradient-info"
+                      data-toggle="modal"
+                      data-target="#enviarCorreoConsultas"
+                      (click)="abrirModalCorreoConsultas(item)"
+                    >
+                      <i class="nav-icon fas fa-envelope"></i> Enviar correo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Modal para vacunas -->
+      <div class="modal fade" id="enviarCorreoVacunas">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-info">
+              <h4 class="modal-title" style="color: #ffffff">
+                Enviar correo de notificación
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formEnviarCorreo" errorTailor>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Dirección de correo electrónico</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="correoElectronico"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Asunto</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder=""
+                        formControlName="asuntoCorreo"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label for="inputMessage">Mensaje</label>
+                      <textarea
+                        id="inputMessage"
+                        class="form-control"
+                        rows="8"
+                        formControlName="mensaje"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                Cerrar
+              </button>
+              <button
+                type="button"
+                class="btn bg-teal"
+                data-dismiss="modal"
+                aria-label="Close"
+                (click)="enviarCorreo()"
+              >
+                Enviar correo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal para desparacitaciones -->
+      <div class="modal fade" id="enviarCorreoDesparacitacion">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-info">
+              <h4 class="modal-title" style="color: #ffffff">
+                Enviar correo de notificación
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formEnviarCorreo" errorTailor>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Dirección de correo electrónico</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="correoElectronico"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Asunto</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder=""
+                        formControlName="asuntoCorreo"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label for="inputMessage">Mensaje</label>
+                      <textarea
+                        id="inputMessage"
+                        class="form-control"
+                        rows="8"
+                        formControlName="mensaje"
+                        [innerHTML]="formEnviarCorreo.get('mensaje')?.value"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                Cerrar
+              </button>
+              <button
+                type="button"
+                class="btn bg-teal"
+                data-dismiss="modal"
+                aria-label="Close"
+                (click)="enviarCorreo()"
+              >
+                Enviar correo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal para enviar correo de consultas -->
+      <div class="modal fade" id="enviarCorreoConsultas">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-gradient-info">
+              <h4 class="modal-title" style="color: #ffffff">
+                Enviar correo de notificación
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formEnviarCorreo" errorTailor>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Dirección de correo electrónico</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="correoElectronico"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Asunto</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder=""
+                        formControlName="asuntoCorreo"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label for="inputMessage">Mensaje</label>
+                      <textarea
+                        id="inputMessage"
+                        class="form-control"
+                        rows="8"
+                        formControlName="mensaje"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                Cerrar
+              </button>
+              <button
+                type="button"
+                class="btn bg-teal"
+                data-dismiss="modal"
+                aria-label="Close"
+                (click)="enviarCorreo()"
+              >
+                Enviar correo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

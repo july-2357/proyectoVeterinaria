@@ -1,0 +1,97 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="card card-primary lineaArriba" >
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <h3 class="profile-username text-center">
+                {{ datosUsuario?.nombres }} {{ datosUsuario?.apellidoPaterno }}
+                {{ datosUsuario?.apellidoMaterno }}
+              </h3>
+
+              <img
+                class="profile-user-img img-fluid img-circle"
+                [src]="datosUsuario?.fotografia"
+                [src]="datosUsuario?.fotografia ? datosUsuario?.fotografia : 'assets/dist/img/avatar2.png'"
+
+                alt="User profile picture"
+              />
+              <a href="#" class="btn bg-teal btn-block"
+                ><b>Actualizar foto</b></a
+              >
+
+              <p class="text-muted text-center">Rol: {{rolusuario}}</p>
+
+              <a href="#" class="btn bg-teal btn-block"
+                ><b>Actualizar datos</b></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="invoice p-3 mb-3">
+          <div class="row">
+            <div class="col-12">
+              <h4><i class="fas fa-user"></i> Mis datos</h4>
+            </div>
+          </div>
+          <div class="row invoice-info lineaArriba" *ngIf="datosUsuario">
+            <div class="col-sm-8 invoice-col">
+              <ul class="list-group list-group-unbordered sm-3">
+                <li class="list-group-item">
+                  <b>Nombre completo: </b>
+                  <a class="float-right" style="color: #000000">
+                    {{ datosUsuario.nombres }}
+                    {{ datosUsuario.apellidoPaterno }}
+                    {{ datosUsuario.apellidoMaterno }}</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <b>Carnet: </b>
+                  <a class="float-right" style="color: #000000">
+                    {{ datosUsuario.carnet }}</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <b>Celular: </b>
+                  <a class="float-right" style="color: #000000">
+                    {{ datosUsuario.celular }}</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <b>Dirección: </b>
+                  <a class="float-right" style="color: #000000">
+                    {{ datosUsuario.direccion }}</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <b>Correo electrónico: </b>
+                  <a class="float-right" style="color: #000000">{{
+                    datosUsuario.correo
+                  }}</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Rol </b>
+                  <a class="float-right" style="color: #000000"
+                    >Administrador</a
+                  >
+                </li>
+                <li class="list-group-item">
+                  <b>Estado </b>
+                  <a class="float-right" style="color: #000000"
+                    >Activo Inactivo</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

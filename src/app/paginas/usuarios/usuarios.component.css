@@ -1,0 +1,11 @@
+/* Estilos para centrar el modal */
+.modal-dialog-centered {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.modal-s .modal-content {
+  width: 400px;
+}
+/* Para marcar con rojo si no cumple  */
+

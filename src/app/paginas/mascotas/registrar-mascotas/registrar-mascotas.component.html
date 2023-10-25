@@ -1,0 +1,276 @@
+<a
+  href="#"
+  class="btn bg-teal btn-block"
+  data-toggle="modal"
+  data-target="#registrarMascota"
+  ><b>Agregar mascota</b></a
+>
+<!-- Registar Mascota -->
+<div class="modal fade" id="registrarMascota">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #16817a">
+        <h4 class="modal-title" style="color: #ffffff">
+          Registrar Nueva Mascota
+        </h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formRegistrarMascota">
+          <div class="form-row">
+            <div class="col-sm-12 col-md-6 col-lg-12">
+              <div class="form-row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Nombre de la mascota</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="nombreM"
+                      placeholder="Ingrese el nombre de la mascota"
+                      (blur)="verNombreError = true"
+                    />
+
+                    <app-error-message
+                      [error]="formRegistrarMascota.get('nombreM')?.errors"
+                      [showError]="verNombreError"
+                    ></app-error-message>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Dueño</label>
+                    <div class="input-group">
+                      <select
+                        class="form-control input"
+                        formControlName="duenoM"
+                        (blur)="verDuenoMError = true"
+                      >
+                        <option
+                          *ngFor="let item of listaDuenos"
+                          [value]="item.idDuenos"
+                        >
+                          {{ item.nombres }} {{ item.apellidoPaterno }}
+                          {{ item.apellidoMaterno }}
+                        </option>
+
+                        />
+
+                        <app-error-message
+                          [error]="formRegistrarMascota.get('duenoM')?.errors"
+                          [showError]="verDuenoMError"
+                        ></app-error-message>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Color</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="colorM"
+                      (blur)="verColorError = true"
+                    />
+
+                    <app-error-message
+                      [error]="formRegistrarMascota.get('colorM')?.errors"
+                      [showError]="verColorError"
+                    ></app-error-message>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Años</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="edadAnios"
+                      (change)="calcularFechaNacimiento()"
+                      (blur)="verEdadAniosError = true"
+                    />
+
+                    <app-error-message
+                      [error]="formRegistrarMascota.get('edadAnios')?.errors"
+                      [showError]="verEdadAniosError"
+                    ></app-error-message>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Meses</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      formControlName="edadMeses"
+                      (change)="calcularFechaNacimiento()"
+                      (blur)="verEdadMesesError = true"
+                    />
+
+                    <app-error-message
+                      [error]="formRegistrarMascota.get('edadMeses')?.errors"
+                      [showError]="verEdadMesesError"
+                    ></app-error-message>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <div class="form-group">
+                    <label>Fecha de nacimiento</label>
+
+                    <input
+                      type="date"
+                      class="form-control"
+                      formControlName="fechaNac"
+                      (blur)="verEdadError = true"
+                    />
+
+                    <app-error-message
+                      [error]="formRegistrarMascota.get('fechaNac')?.errors"
+                      [showError]="verEdadError"
+                    ></app-error-message>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label>Especie</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <select
+                          class="form-control input"
+                          formControlName="especieM"
+                          [(ngModel)]="especieSeleccionada"
+                          (change)="mostrarRazas()"
+                        >
+                          <option value="">Selecione especie</option>
+                          <option
+                            *ngFor="let item of listaEspecies"
+                            [value]="item.descripcion"
+                          >
+                            {{ item.descripcion }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-sm-12 col-md-6 col-lg-4"
+                  *ngIf="this.formRegistrarMascota.get('especieM')?.value != ''"
+                >
+                  <div class="form-group">
+                    <label>Raza</label>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <select
+                          class="form-control input"
+                          formControlName="razaM"
+                          [(ngModel)]="idRazaForm"
+                        >
+                          <option value="">Selecione raza</option>
+                          <option
+                            *ngFor="let item of listaRazas"
+                            [value]="item.idRaza"
+                          >
+                            {{ item.descripcion }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label>Sexo de la mascota</label>
+                    <div class="input-group">
+                      <select
+                        class="form-control input-lg"
+                        formControlName="sexoM"
+                      >
+                        <option value="">Selecionar sexo</option>
+                        <option value="Macho">Macho</option>
+                        <option value="Hembra">Hembra</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-4 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Tatuaje </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="tatuajeM"
+                      placeholder="Ingrese el tatuaje si la mascota lo tiene."
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Conducta</label>
+                    <div class="input-group">
+                      <select
+                        class="form-control input-lg"
+                        formControlName="conductaM"
+                      >
+                        <option value="">Selecionar conducta</option>
+                        <option value="CONFIADO">Confiado</option>
+                        <option value="DESCONFIADO">Desconfiado</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-12">
+                <div class="input-group mb-12">
+                  <span class="input-group-text" id="inputGroup-sizing-default"
+                    >Foto
+                  </span>
+                  <app-input-img
+                    (change)="onFileSelected($event)"
+                  ></app-input-img>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cerrar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="guardarMascota()"
+              data-dismiss="modal"
+              aria-label="Close"
+              [disabled]="!formRegistrarMascota.valid"
+            >
+              Guardar datos
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

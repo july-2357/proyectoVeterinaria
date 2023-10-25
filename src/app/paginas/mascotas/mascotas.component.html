@@ -23,36 +23,31 @@
     <div class="card">
       <div class="card-header headerCardConsultas">
         <div class="row">
-          <div class="col-sm-6 col-md-6 col-lg-3">
+          <div *ngIf="esRol('Administrador') || esRol('Veterinario')">
             <button
               type="button"
-              class="btn btn-block bg-gradient-info"
+              class="btn bg-gradient-info btn-sm"
               data-toggle="modal"
               data-target="#registrarMascota"
             >
-              <i class="nav-icon fas fa-solid fa-dog"></i> Registrar nueva
+              <i class="nav-icon fas fa-solid fa-plus"></i> Registrar nueva
               mascota
             </button>
+            <!-- <app-camara></app-camara> -->
+            <!-- <app-registrar-mascotas></app-registrar-mascotas> -->
           </div>
-          <div class="col-sm-6 col-md-6 col-lg-3">
-            <button
-              type="button"
-              class="btn btn-block bg-gradient-info"
-              data-toggle="modal"
-              data-target="#registrarMascota"
-            >
-              Mascotas Registradas
-              <i class="nav-icon fas fa-solid fa-file-pdf"></i>
-            </button>
+          <div>
+            <app-lista-mascotas-pdf></app-lista-mascotas-pdf>
           </div>
           <div class="col-sm-6 col-md-6 col-lg-6">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control rounded-0" />
-              <span class="input-group-append">
-                <button type="submit" class="btn btn-info btn-flat">
-                  Buscar
-                </button>
-              </span>
+            <div class="input-group input-group-sm mb-3">
+              <input
+                type="text"
+                class="form-control rounded-0"
+                [(ngModel)]="buscarTexto"
+                (input)="buscarMascota()"
+                placeholder="Buscar mascota por nombre"
+              />
             </div>
           </div>
         </div>
@@ -62,110 +57,95 @@
         <div class="row">
           <div
             class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column"
-            *ngFor="let item of listaMascotas"
-            style="width: 600px"
+            *ngFor="
+              let item of listaMascotas
+                | paginate : { itemsPerPage: 6, currentPage: pagina }
+            "
           >
             <div class="card bg-light d-flex flex-fill">
-              <div class="card-header headerCardMascotas">
-                Datos del paciente: {{ item.nombreMascota }}
-              </div>
+              <div class="card-header text-muted border-bottom-0"></div>
               <div class="card-body pt-0">
                 <div class="row">
-                  <div class="col-8">
-                    <!-- /<p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p> -->
-                    <ul class="ml-4 mb-0 fa-ul text-muted">
-                      <li class="large">
-                        <span class="fa-li"
-                          ><i class="fa-solid fa-user"></i
-                        ></span>
-                        <h6>
-                          Dueño: {{ item.dueno.nombres }}
-                          {{ item.dueno.apellidoPaterno }}
-                          {{ item.dueno.apellidoMaterno }}
-                        </h6>
-                      </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-solid fa-droplet"></i
-                        ></span>
-                        <b>Color: {{ item.color }} </b>
-                      </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-solid fa-hashtag"></i
-                        ></span>
-                        <b>Tatuaje: {{ item.tatuaje }} </b>
-                      </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-solid fa-list-ol"></i> </span
-                        ><b
-                          >Edad:
-                          {{ calcularEdad(item.fecha_nacimiento).anios }} años
-                        </b>
+                  <div class="col-7">
+                    <h2 class="lead">
+                      <b>Mascota: {{ item.nombreMascota }}</b>
+                    </h2>
 
-                        <b>
-                          {{ calcularEdad(item.fecha_nacimiento).meses }} meses
-                        </b>
+                    <ul class="ml-2 mb-0 fa-ul text-muted">
+                      <li class="small">
+                        <b>Dueño: </b>
+                        {{ item.dueno.nombres }}
+                        {{ item.dueno.apellidoPaterno }}
+                        {{ item.dueno.apellidoMaterno }}
                       </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-brands fa-medium"></i
-                        ></span>
-                        <b>Conducta: {{ item.conducta }}</b>
+                      <li class="small">
+                        <b>Edad: </b
+                        >{{ calcularEdad(item.fecha_nacimiento).anios }} años
+
+                        {{ calcularEdad(item.fecha_nacimiento).meses }} meses
                       </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-solid fa-venus-mars"></i></span
-                        ><b>Sexo: {{ item.sexo }}</b>
+                      <li class="small"><b>Color: </b>{{ item.color }}</li>
+                      <li class="small">
+                        <b>Conducta: </b>{{ item.conducta }}
                       </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-brands fa-medium"></i
-                        ></span>
-                        <b
-                          >Especie:
-                         </b
-                        >
+                      <li class="small"><b>Sexo: </b>{{ item.sexo }}</li>
+                      <li
+                        class="small"
+                        *ngIf="
+                          item.raza.idEspecie === 1 || item.raza.idEspecie === 2
+                        "
+                      >
+                        <b>Especie: </b>
+                        {{ item.raza.idEspecie === 1 ? "CANINO" : "FELINO" }}
                       </li>
-                      <li class="medium">
-                        <span class="fa-li"
-                          ><i class="fa-solid fa-splotch"></i
-                        ></span>
-                        <b>Raza: {{ item.idDueno }}</b>
+                      <li class="small">
+                        <b>Raza: </b>{{ item.raza.descripcion }}
                       </li>
                     </ul>
                   </div>
-                  <div class="col-4 text-center">
-                    <h3 class="profile-username text-center"><b> </b></h3>
-                    <td>
+                  <div class="col-5 text-center">
+                    <a
+                      class="btn btn-sm btn-outline-info"
+                      data-toggle="modal"
+                      data-target="#modalActualizarFoto"
+                    >
+                      <i class="fas fa-camera"></i> Subir foto
+                    </a>
+                    <div class="imagen-container">
                       <img
-                        src="{{
+                        [src]="
                           item.foto
-                            ? item.foto
-                            : '../../../assets/dist/img/avatar.png'
-                        }}"
-                        class="img-circle img-fluid"
-                        width="150px"
+                            ? item?.foto
+                            : item?.raza.idEspecie === 1
+                            ? '../../../assets/dist/img/avatarPerro.png'
+                            : '../../../assets/dist/img/avatarGato.png'
+                        "
+                        alt="user-avatar"
+                        class="img-fluid"
                       />
-                    </td>
+                    </div>
+                    <div class="cod">
+                      <b>Cod. Mascota: {{ item.cod_mascota }}</b>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="card-footer">
-                <div class="text-right">
+              <div class="card-footer" style="">
+                <div class="float-right">
                   &nbsp;
                   <a
                     class="btn btn-success btn-sm btnRegistrarConsulta"
                     idMascota=""
+                    (click)="navegarVentanaDestino(item)"
+                    *ngIf="esRol('Administrador') || esRol('Veterinario')"
                   >
                     Nueva consulta
                   </a>
                   &nbsp;
                   <a
-                    routerLink="/historial"
                     class="btn btn-primary bg-indigo btn-sm btnHistorial"
                     idMascota=""
+                    (click)="navegarVentanaHistorial(item)"
                   >
                     Historial
                   </a>
@@ -173,22 +153,30 @@
                   <a
                     class="btn btn-info btn-sm btnEditarmascota"
                     idMascota=""
-                    data-toggle="modal"
-                    data-target="#modalEditarMascota"
+                    *ngIf="!item.foto"
                   >
-                    Editar
+                    Foto
                   </a>
                   &nbsp;
                   <a
-                    class="btn btn-danger btn-sm btnEliminarmascota"
+                    class="btn btn-info btn-sm btnEditarmascota"
                     idMascota=""
+                    data-toggle="modal"
+                    data-target="#modalEditarMascota"
+                    (click)="abrirModalEditarMascota(item.idMascota)"
+                    *ngIf="esRol('Administrador') || esRol('Veterinario')"
                   >
-                    <i class="fas fa-trash"> </i>
+                    Editar
                   </a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <pagination-controls
+            (pageChange)="pagina = $event"
+          ></pagination-controls>
         </div>
       </div>
 
@@ -205,6 +193,7 @@
                 class="close"
                 data-dismiss="modal"
                 aria-label="Close"
+                (click)="resetForm()"
               >
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -212,10 +201,9 @@
             <div class="modal-body">
               <form [formGroup]="formRegistrarMascota">
                 <div class="form-row">
-                  <div class="col-sm-12 col-md-6 col-lg-12">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-row">
                       <div class="col-sm-12 col-md-6 col-lg-6">
-                        <!-- text input -->
                         <div class="form-group">
                           <label>Nombre de la mascota</label>
                           <input
@@ -223,7 +211,17 @@
                             class="form-control"
                             formControlName="nombreM"
                             placeholder="Ingrese el nombre de la mascota"
+                            (blur)="verNombreError = true"
+                            [(ngModel)]="textoEnMayusculas"
+                            (input)="convertirAMayusculas()"
                           />
+
+                          <app-error-message
+                            [error]="
+                              formRegistrarMascota.get('nombreM')?.errors
+                            "
+                            [showError]="verNombreError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-6">
@@ -233,6 +231,7 @@
                             <select
                               class="form-control input"
                               formControlName="duenoM"
+                              (blur)="verDuenoMError = true"
                             >
                               <option
                                 *ngFor="let item of listaDuenos"
@@ -241,6 +240,15 @@
                                 {{ item.nombres }} {{ item.apellidoPaterno }}
                                 {{ item.apellidoMaterno }}
                               </option>
+
+                              />
+
+                              <app-error-message
+                                [error]="
+                                  formRegistrarMascota.get('duenoM')?.errors
+                                "
+                                [showError]="verDuenoMError"
+                              ></app-error-message>
                             </select>
                           </div>
                         </div>
@@ -248,92 +256,82 @@
                     </div>
                     <div class="form-row">
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <label>Color</label>
                           <input
                             type="text"
                             class="form-control"
                             formControlName="colorM"
-                            placeholder="Ingrese color(es) de la mascota"
+                            (blur)="verColorError = true"
+                            (input)="convertirAMayusculas()"
                           />
+
+                          <app-error-message
+                            [error]="formRegistrarMascota.get('colorM')?.errors"
+                            [showError]="verColorError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <label>Años</label>
                           <input
-                            type="text"
+                            type="number"
                             class="form-control"
                             formControlName="edadAnios"
-                            placeholder="año"
                             (change)="calcularFechaNacimiento()"
+                            (blur)="verEdadAniosError = true"
                           />
+
+                          <app-error-message
+                            [error]="
+                              formRegistrarMascota.get('edadAnios')?.errors
+                            "
+                            [showError]="verEdadAniosError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <label>Meses</label>
                           <input
-                            type="text"
+                            type="number"
                             class="form-control"
                             formControlName="edadMeses"
-                            placeholder="meses"
                             (change)="calcularFechaNacimiento()"
+                            (blur)="verEdadMesesError = true"
                           />
+
+                          <app-error-message
+                            [error]="
+                              formRegistrarMascota.get('edadMeses')?.errors
+                            "
+                            [showError]="verEdadMesesError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="form-group">
-                          <label>Edad</label>
+                          <label>Fecha de nacimiento</label>
 
                           <input
                             type="date"
                             class="form-control"
                             formControlName="fechaNac"
-                            placeholder="Ingrese fecha nac"
+                            (blur)="verEdadError = true"
                           />
-                          <!-- <select class="form-control input" formControlName="aniosM">
-                              <option value="0">Selecionar años</option>
-                              <option value="0">0</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                            </select>
-                            <select class="form-control input" formControlName="mesesM">
-                              <option value="0">Selecionar meses</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                            </select>-->
+
+                          <app-error-message
+                            [error]="
+                              formRegistrarMascota.get('fechaNac')?.errors
+                            "
+                            [showError]="verEdadError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <!-- text input -->
                         <div class="form-group">
                           <label>Especie</label>
                           <div class="form-group">
@@ -369,14 +367,14 @@
                               <select
                                 class="form-control input"
                                 formControlName="razaM"
-                                [(ngModel)]="idEspecieForm"
+                                [(ngModel)]="idRazaForm"
                               >
                                 <option value="">Selecione raza</option>
                                 <option
                                   *ngFor="let item of listaRazas"
-                                  [value]="item.idEspecie"
+                                  [value]="item.idRaza"
                                 >
-                                  {{ item.raza.descripcion }}
+                                  {{ item.descripcion }}
                                 </option>
                               </select>
                             </div>
@@ -390,6 +388,245 @@
                             <select
                               class="form-control input-lg"
                               formControlName="sexoM"
+                            >
+                              <option value="">Selecionar sexo</option>
+                              <option value="Macho">MACHO</option>
+                              <option value="Hembra">HEMBRA</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-sm-4 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Tatuaje </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="tatuajeM"
+                            placeholder="Ingrese el tatuaje si la mascota lo tiene."
+                            (input)="convertirAMayusculas()"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Conducta</label>
+                          <div class="input-group">
+                            <select
+                              class="form-control input-lg"
+                              formControlName="conductaM"
+                            >
+                              <option value="">Selecionar conducta</option>
+                              <option value="CONFIADO">CONFIADO</option>
+                              <option value="DESCONFIADO">DESCONFIADO</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <span
+                            class="input-group-text"
+                            id="inputGroup-sizing-default"
+                            >Imagen de la mascota</span
+                          >
+                          <select
+                            class="form-control input-lg"
+                            (change)="onChangeOption($event)"
+                          >
+                            <option value="none">Selecciona una opción</option>
+                            <option value="foto">Subir una foto</option>
+                            <option value="camara">Tomar una foto</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div *ngIf="opcionSeleccionada === 'foto'">
+                          <div class="input-group mb-12">
+                            <span
+                              class="input-group-text"
+                              id="inputGroup-sizing-default"
+                              >Foto</span
+                            >
+                            <app-input-img
+                              (change)="onFileSelected($event)"
+                            ></app-input-img>
+                          </div>
+                        </div>
+                        <div *ngIf="opcionSeleccionada === 'camara'">
+                          <app-camara
+                            (imagenCapturada)="fotoTomada($event)"
+                          ></app-camara>
+                        </div>
+                      </div>
+                      <!-- <div class="col-lg-12">
+
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    Cerrar
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    (click)="guardarMascota()"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    [disabled]="!formRegistrarMascota.valid"
+                  >
+                    Guardar datos
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Editar Mascota -->
+      <div class="modal fade" id="modalEditarMascota">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #16817a">
+              <h4 class="modal-title" style="color: #ffffff">
+                Actualizar datos
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formActualizarMascota">
+                <div class="form-row">
+                  <div class="col-sm-12 col-md-6 col-lg-12">
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Nombre de la mascota</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editarnombreM"
+                            placeholder="Ingrese el nombre de la mascota"
+                            (input)="convertirAMayusculas()"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Dueño</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editarduenoM"
+                            placeholder="Ingrese el nombre de la mascota"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Color</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editarcolorM"
+                            placeholder="Ingrese color(es) de la mascota"
+                            (input)="convertirAMayusculas()"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Años</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editaredadAnios"
+                            placeholder="año"
+                            (change)="calcularFechaNacimientoEditar()"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <!-- text input -->
+                        <div class="form-group">
+                          <label>Meses</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editaredadMeses"
+                            placeholder="meses"
+                            (change)="calcularFechaNacimientoEditar()"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group">
+                          <label>Fecha de nacimiento</label>
+
+                          <input
+                            type="date"
+                            class="form-control"
+                            formControlName="editarfechaNac"
+                            placeholder="Ingrese fecha nac"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Especie</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editarespecieM"
+                            placeholder="Ingrese fecha nac"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Raza</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editarrazaM"
+                            placeholder="Ingrese fecha nac"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Sexo de la mascota</label>
+                          <div class="input-group">
+                            <select
+                              class="form-control input-lg"
+                              formControlName="editarsexoM"
                             >
                               <option value="">Selecionar sexo</option>
                               <option value="Macho">Macho</option>
@@ -406,7 +643,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="tatuajeM"
+                            formControlName="editartatuajeM"
                             placeholder="Ingrese el tatuaje si la mascota lo tiene."
                           />
                         </div>
@@ -417,7 +654,7 @@
                           <div class="input-group">
                             <select
                               class="form-control input-lg"
-                              formControlName="conductaM"
+                              formControlName="editarconductaM"
                             >
                               <option value="">Selecionar sexo</option>
                               <option value="CONFIADO">Confiado</option>
@@ -425,20 +662,6 @@
                             </select>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="col-lg-4">
-                      <div class="input-group mb-3">
-                        <span
-                          class="input-group-text"
-                          id="inputGroup-sizing-default"
-                          >Foto
-                        </span>
-                        <app-input-img
-                          (change)="onFileSelected($event)"
-                        ></app-input-img>
                       </div>
                     </div>
                   </div>
@@ -454,12 +677,94 @@
                   <button
                     type="submit"
                     class="btn btn-primary"
-                    (click)="guardarMascota()"
+                    (click)="actualizarMascota()"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    [disabled]="!formActualizarMascota.valid"
                   >
                     Guardar datos
                   </button>
                 </div>
               </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- Editar Mascota -->
+      <div class="modal fade" id="modalActualizarFoto">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #16817a">
+              <h4 class="modal-title" style="color: #ffffff">
+                Actualizar Foto
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="col-lg-12">
+                  <div class="input-group">
+                    <span
+                      class="input-group-text"
+                      id="inputGroup-sizing-default"
+                      >Imagen de la mascota</span
+                    >
+                    <select
+                      class="form-control input-lg"
+                      (change)="onChangeOption($event)"
+                    >
+                      <option value="none">Selecciona una opción</option>
+                      <option value="foto">Subir una foto</option>
+                      <option value="camara">Tomar una foto</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-lg-12">
+                  <div *ngIf="opcionSeleccionada === 'foto'">
+                    <div class="input-group mb-12">
+                      <span
+                        class="input-group-text"
+                        id="inputGroup-sizing-default"
+                        >Foto</span
+                      >
+                      <app-input-img
+                        (change)="onFileSelected($event)"
+                      ></app-input-img>
+                    </div>
+                  </div>
+                  <div *ngIf="opcionSeleccionada === 'camara'">
+                    <app-camara
+                      (imagenCapturada)="fotoTomada($event)"
+                    ></app-camara>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="actualizarMascota()"
+                data-dismiss="modal"
+                aria-label="Close"
+                [disabled]="!formActualizarMascota.valid"
+              >
+                Guardar datos
+              </button>
             </div>
           </div>
           <!-- /.modal-content -->

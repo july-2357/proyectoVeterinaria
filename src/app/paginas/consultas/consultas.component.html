@@ -21,46 +21,38 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-9">
-        <div class="card card-outline">
-          <div class="card-header p-0 pt-1 border-bottom-0 headerCardConsultas">
+        <div class="card card-primary card-tabs">
+          <div class="card-header p-0 pt-1 custom-card-header">
             <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
               <li class="nav-item">
-                <a
-                  class="nav-link textoNav active"
-                  href="#consultas"
-                  data-toggle="tab"
+                <a class="nav-link active" href="#consultas" data-toggle="tab"
                   >CONSULTA</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link textoNav" href="#vacunas" data-toggle="tab"
+                <a class="nav-link" href="#vacunas" data-toggle="tab"
                   >VACUNAS</a
                 >
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link textoNav"
-                  href="#desparacitaciones"
-                  data-toggle="tab"
-                  >DESPARACITACIONES</a
+                <a class="nav-link" href="#desparacitaciones" data-toggle="tab"
+                  >DESPARASITACIONES</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link textoNav" href="#cirugias" data-toggle="tab"
-                  >Cirugias</a
+                <a class="nav-link" href="#cirugias" data-toggle="tab"
+                  >CIRUGIAS</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link textoNav" href="#otros" data-toggle="tab"
-                  >Otros</a
-                >
+                <a class="nav-link" href="#otros" data-toggle="tab">Otros</a>
               </li>
             </ul>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
-              <!-- Ventana  Vacunas -->
+              <!-- Ventana  Consultas -->
               <div class="active tab-pane" id="consultas">
                 <div class="card-body p-0">
                   <form [formGroup]="formRegistrarConsulta">
@@ -80,11 +72,11 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="mayorAp"
-                                  name="apetitoName"
                                   formControlName="apetito"
+                                  name="apetito"
                                   value="Mayor Apetito"
                                 />
-                                <label class="form-check-label"
+                                <label class="form-check-label" for="mayorAp"
                                   >Mayor apetito</label
                                 >
                               </div>
@@ -93,22 +85,26 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="normalAp"
-                                  name="apetitoName"
                                   formControlName="apetito"
+                                  name="apetito"
                                   value="Normal"
                                 />
-                                <label class="form-check-label">Normal</label>
+                                <label class="form-check-label" for="normalAp"
+                                  >Normal</label
+                                >
                               </div>
                               <div class="form-check">
                                 <input
                                   class="form-check-input"
                                   type="radio"
                                   id="menorAp"
-                                  name="apetitoName"
                                   formControlName="apetito"
+                                  name="apetito"
                                   value="Menor apetito"
                                 />
-                                <label class="form-check-label">Menor</label>
+                                <label class="form-check-label" for="menorAp"
+                                  >Menor</label
+                                >
                               </div>
                             </div>
                           </div>
@@ -120,8 +116,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="aguaIn"
-                                  name="agua"
                                   formControlName="agua"
+                                  name="agua"
                                   value="Incremento"
                                 />
                                 <label for="aguaIn" class="form-check-label"
@@ -133,8 +129,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="aguaNor"
-                                  name="agua"
                                   formControlName="agua"
+                                  name="agua"
                                   value="Normal"
                                 />
                                 <label for="aguaNor" class="form-check-label"
@@ -146,8 +142,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="aguaDis"
-                                  name="agua"
                                   formControlName="agua"
+                                  name="agua"
                                   value="Disminuyó"
                                 />
                                 <label for="aguaDis" class="form-check-label"
@@ -164,8 +160,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="conductaLet"
-                                  name="conducta"
                                   formControlName="conducta"
+                                  name="conducta"
                                   value="Letargo o apatía"
                                 />
                                 <label
@@ -180,8 +176,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="conductaNor"
-                                  name="conducta"
                                   formControlName="conducta"
+                                  name="conducta"
                                   value="Normal"
                                 />
                                 <label
@@ -195,8 +191,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="conductaAgre"
-                                  name="conducta"
                                   formControlName="conducta"
+                                  name="conducta"
                                   value="Agresividad o irritabilidad"
                                 />
                                 <label
@@ -215,8 +211,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="defEs"
-                                  name="defecacion"
                                   formControlName="defecacion"
+                                  name="defecacion"
                                   value="Estreñimiento"
                                 />
                                 <label for="defEs" class="form-check-label"
@@ -228,8 +224,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="defNor"
-                                  name="defecacion"
                                   formControlName="defecacion"
+                                  name="defecacion"
                                   value="Normal"
                                 />
                                 <label for="defNor" class="form-check-label"
@@ -241,8 +237,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="defDia"
-                                  name="defecacion"
                                   formControlName="defecacion"
+                                  name="defecacion"
                                   value="Diarrea"
                                 />
                                 <label for="defDia" class="form-check-label"
@@ -263,8 +259,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="neuCon"
-                                  name="alteracionesNeuro"
                                   formControlName="alteracionesNeuro"
+                                  name="alteracionesNeuro"
                                   value="Convulsiones"
                                 />
                                 <label for="neuCon" class="form-check-label"
@@ -276,8 +272,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="neuNor"
-                                  name="alteracionesNeuro"
                                   formControlName="alteracionesNeuro"
+                                  name="alteracionesNeuro"
                                   value="Normal"
                                 />
                                 <label for="neuNor" class="form-check-label"
@@ -289,8 +285,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="neuFCoor"
-                                  name="alteracionesNeuro"
                                   formControlName="alteracionesNeuro"
+                                  name="alteracionesNeuro"
                                   value="Falta de coordinación"
                                 />
                                 <label for="neuFCoor" class="form-check-label"
@@ -307,8 +303,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="frecA"
-                                  name="problemasUr"
                                   formControlName="problemasUr"
+                                  name="problemasUr"
                                   value="Frecuencia aumentada"
                                 />
                                 <label for="frecA" class="form-check-label"
@@ -320,8 +316,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="dificO"
-                                  name="problemasUr"
                                   formControlName="problemasUr"
+                                  name="problemasUr"
                                   value="Dificultad para orinar"
                                 />
                                 <label for="dificO" class="form-check-label"
@@ -333,8 +329,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="sangreO"
-                                  name="problemasUr"
                                   formControlName="problemasUr"
+                                  name="problemasUr"
                                   value="Presencia de sangre en la orina"
                                 />
                                 <label for="sangreO" class="form-check-label"
@@ -346,8 +342,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="normalO"
-                                  name="problemasUr"
                                   formControlName="problemasUr"
+                                  name="problemasUr"
                                   value="Normal"
                                 />
                                 <label for="normalO" class="form-check-label"
@@ -366,8 +362,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="resDif"
-                                  name="alteracionesRes"
                                   formControlName="alteracionesRes"
+                                  name="alteracionesRes"
                                   value="Dificultad para respirar"
                                 />
                                 <label for="resDif" class="form-check-label"
@@ -379,8 +375,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="resNor"
-                                  name="alteracionesRes"
                                   formControlName="alteracionesRes"
+                                  name="alteracionesRes"
                                   value="Normal"
                                 />
                                 <label for="resNor" class="form-check-label"
@@ -392,8 +388,8 @@
                                   class="form-check-input"
                                   type="radio"
                                   id="resTos"
-                                  name="alteracionesRes"
                                   formControlName="alteracionesRes"
+                                  name="alteracionesRes"
                                   value="Tos o estornudos frecuentes"
                                 />
                                 <label for="resTos" class="form-check-label"
@@ -405,53 +401,106 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-12">
-                            <div class="titulo">Control medico</div>
+                            <div class="titulo">Control físico</div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
                             <div class="form-group">
                               <div class="pregunta">Temperatura</div>
-                              <input
-                                type="number"
-                                class="form-control"
-                                formControlName="temperatura"
-                              />
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="temperaturaConsulta"
+                                  (blur)="verTempCError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">°C</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarConsulta.get(
+                                    'temperaturaConsulta'
+                                  )?.errors
+                                "
+                                [showError]="verTempCError"
+                              ></app-error-message>
                             </div>
                           </div>
+
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
                             <div class="form-group">
                               <div class="pregunta">Frecuencia cardiaca</div>
-                              <input
-                                type="text"
-                                class="form-control"
-                                formControlName="frecCardiaca"
-                              />
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="frecuenciaCardiacaConsulta"
+                                  (blur)="verFCCError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">LPM</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarConsulta.get(
+                                    'frecuenciaCardiacaConsulta'
+                                  )?.errors
+                                "
+                                [showError]="verFCCError"
+                              ></app-error-message>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
                             <div class="form-group">
                               <div class="pregunta">
                                 Frecuencia respiratoria
                               </div>
-                              <input
-                                type="text"
-                                class="form-control"
-                                formControlName="frecRespiratoria"
-                              />
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="frecuenciaRespiratoriaConsulta"
+                                  (blur)="verFRCError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">RPM</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarConsulta.get(
+                                    'frecuenciaRespiratoriaConsulta'
+                                  )?.errors
+                                "
+                                [showError]="verFRCError"
+                              ></app-error-message>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
                             <div class="form-group">
                               <div class="pregunta">Peso</div>
-                              <input
-                                type="text"
-                                class="form-control"
-                                formControlName="peso"
-                              />
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="pesoConsulta"
+                                  (blur)="verPesoCError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">Kg.</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarConsulta.get('pesoConsulta')
+                                    ?.errors
+                                "
+                                [showError]="verPesoCError"
+                              ></app-error-message>
                             </div>
                           </div>
                         </div>
@@ -461,43 +510,72 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-sm-12 col-md-6 col-lg-12">
-                            <!-- text input -->
+                          <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Motivo de la consulta</label>
-                              <input
+                              <!-- <input
                                 type="text"
                                 class="form-control"
                                 formControlName="motivoConsulta"
-                              />
+                              /> -->
+                              <textarea
+                                id="inputMessage"
+                                class="form-control"
+                                rows="2"
+                                formControlName="motivoConsulta"
+                              ></textarea>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>Diágnostico</label>
+                              <textarea
+                              id="inputMessage"
+                              class="form-control"
+                              rows="2"
+                              formControlName="diagnosticoConsulta"
+                            ></textarea>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>Tratamiento</label>
+
+                              <textarea
+                              id="inputMessage"
+                              class="form-control"
+                              rows="2"
+                              formControlName="tratamiento"
+                            ></textarea>
                             </div>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-sm-12 col-md-6 col-lg-6">
-                            <!-- text input -->
+
+                          <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                              <label>Diágnostico</label>
+                              <label>Precio</label>
                               <input
                                 type="text"
                                 class="form-control"
-                                formControlName="diagnosticoConsulta"
+                                formControlName="precioConsulta"
+
                               />
                             </div>
                           </div>
-                          <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
+
+                          <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                              <label>Tratamiento</label>
+                              <label>Fecha Consulta</label>
                               <input
-                                type="text"
+                                type="date"
                                 class="form-control"
-                                formControlName="tratamiento"
+                                formControlName="fechaConsulta"
+                                [(ngModel)]="currentDate"
                               />
                             </div>
                           </div>
-                          <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
+                          <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Proxima visita</label>
                               <input
@@ -508,81 +586,125 @@
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-sm-12 col-md-4 col-lg-4">
-                            <button
-                              type="button"
-                              class="btn btn-block btn-danger disabled"
-                            >
-                              Cerrar
-                            </button>
-                          </div>
-                          <div class="col-sm-12 col-md-8 col-lg-8">
-                            <button
-                              type="button"
-                              class="btn btn-block btn-info"
-                              (click)="guardarAnamnesis()"
-                            >
-                              REGISTRAR
-                            </button>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </form>
+                </div>
+                <div class="card-footer p-0 text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-info"
+                    (click)="guardarConsulta()"
+                    name="GUARDAR"
+                    [disabled]="!formRegistrarConsulta.valid"
+                  >
+                    REGISTRAR CONSULTA
+                  </button>
                 </div>
               </div>
               <!----- Ventana  VACUNAS -->
               <div class="tab-pane" id="vacunas">
                 <div class="card-body p-0">
-                  <form method="POST">
+                  <form [formGroup]="formRegistrarVacuna">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="titulo">Consulta Medica</div>
+                        <div class="titulo">Control físico</div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <div class="pregunta">Temperatura</div>
-                          <input
-                            type="number"
-                            class="form-control"
-                            formControlName="temperatura"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="temperaturaVacunas"
+                              (blur)="verTempVError = true"
+                            />
+
+                            <div class="input-group-append">
+                              <span class="input-group-text">°C</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarVacuna.get('temperaturaVacunas')
+                                ?.errors
+                            "
+                            [showError]="verTempVError"
+                          ></app-error-message>
                         </div>
                       </div>
+
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <div class="pregunta">Frecuencia cardiaca</div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="frecCardiaca"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="frecuenciaCardiacaVacunas"
+                              (blur)="verFCVError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">LPM</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarVacuna.get(
+                                'frecuenciaCardiacaVacunas'
+                              )?.errors
+                            "
+                            [showError]="verFCVError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <div class="pregunta">Frecuencia respiratoria</div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="frecRespiratoria"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="frecuenciaRespiratoriaVacunas"
+                              (blur)="verFRVError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">RPM</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarVacuna.get(
+                                'frecuenciaRespiratoriaVacunas'
+                              )?.errors
+                            "
+                            [showError]="verFRVError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="form-group">
                           <div class="pregunta">Peso</div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="peso"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="pesoVacunas"
+                              (blur)="verPesoVError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">Kg.</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarVacuna.get('pesoVacunas')?.errors
+                            "
+                            [showError]="verPesoVError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
@@ -592,19 +714,26 @@
                       </div>
                     </div>
 
-                    <div class="row">
+                    <div
+                      class="row"
+                      *ngIf="
+                        datosMascota.idEspecie === 1 ||
+                        (datosMascota.idEspecie === undefined &&
+                          mascotaSeleccionada?.raza.idEspecie === 1)
+                      "
+                    >
                       <div class="col-sm-12 col-md-6 col-lg-2">
                         <div class="form-check formVac">
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="parvovirus"
-                            name="vacunas"
-                            formControlName="vacunaCan"
-                            value="Parvovirus"
+                            id="octavalente"
+                            formControlName="vacunaCanino"
+                            name="vacunaCanino"
+                            value="OCTAVALENTE"
                           />
-                          <label for="parvovirus" class="form-check-label"
-                            >Parvovirus</label
+                          <label for="octavalente" class="form-check-label"
+                            >Octavalente</label
                           >
                         </div>
                       </div>
@@ -613,44 +742,44 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            name="vacunas"
-                            id="distemper"
-                            formControlName="vacunaCan"
-                            value="Distemper"
+                            id="parvocorona"
+                            formControlName="vacunaCanino"
+                            name="vacunaCanino"
+                            value="PARVOCORONAVIRUS"
                           />
-                          <label for="distemper" class="form-check-label"
-                            >Distemper</label
+                          <label for="parvocorona" class="form-check-label"
+                            >Parvocoronavirus</label
                           >
                         </div>
                       </div>
+                      <div class="col-sm-12 col-md-6 col-lg-2">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="hexavalente"
+                            formControlName="vacunaCanino"
+                            name="vacunaCanino"
+                            value="HEXAVALENTE"
+                          />
+                          <label for="hexavalente" class="form-check-label"
+                            >Hexavalente</label
+                          >
+                        </div>
+                      </div>
+
                       <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="form-check formVac">
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="hepatitisInf"
-                            name="vacunas"
-                            formControlName="vacunaCan"
-                            value="Hepatitis infecciosa canina"
+                            id="traquebronquitis"
+                            name="vacunaCanino"
+                            formControlName="vacunaCanino"
+                            value="TRAQUEOBRONQUITIS"
                           />
-                          <label for="hepatitisInf" class="form-check-label"
-                            >Hepatitis infecciosa canina</label
-                          >
-                        </div>
-                      </div>
-
-                      <div class="col-sm-12 col-md-6 col-lg-2">
-                        <div class="form-check formVac">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            id="coronavirus"
-                            name="vacunas"
-                            formControlName="vacunaCan"
-                            value="Coronavirus"
-                          />
-                          <label for="coronavirus" class="form-check-label"
-                            >Coronavirus</label
+                          <label for="traquebronquitis" class="form-check-label"
+                            >Traquebronquitis</label
                           >
                         </div>
                       </div>
@@ -659,30 +788,39 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="rabia"
-                            name="vacunas"
-                            formControlName="vacunaCan"
-                            value="Rabia"
+                            id="rabiaCan"
+                            name="vacunaCanino"
+                            formControlName="vacunaCanino"
+                            value="RABIA"
                           />
-                          <label for="rabia" class="form-check-label laberForm"
+                          <label
+                            for="rabiaCan"
+                            class="form-check-label laberForm"
                             >Rabia</label
                           >
                         </div>
                       </div>
                     </div>
 
-                    <div class="row">
+                    <div
+                      class="row"
+                      *ngIf="
+                        datosMascota.idEspecie === 2 ||
+                        (datosMascota.idEspecie === undefined &&
+                          mascotaSeleccionada?.raza.idEspecie === 2)
+                      "
+                    >
                       <div class="col-sm-12 col-md-6 col-lg-2">
                         <div class="form-check formVac">
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="parvovirus"
-                            name="vacunas"
-                            formControlName="vacunaCan"
-                            value="Parvovirus"
+                            id="tripleFelina"
+                            name="vacunaFelino"
+                            formControlName="vacunaFelino"
+                            value="TRIPLE FELINA"
                           />
-                          <label for="parvovirus" class="form-check-label"
+                          <label for="tripleFelina" class="form-check-label"
                             >Triple felina</label
                           >
                         </div>
@@ -692,12 +830,12 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            name="vacunas"
-                            id="distemper"
-                            formControlName="vacunaCan"
-                            value="Distemper"
+                            name="vacunaFelino"
+                            id="rabiaFel"
+                            formControlName="vacunaFelino"
+                            value="RABIA"
                           />
-                          <label for="distemper" class="form-check-label"
+                          <label for="rabiaFel" class="form-check-label"
                             >Rabia</label
                           >
                         </div>
@@ -707,12 +845,12 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            id="hepatitisInf"
-                            name="vacunas"
-                            formControlName="vacunaCan"
-                            value="Hepatitis infecciosa canina"
+                            name="vacunaFelino"
+                            id="leucemiaFel"
+                            formControlName="vacunaFelino"
+                            value="LEUCEMIA FELINA"
                           />
-                          <label for="hepatitisInf" class="form-check-label"
+                          <label for="leucemiaFel" class="form-check-label"
                             >Leucemia felina</label
                           >
                         </div>
@@ -725,148 +863,203 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="laboratorioVacuna"
                           />
                         </div>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="form-group">
-                          <label>Fecha de refuerzo</label>
+                          <label>Fecha de vacunación</label>
                           <input
                             type="date"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="fechadeVacunacion"
+                            [(ngModel)]="currentDate"
                           />
                         </div>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="form-group">
                           <label>fecha de revacunacion</label>
                           <input
                             type="date"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="fechadeREVacunacion"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="form-group">
+                          <label>Precio</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="precioVacunacion"
                           />
                         </div>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <div class="col-sm-12 col-md-4 col-lg-4">
-                        <button
-                          type="button"
-                          class="btn btn-block btn-danger disabled"
-                        >
-                          Cerrar
-                        </button>
-                      </div>
-                      <div class="col-sm-12 col-md-8 col-lg-8">
-                        <button
-                          type="submit"
-                          class="btn btn-block btn-info"
-                          name="GUARDAR"
-                        >
-                          REGISTRAR
-                        </button>
-                      </div>
-                    </div>
                   </form>
+                </div>
+                <div class="card-footer p-0 text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-info"
+                    (click)="guardarVacunas()"
+                    name="GUARDAR"
+                    [disabled]="!formRegistrarVacuna.valid"
+                  >
+                    REGISTRAR VACUNA
+                  </button>
                 </div>
               </div>
 
               <!----- Ventana  DESPARACITACIONES -->
               <div class="tab-pane" id="desparacitaciones">
                 <div class="card-body p-0">
-                  <form method="POST">
+                  <form [formGroup]="formRegistrarDesparacitacion">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-12">
-                        <div class="titulo">Examén fisico</div>
+                        <div class="titulo">Control físico</div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <div class="pregunta">Temperatura</div>
-                          <input
-                            type="number"
-                            class="form-control"
-                            formControlName="temperatura"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="temperaturaDesparacitacion"
+                              (blur)="verTempDError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">°C</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarDesparacitacion.get(
+                                'temperaturaDesparacitacion'
+                              )?.errors
+                            "
+                            [showError]="verTempDError"
+                          ></app-error-message>
                         </div>
                       </div>
+
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <div class="pregunta">Frecuencia cardiaca</div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="frecCardiaca"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="frecuenciaCardiacaDesparacitacion"
+                              (blur)="verFCDError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">LPM</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarDesparacitacion.get(
+                                'frecuenciaCardiacaDesparacitacion'
+                              )?.errors
+                            "
+                            [showError]="verFCDError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <!-- text input -->
                         <div class="form-group">
                           <div class="pregunta">Frecuencia respiratoria</div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="frecRespiratoria"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="frecuenciaRespiratoriaDeparacitacion"
+                              (blur)="verFRDError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">RPM</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarDesparacitacion.get(
+                                'frecuenciaRespiratoriaDeparacitacion'
+                              )?.errors
+                            "
+                            [showError]="verFRDError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="form-group">
                           <div class="pregunta">Peso</div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="peso"
-                          />
+                          <div class="input-group">
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="pesoDesparacitacion"
+                              (blur)="verPesoDError = true"
+                            />
+                            <div class="input-group-append">
+                              <span class="input-group-text">Kg.</span>
+                            </div>
+                          </div>
+                          <app-error-message
+                            [error]="
+                              formRegistrarDesparacitacion.get(
+                                'pesoDesparacitacion'
+                              )?.errors
+                            "
+                            [showError]="verPesoDError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg 12">
-                        <div class="titulo">Datos desparacitacion</div>
+                        <div class="titulo">Datos desparasitación</div>
                       </div>
                     </div>
 
-                    <div class="row ">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-check formVac">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            id="despInterna"
+                            formControlName="tipoDesparacitacion"
+                            name="tipoDesparacitacion"
+                            value="Interna"
+                          />
+                          <label for="despInterna" class="form-check-label"
+                            >Desparasitación Interna</label
+                          >
+                        </div>
+                      </div>
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="form-check formVac">
                           <input
                             class="form-check-input"
                             type="radio"
                             id="despExterna"
-                            name="desparacitacion"
-                            formControlName="desparacitaciones"
-                            value="Interna"
-                          />
-                          <label for="parvovirus" class="form-check-label"
-                            >Desparacitación Interna</label
-                          >
-                        </div>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="form-check formVac">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="desparacitacion"
-                            id="despInterna"
-                            formControlName="desparacitaciones"
+                            formControlName="tipoDesparacitacion"
+                            name="tipoDesparacitacion"
                             value="Externa"
                           />
-                          <label for="distemper" class="form-check-label"
-                            >Desparacitación Externa</label
+                          <label for="despExterna" class="form-check-label"
+                            >Desparasitación Externa</label
                           >
                         </div>
                       </div>
                     </div>
-
 
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-4">
@@ -875,7 +1068,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="productoDesparacitacion"
                           />
                         </div>
                       </div>
@@ -885,27 +1078,37 @@
                           <input
                             type="text"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="principioActivo"
                           />
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-4">
+                        <label>Vía</label>
                         <div class="form-group">
-                          <label>Vía</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            formControlName="diagnosticoConsulta"
-                          />
+                          <div class="input-group" aria-placeholder="asdas">
+                            <select
+                              class="form-control input"
+                              formControlName="viaDesparacitacion"
+                            >
+                              <option value="">Selecciona una opción</option>
+                              <option value="ORAL">Oral</option>
+
+                              <option value="SUBCUTANEA">Subcutanea</option>
+                              <option value="TOPICA">Topica</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <div class="form-group">
-                          <label>Fecha de vacunación</label>
+                          <label>Fecha de desparasitación</label>
                           <input
                             type="date"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="fechaDesparacitacion"
+                            [(ngModel)]="currentDate"
                           />
                         </div>
                       </div>
@@ -915,173 +1118,587 @@
                           <input
                             type="date"
                             class="form-control"
-                            formControlName="diagnosticoConsulta"
+                            formControlName="fechaProximaAplicacionDespa"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Precio</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="precioDesparasitacion"
                           />
                         </div>
                       </div>
                     </div>
-
-                    <div class="row">
-                      <div class="col-sm-12 col-md-4 col-lg-4">
-                        <button
-                          type="button"
-                          class="btn btn-block btn-danger disabled"
-                        >
-                          Cerrar
-                        </button>
-                      </div>
-                      <div class="col-sm-12 col-md-8 col-lg-8">
-                        <button
-                          type="submit"
-                          class="btn btn-block btn-info"
-                          name="GUARDAR"
-                        >
-                          REGISTRAR
-                        </button>
-                      </div>
-                    </div>
                   </form>
                 </div>
+                <div class="card-footer p-0 text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-info"
+                    (click)="guardarDesparacitacion()"
+                    name="GUARDAR"
+                    [disabled]="!formRegistrarDesparacitacion.valid"
+                  >
+                    REGISTRAR DESPARASITACIÓN
+                  </button>
+                </div>
               </div>
-              <!-- /.tab-pane -->
+
               <!-- Ventana  Cirugias -->
               <div class="tab-pane" id="cirugias">
                 <div class="card-body p-0">
-                  <form method="POST">
+                  <form [formGroup]="formRegistrarCirugia">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-12">
                         <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <div class="titulo">Anamnesis</div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Apetito</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="mayorApC"
+                                  formControlName="apetitoCirugia"
+                                  name="apetitoCirugia"
+                                  value="Mayor Apetito"
+                                />
+                                <label class="form-check-label" for="mayorApC"
+                                  >Mayor apetito</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="normalApC"
+                                  formControlName="apetitoCirugia"
+                                  name="apetitoCirugia"
+                                  value="Normal"
+                                />
+                                <label class="form-check-label" for="normalApC"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="menorApC"
+                                  formControlName="apetitoCirugia"
+                                  name="apetitoCirugia"
+                                  value="Menor apetito"
+                                />
+                                <label class="form-check-label" for="menorApC"
+                                  >Menor</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Ingesta de agua</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="aguaInC"
+                                  formControlName="aguaCirugia"
+                                  name="aguaCirugia"
+                                  value="Incremento"
+                                />
+                                <label for="aguaInC" class="form-check-label"
+                                  >Incremento</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="aguaNorC"
+                                  formControlName="aguaCirugia"
+                                  name="aguaCirugia"
+                                  value="Normal"
+                                />
+                                <label for="aguaNorC" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="aguaDisC"
+                                  formControlName="aguaCirugia"
+                                  name="aguaCirugia"
+                                  value="Disminuyó"
+                                />
+                                <label for="aguaDisC" class="form-check-label"
+                                  >Disminuyó</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Conducta</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="conductaLetC"
+                                  formControlName="conductaCirugia"
+                                  name="conductaCirugia"
+                                  value="Letargo o apatía"
+                                />
+                                <label
+                                  for="conductaLetC"
+                                  class="form-check-label"
+                                >
+                                  Letargo o apatía</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="conductaNorC"
+                                  formControlName="conductaCirugia"
+                                  name="conductaCirugia"
+                                  value="Normal"
+                                />
+                                <label
+                                  for="conductaNorC"
+                                  class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="conductaAgreC"
+                                  formControlName="conductaCirugia"
+                                  name="conductaCirugia"
+                                  value="Agresividad o irritabilidad"
+                                />
+                                <label
+                                  for="conductaAgreC"
+                                  class="form-check-label"
+                                  >Agresividad o irritabilidad</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group centrar">
+                              <div class="pregunta">Defecación</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="defEsC"
+                                  formControlName="defecacionCirugia"
+                                  name="defecacionCirugia"
+                                  value="Estreñimiento"
+                                />
+                                <label for="defEsC" class="form-check-label"
+                                  >Estreñimiento</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="defNorC"
+                                  formControlName="defecacionCirugia"
+                                  name="defecacionCirugia"
+                                  value="Normal"
+                                />
+                                <label for="defNorC" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="defDiaC"
+                                  formControlName="defecacionCirugia"
+                                  name="defecacionCirugia"
+                                  value="Diarrea"
+                                />
+                                <label for="defDiaC" class="form-check-label"
+                                  >Diarrea</label
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-4">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>Nombre mascota</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="nombreD"
-                                placeholder="Jalar los datos de la mascota"
-                              />
+                            <div class="form-group centrar">
+                              <div class="pregunta">
+                                Alteraciones neurológicas
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="neuConC"
+                                  formControlName="alteracionesNeuroCirugia"
+                                  name="alteracionesNeuroCirugia"
+                                  value="Convulsiones"
+                                />
+                                <label for="neuConC" class="form-check-label"
+                                  >Convulsiones</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="neuNorC"
+                                  formControlName="alteracionesNeuroCirugia"
+                                  name="alteracionesNeuroCirugia"
+                                  value="Normal"
+                                />
+                                <label for="neuNorC" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="neuFCoorC"
+                                  formControlName="alteracionesNeuroCirugia"
+                                  name="alteracionesNeuroCirugia"
+                                  value="Falta de coordinación"
+                                />
+                                <label for="neuFCoorC" class="form-check-label"
+                                  >Falta de coordinación</label
+                                >
+                              </div>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-4">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>Datos del propietario</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                name="apePD"
-                                placeholder="jalar datos del propietario"
-                              />
+                            <div class="form-group centrar">
+                              <div class="pregunta">Problemas urinarios</div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="frecAC"
+                                  formControlName="problemasUrCirugia"
+                                  name="problemasUrCirugia"
+                                  value="Frecuencia aumentada"
+                                />
+                                <label for="frecAC" class="form-check-label"
+                                  >Frecuencia aumentada</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="dificOC"
+                                  formControlName="problemasUrCirugia"
+                                  name="problemasUrCirugia"
+                                  value="Dificultad para orinar"
+                                />
+                                <label for="dificOC" class="form-check-label"
+                                  >Dificultad para orinar</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="sangreOC"
+                                  formControlName="problemasUrCirugia"
+                                  name="problemasUrCirugia"
+                                  value="Presencia de sangre en la orina"
+                                />
+                                <label for="sangreOC" class="form-check-label"
+                                  >Presencia de sangre en la orina</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="normalOC"
+                                  formControlName="problemasUrCirugia"
+                                  name="problemasUrCirugia"
+                                  value="Normal"
+                                />
+                                <label for="normalOC" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
                             </div>
                           </div>
-                          <div class="col-sm-12 col-md-6 col-lg-2">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>Edad de la mascota</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder=""
-                              />
-                            </div>
-                          </div>
-                          <div class="col-sm-12 col-md-6 col-lg-2">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>Peso de la mascota</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder=""
-                              />
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group centrar">
+                              <div class="pregunta">
+                                Alteraciones respiratorias
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="resDifC"
+                                  formControlName="alteracionesResCirugia"
+                                  name="alteracionesResCirugia"
+                                  value="Dificultad para respirar"
+                                />
+                                <label for="resDifC" class="form-check-label"
+                                  >Dificultad para respirar</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="resNorC"
+                                  formControlName="alteracionesResCirugia"
+                                  name="alteracionesResCirugia"
+                                  value="Normal"
+                                />
+                                <label for="resNorC" class="form-check-label"
+                                  >Normal</label
+                                >
+                              </div>
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  id="resTosC"
+                                  formControlName="alteracionesResCirugia"
+                                  name="alteracionesResCirugia"
+                                  value="Tos o estornudos frecuentes"
+                                />
+                                <label for="resTosC" class="form-check-label"
+                                  >Tos o estornudos frecuentes</label
+                                >
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-12">
-                            <label>Datos de la vacuna</label>
-                            <hr />
+                            <div class="titulo">Control físico</div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
                             <div class="form-group">
-                              <label>Fecha</label>
-                              <input
-                                type="date"
-                                class="form-control"
-                                placeholder=""
-                              />
+                              <div class="pregunta">Temperatura</div>
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="temperaturaCirugia"
+                                  (blur)="verTempCiError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">°C</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarCirugia.get('temperaturaCirugia')
+                                    ?.errors
+                                "
+                                [showError]="verTempCiError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group">
+                              <div class="pregunta">Frecuencia cardiaca</div>
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="frecuenciaCardiacaCirugia"
+                                  (blur)="verFCCiError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">LPM</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarCirugia.get(
+                                    'frecuenciaCardiacaCirugia'
+                                  )?.errors
+                                "
+                                [showError]="verFCCiError"
+                              ></app-error-message>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
                             <div class="form-group">
-                              <label>Observación</label>
+                              <div class="pregunta">
+                                Frecuencia respiratoria
+                              </div>
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="frecuenciaRespiratoriaCirugia"
+                                  (blur)="verFRCiError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">RPM</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarCirugia.get(
+                                    'frecuenciaRespiratoriaCirugia'
+                                  )?.errors
+                                "
+                                [showError]="verFCCiError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group">
+                              <div class="pregunta">Peso</div>
+                              <div class="input-group">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="pesoCirugia"
+                                  (blur)="verPesoCiError = true"
+                                />
+                                <div class="input-group-append">
+                                  <span class="input-group-text">Kg.</span>
+                                </div>
+                              </div>
+                              <app-error-message
+                                [error]="
+                                  formRegistrarCirugia.get('pesoCirugia')
+                                    ?.errors
+                                "
+                                [showError]="verPesoCiError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-12">
+                            <div class="titulo">Cirugia</div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>Tipo de cirugia</label>
+                              <select
+                                class="form-control input-lg"
+                                formControlName="tipoCirugia"
+                              >
+                                <option selected>
+                                  Selecciona un tipo de cirugía
+                                </option>
+                                <option
+                                  value="ESTERILIZACIÓN (CASTRACIÓN U OVARIOHISTERECTOMÍA)"
+                                >
+                                  Esterilización (castración u
+                                  ovariohisterectomía)
+                                </option>
+                                <option value="NEUTRO (CASTRACIÓN DE MACHOS)">
+                                  Neutro (castración de machos)
+                                </option>
+                                <option value="CESÁREA">Cesárea</option>
+                                <option value="Extirpación de masas">
+                                  Extirpación de masas
+                                </option>
+                                <option value="CIRUGÍA DE LIGAMENTO CRUZADO">
+                                  Cirugía de ligamento cruzado
+                                </option>
+                                <option value="EXTRACCIÓN DENTAL">
+                                  Extracción dental
+                                </option>
+                                <option value="EXTRACCIÓN DEL TERCER PARPADO">
+                                  Extracción del tercer parpado
+                                </option>
+                                <option value="CURACIONES">Curaciones</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-8">
+                            <div class="form-group">
+                              <label>Descripcion</label>
                               <input
                                 type="text"
                                 class="form-control"
-                                placeholder=""
+                                formControlName="descripcionCirugia"
                               />
-                            </div>
-                          </div>
-
-                          <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
-                            <div class="form-group">
-                              <label>Proxima visita</label>
-                              <input
-                                type="date"
-                                class="form-control"
-                                placeholder=""
-                              />
-                            </div>
-                          </div>
-                          <div class="col-sm-12 col-md-6 col-lg-3">
-                            <div class="form-group">
-                              <label>Tipo cirugia</label>
-                              <div class="input-group">
-                                <select
-                                  class="form-control input-lg"
-                                  name="sexoM"
-                                >
-                                  <option value="">Seleccione</option>
-                                  <option value="Desparacitación">
-                                    Castrar
-                                  </option>
-                                  <option value="Vitaminas">
-                                    Esterilización
-                                  </option>
-                                </select>
-                              </div>
                             </div>
                           </div>
                         </div>
-
                         <div class="row">
-                          <div class="col-sm-12 col-md-4 col-lg-4">
-                            <button
-                              type="button"
-                              class="btn btn-block btn-danger disabled"
-                            >
-                              Cerrar
-                            </button>
+                          <div class="col-sm-12 col-md-6 col-lg-8">
+                            <div class="form-group">
+                              <label>Observaciones adicionales</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="observacionesCirugia"
+                              />
+                            </div>
                           </div>
-                          <div class="col-sm-12 col-md-8 col-lg-8">
-                            <button
-                              type="submit"
-                              class="btn btn-block btn-info"
-                              name="GUARDAR"
-                            >
-                              REGISTRAR
-                            </button>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>Fecha de cirugia</label>
+                              <input
+                                type="date"
+                                class="form-control"
+                                formControlName="fechaCirugia"
+                                [(ngModel)]="currentDate"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-8">
+                            <div class="form-group">
+                              <label>Precio</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="precioCirugia"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </form>
+                </div>
+                <div class="card-footer p-0 text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-info"
+                    (click)="guardarCirugia()"
+                    name="GUARDAR"
+                    [disabled]="!formRegistrarCirugia.valid"
+                  >
+                    REGISTRAR CIRUGIA
+                  </button>
                 </div>
               </div>
               <div class="tab-pane" id="otros">
@@ -1091,7 +1708,6 @@
                       <div class="col-sm-12 col-md-6 col-lg-12">
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-4">
-                            <!-- text input -->
                             <div class="form-group">
                               <label>Nombre mascota</label>
                               <input
@@ -1103,7 +1719,6 @@
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-4">
-                            <!-- text input -->
                             <div class="form-group">
                               <label>Datos del propietario</label>
                               <input
@@ -1115,7 +1730,6 @@
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-2">
-                            <!-- text input -->
                             <div class="form-group">
                               <label>Edad de la mascota</label>
                               <input
@@ -1126,7 +1740,6 @@
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-2">
-                            <!-- text input -->
                             <div class="form-group">
                               <label>Peso de la mascota</label>
                               <input
@@ -1145,7 +1758,6 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-12 col-md-6 col-lg-3">
-                            <!-- text input -->
                             <div class="form-group">
                               <label>Fecha</label>
                               <input
@@ -1156,7 +1768,6 @@
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-9">
-                            <!-- text input -->
                             <div class="form-group">
                               <label>Motivo visita</label>
                               <input
@@ -1195,30 +1806,150 @@
             </div>
             <!-- /.tab-content -->
           </div>
-          <!-- /.card-body -->
         </div>
-        <!-- /.card -->
       </div>
       <!-------------  datos de la mascota -->
       <div class="col-md-3">
-        <div class="card lineaArriba">
-          <div class="card-header">
-            <h3 class="card-title">INFORMACION DE LA MASCOTA</h3>
+        <div *ngIf="datosMascota">
+          <div class="tarjeta">
+            <div class="card lineaArriba">
+              <div class="card-header">
+                <h3 class="card-title">INFORMACÓN DE LA MASCOTA</h3>
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <img
+                    class="profile-user-img img-fluid"
+                    [src]="
+                      datosMascota.foto
+                        ? datosMascota.foto
+                        : datosMascota.idEspecie === 1
+                        ? '../../../assets/dist/img/avatarPerro.png'
+                        : '../../../assets/dist/img/avatarGato.png'
+                    "
+                  />
+                </div>
+                <dl class="row">
+                  <dt class="col-sm-4">Mascota</dt>
+                  <dd class="col-sm-8">{{ datosMascota.nombreMascota }}</dd>
+                  <dt class="col-sm-4">Edad</dt>
+                  <dd class="col-sm-8">
+                    {{ calcularEdad(datosMascota.fecha_nacimiento).anios }} años
+
+                    {{ calcularEdad(datosMascota.fecha_nacimiento).meses }}
+                    meses
+                  </dd>
+                  <dt class="col-sm-4">Dueño</dt>
+                  <dd class="col-sm-8">
+                    {{ datosMascota.duenoNombre }}
+                    {{ datosMascota.duenoApellidoPaterno }}
+                    {{ datosMascota.duenoApellidoMaterno }}
+                  </dd>
+                  <dt class="col-sm-4">Sexo</dt>
+                  <dd class="col-sm-8">
+                    {{ datosMascota.sexo }}
+                  </dd>
+                  <dt class="col-sm-4">Tatuaje</dt>
+                  <dd class="col-sm-8">
+                    {{ datosMascota.tatuaje }}
+                  </dd>
+                  <dt class="col-sm-4">Especie</dt>
+                  <dd class="col-sm-8" *ngIf="datosMascota.idEspecie === 1">
+                    Canino
+                  </dd>
+                  <dd class="col-sm-8" *ngIf="datosMascota.idEspecie === 2">
+                    Felino
+                  </dd>
+                </dl>
+              </div>
+            </div>
           </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-            <dl class="row">
-              <dt class="col-sm-4">Mascota</dt>
-              <dd class="col-sm-8">Nombre de la mascota</dd>
-              <dt class="col-sm-4">Edad</dt>
-              <dd class="col-sm-8">Edad de la mascota</dd>
-              <dt class="col-sm-4">Dueño</dt>
-              <dd class="col-sm-8">Nombre del dueño</dd>
-              <dt class="col-sm-4">Fecha de nacimiento</dt>
-              <dd class="col-sm-4">02/05/1998</dd>
-            </dl>
+        </div>
+        <div *ngIf="!datosMascota">
+          <div class="card lineaArriba">
+            <div class="card-header">
+              <h3 class="card-title">INFORMACION DE LA MASCOTA</h3>
+            </div>
+
+            <div class="card-body">
+              <div class="form-group">
+                <label>Seleccione mascota</label>
+                <div class="input-group">
+                  <select
+                    class="form-control input"
+                    (change)="seleccionarMascota($event)"
+                    [ngModel]="mascotaSeleccionada?.idMascota"
+                  >
+                    <option
+                      *ngFor="let item of listaMascotas"
+                      [value]="item.idMascota"
+                    >
+                      {{ item.nombreMascota }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="mascotaSeleccionada">
+                <div class="text-center">
+                  <img
+                    class="profile-user-img img-fluid"
+                    [src]="
+                      mascotaSeleccionada.foto
+                        ? mascotaSeleccionada?.foto
+                        : mascotaSeleccionada?.raza.idEspecie === 1
+                        ? '../../../assets/dist/img/avatarPerro.png'
+                        : '../../../assets/dist/img/avatarGato.png'
+                    "
+                  />
+                </div>
+                <dl class="row">
+                  <dt class="col-sm-4">Mascota</dt>
+                  <dd class="col-sm-8">
+                    {{ mascotaSeleccionada?.nombreMascota }}
+                  </dd>
+                  <dt class="col-sm-4">Edad</dt>
+                  <dd class="col-sm-8">
+                    {{
+                      calcularEdad(mascotaSeleccionada?.fecha_nacimiento).anios
+                    }}
+                    años
+
+                    {{
+                      calcularEdad(mascotaSeleccionada?.fecha_nacimiento).meses
+                    }}
+                    meses
+                  </dd>
+                  <dt class="col-sm-4">Dueño</dt>
+                  <dd class="col-sm-8">
+                    {{ mascotaSeleccionada?.dueno.nombres }}
+                    {{ mascotaSeleccionada?.dueno.apellidoPaterno }}
+                    {{ mascotaSeleccionada?.dueno.apellidoMaterno }}
+                  </dd>
+                  <dt class="col-sm-4">Sexo</dt>
+                  <dd class="col-sm-8">
+                    {{ mascotaSeleccionada?.sexo }}
+                  </dd>
+                  <dt class="col-sm-4">Tatuaje</dt>
+                  <dd class="col-sm-8">
+                    {{ mascotaSeleccionada?.tatuaje }}
+                  </dd>
+                  <dt class="col-sm-4">Especie</dt>
+                  <dd
+                    class="col-sm-8"
+                    *ngIf="mascotaSeleccionada?.raza.idEspecie === 1"
+                  >
+                    Canino
+                  </dd>
+                  <dd
+                    class="col-sm-8"
+                    *ngIf="mascotaSeleccionada?.raza.idEspecie === 2"
+                  >
+                    Felino
+                  </dd>
+                </dl>
+              </div>
+            </div>
           </div>
-          <!-- /.card-body -->
         </div>
       </div>
     </div>

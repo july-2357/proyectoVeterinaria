@@ -3,11 +3,11 @@
   class="main-sidebar sidebar-dark-primary elevation-4 verdeOscuroBackground"
 >
   <!-- Brand Logo -->
-  <a href="index3.html" class="brand-link">
+  <a class="brand-link">
     <img
-      src="assets/dist/img/AdminLTELogo.png"
+      src="assets/dist/img/logoMyPP.png"
       alt="AdminLTE Logo"
-      class="brand-image img-circle elevation-3"
+      class="brand-image  elevation-3"
       style="opacity: 0.8"
     />
     <span class="brand-text font-weight-light">Veterinaria MPP</span>
@@ -19,51 +19,27 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img
-          src="assets/dist/img/user2-160x160.jpg"
+          src="assets/dist/img/userVeterinario.png"
           class="img-circle elevation-2"
           alt="User Image"
         />
       </div>
       <div class="info">
-        <a href="#" class="d-block">Julissa vargas</a>
+        <a routerLink="/principal/perfilUsuario" class="d-block">Ver perfil</a>
       </div>
     </div>
-
-    <!-- SidebarSearch Form -->
-    <!-- <div class="form-inline">
-      <div class="input-group" data-widget="sidebar-search">
-        <input
-          class="form-control form-control-sidebar"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-sidebar">
-            <i class="fas fa-search fa-fw"></i>
-          </button>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-      <ul
+    <nav class="mt-2" >
+      <div *ngIf="esRol('Administrador')">
+        <ul
         class="nav nav-pills nav-sidebar flex-column"
         data-widget="treeview"
         role="menu"
         data-accordion="false"
       >
-        <!-- Add icons to the links using the .nav-icon class
-           with font-awesome or any other icon font library -->
-
         <li class="nav-item">
           <a routerLink="/principal/inicio" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
-            <p>
-              Inicio
-              <span class="right badge badge-danger">VER</span>
-            </p>
+            <p>Inicio</p>
           </a>
         </li>
         <li class="nav-header">MASCOTAS</li>
@@ -73,38 +49,20 @@
             <p>Mascotas registradas</p>
           </a>
         </li>
-        <!-- <li class="nav-item">
-          <a routerLink="" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-paw"></i>
-            <p>Razas y especies</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-file"></i>
-            <p>Historial Clinico</p>
-          </a>
-        </li>-->
         <li class="nav-item">
           <a routerLink="/principal/consultas" class="nav-link">
             <i class="nav-icon fas fa-solid fa-stethoscope"></i>
             <p>Consultas</p>
           </a>
         </li>
-
         <li class="nav-header">DUEÑOS</li>
         <li class="nav-item">
           <a routerLink="/principal/listarDuenos" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-paw"></i>
-            <p>Lista de Dueños</p>
+            <i class="nav-icon fas fa-solid fa-users"></i>
+            <p>Dueños registrados</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a routerLink="" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-paw"></i>
-            <p>Lista de Dueños</p>
-          </a>
-        </li>
+
         <li class="nav-header">USUARIOS</li>
         <li class="nav-item">
           <a routerLink="/principal/usuarios" class="nav-link">
@@ -112,15 +70,100 @@
             <p>Usuarios registrados</p>
           </a>
         </li>
+        <li class="nav-header">RECORDATORIOS</li>
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-users"></i>
-            <p>Login</p>
+          <a routerLink="/principal/recordatorio" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-bell"></i>
+            <p>Consultas pedientes</p>
           </a>
         </li>
+            </ul>
+      </div>
+      <div *ngIf="esRol('Veterinario')">
+        <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+      <li class="nav-item">
+        <a routerLink="/principal/inicio" class="nav-link">
+          <i class="nav-icon fas fa-home"></i>
+          <p>Inicio</p>
+        </a>
+      </li>
+      <li class="nav-header">MASCOTAS</li>
+      <li class="nav-item">
+        <a routerLink="/principal/mascotas" class="nav-link">
+          <i class="nav-icon fas fa-solid fa-paw"></i>
+          <p>Mascotas registradas</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a routerLink="/principal/consultas" class="nav-link">
+          <i class="nav-icon fas fa-solid fa-stethoscope"></i>
+          <p>Consultas</p>
+        </a>
+      </li>
+
+      <li class="nav-header">DUEÑOS</li>
+      <li class="nav-item">
+        <a routerLink="/principal/listarDuenos" class="nav-link">
+          <i class="nav-icon fas fa-solid fa-users"></i>
+          <p>Dueños registrados</p>
+        </a>
+      </li>
+      <li class="nav-header">RECORDATORIOS</li>
+      <li class="nav-item">
+        <a routerLink="/principal/recordatorio" class="nav-link">
+          <i class="nav-icon fas fa-solid fa-bell"></i>
+          <p>Consultas pedientes</p>
+        </a>
+      </li>
       </ul>
+      </div>
+
+      <div *ngIf="esRol('Recepcionista')">
+        <ul
+        class="nav nav-pills nav-sidebar flex-column"
+        data-widget="treeview"
+        role="menu"
+        data-accordion="false"
+      >
+        <li class="nav-item">
+          <a routerLink="/principal/inicio" class="nav-link">
+            <i class="nav-icon fas fa-home"></i>
+            <p>Inicio</p>
+          </a>
+        </li>
+        <li class="nav-header">MASCOTAS</li>
+        <li class="nav-item">
+          <a routerLink="/principal/mascotas" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-paw"></i>
+            <p>Mascotas registradas</p>
+          </a>
+        </li>
+
+        <li class="nav-header">DUEÑOS</li>
+        <li class="nav-item">
+          <a routerLink="/principal/listarDuenos" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-users"></i>
+            <p>Dueños registrados</p>
+          </a>
+        </li>
+
+        <li class="nav-header">USUARIOS</li>
+
+        <li class="nav-header">RECORDATORIOS</li>
+        <li class="nav-item">
+          <a routerLink="/principal/recordatorio" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-bell"></i>
+            <p>Consultas pedientes</p>
+          </a>
+        </li>
+            </ul>
+      </div>
     </nav>
-    <!-- /.sidebar-menu -->
   </div>
-  <!-- /.sidebar -->
 </aside>

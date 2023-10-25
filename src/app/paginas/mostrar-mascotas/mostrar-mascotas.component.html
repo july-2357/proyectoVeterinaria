@@ -1,0 +1,574 @@
+<section class="container-fluid">
+  <div class="content-header">
+    <div class="container- fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Dueños</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Dueños</li>
+            <li class="breadcrumb-item active">Mascotas</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+  </div>
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="card lineaArriba">
+      <div class="card-body pb-0" *ngIf="datosDueno">
+        <div class="row">
+          <div class="col-9">
+            <div class="text-center mb-4">
+              <h3 class="custom-title">
+                <i class="fas fa-user"></i><strong> Dueño: </strong>
+                {{ datosDueno.nombres }}
+                {{ datosDueno.apellidoPaterno }}
+                {{ datosDueno.apellidoMaterno }}
+              </h3>
+            </div>
+            <div class="row invoice-info">
+              <div class="col-sm-3 invoice-col">
+                <strong><i class="fas fa-solid fa-phone"></i> Teléfono</strong>
+
+                <p class="text-muted">
+                  {{ datosDueno.telefono }}
+                </p>
+              </div>
+              <div class="col-sm-3 invoice-col">
+                <i class="fas fa-regular fa-envelope"></i>
+                <strong> Correo electrónico</strong>
+                <p class="text-muted">
+                  {{ datosDueno.correo }}
+                </p>
+              </div>
+              <div class="col-sm-3 invoice-col">
+                <i class="fas fa-map-marker-alt mr-1"></i>
+                <strong> Dirección</strong>
+                <p class="text-muted">
+                  {{ datosDueno.direccion }}
+                </p>
+              </div>
+              <div class="col-sm-3 invoice-col">
+                <i class="fas fa-solid fa-hashtag"></i>
+                <strong> Mascotas registradas</strong>
+                <p class="text-muted">
+                  {{ listaMascotas.length }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <a
+              href="#"
+              class="btn btn-success btn-block"
+              data-toggle="modal"
+              data-target="#modalActualizarDueno"
+              *ngIf="esRol('Administrador') || esRol('Veterinario')"
+              ><b>Actualizar dueño</b></a
+            >
+            <app-duenos-pdf></app-duenos-pdf>
+
+
+            <a
+              href="#"
+              class="btn bg-teal btn-block"
+              data-toggle="modal"
+              data-target="#registrarMascota"
+              ><b>Agregar mascota</b></a
+            >
+          </div>
+        </div>
+        <hr class="custom-hr" />
+        <div class="row">
+          <div
+            class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column"
+            *ngFor="let item of listaMascotas"
+          >
+            <div class="card bg-light d-flex flex-fill">
+              <div class="card-header text-muted border-bottom-0"></div>
+              <div class="card-body pt-0">
+                <div class="row">
+                  <div class="col-7">
+                    <h2 class="lead">
+                      <b>Mascota: {{ item.nombreMascota }}</b>
+                    </h2>
+
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="small">
+                        <b>Edad: </b
+                        >{{ calcularEdad(item.fecha_nacimiento).anios }} años
+
+                        {{ calcularEdad(item.fecha_nacimiento).meses }} meses
+                      </li>
+                      <li class="small"><b>Color: </b>{{ item.color }}</li>
+                      <li class="small">
+                        <b>Conducta: </b>{{ item.conducta }}
+                      </li>
+                      <li class="small"><b>Sexo: </b>{{ item.sexo }}</li>
+                      <li
+                        class="small"
+                        *ngIf="
+                          item.raza.idEspecie === 1 || item.raza.idEspecie === 2
+                        "
+                      >
+                        <b>Especie: </b>
+                        {{ item.raza.idEspecie === 1 ? "Canino" : "Felino" }}
+                      </li>
+                      <li class="small">
+                        <b>Raza: </b>{{ item.raza.descripcion }}
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-5 text-center">
+                    <img
+                      [src]="
+                        item.foto
+                          ? item?.foto
+                          : item?.raza.idEspecie === 1
+                          ? '../../../assets/dist/img/avatarPerro.png'
+                          : '../../../assets/dist/img/avatarGato.png'
+                      "
+                      alt="user-avatar"
+                      class="img-circle img-fluid"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer" style="">
+                <div class="">
+                  &nbsp;
+                  <a
+                    class="btn btn-success btn-sm btnRegistrarConsulta"
+                    idMascota=""
+                    (click)="navegarVentanaDestino(item)"
+                  >
+                    Nueva consulta
+                  </a>
+                  &nbsp;
+                  <a
+                    class="btn btn-primary bg-indigo btn-sm btnHistorial"
+                    idMascota=""
+                    (click)="navegarVentanaHistorial(item)"
+                  >
+                    Historial
+                  </a>
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Registar Mascota -->
+          <div class="modal fade" id="registrarMascota">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header" style="background-color: #16817a">
+                  <h4 class="modal-title" style="color: #ffffff">
+                    Registrar Nueva Mascota
+                  </h4>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="formRegistrarMascota">
+                    <div class="form-row">
+                      <div class="col-sm-12 col-md-6 col-lg-12">
+                        <div class="form-row">
+                          <div class="col-sm-12 col-md-6 col-lg-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Nombre de la mascota</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="nombreM"
+                                placeholder="Ingrese el nombre de la mascota"
+                                (blur)="verNombreError = true"
+                              />
+
+                              <app-error-message
+                                [error]="
+                                  formRegistrarMascota.get('nombreM')?.errors
+                                "
+                                [showError]="verNombreError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                          <!-- <div class="col-sm-12 col-md-6 col-lg-6">
+                          <div class="form-group">
+                            <label>Dueño</label>
+                            <div class="input-group">
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="duenoM"
+                                [placeholder]="
+                                  datosDueno.nombres +
+                                  ' ' +
+                                  datosDueno.apellidoPaterno +
+                                  ' ' +
+                                  datosDueno.apellidoMaterno
+                                "
+                                [readOnly]="idDuenoPDF"
+                                [value]="idDuenoPDF"
+                              />
+                            </div>
+                          </div>
+                        </div> -->
+                        </div>
+                        <div class="form-row">
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Color</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="colorM"
+                                (blur)="verColorError = true"
+                              />
+
+                              <app-error-message
+                                [error]="
+                                  formRegistrarMascota.get('colorM')?.errors
+                                "
+                                [showError]="verColorError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Años</label>
+                              <input
+                                type="number"
+                                class="form-control"
+                                formControlName="edadAnios"
+                                (change)="calcularFechaNacimiento()"
+                                (blur)="verEdadAniosError = true"
+                              />
+
+                              <app-error-message
+                                [error]="
+                                  formRegistrarMascota.get('edadAnios')?.errors
+                                "
+                                [showError]="verEdadAniosError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Meses</label>
+                              <input
+                                type="number"
+                                class="form-control"
+                                formControlName="edadMeses"
+                                (change)="calcularFechaNacimiento()"
+                                (blur)="verEdadMesesError = true"
+                              />
+
+                              <app-error-message
+                                [error]="
+                                  formRegistrarMascota.get('edadMeses')?.errors
+                                "
+                                [showError]="verEdadMesesError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-3">
+                            <div class="form-group">
+                              <label>Fecha de nacimiento</label>
+
+                              <input
+                                type="date"
+                                class="form-control"
+                                formControlName="fechaNac"
+                                (blur)="verEdadError = true"
+                              />
+
+                              <app-error-message
+                                [error]="
+                                  formRegistrarMascota.get('fechaNac')?.errors
+                                "
+                                [showError]="verEdadError"
+                              ></app-error-message>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>Especie</label>
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <select
+                                    class="form-control input"
+                                    formControlName="especieM"
+                                    [(ngModel)]="especieSeleccionada"
+                                    (change)="mostrarRazas()"
+                                  >
+                                    <option value="">Selecione especie</option>
+                                    <option
+                                      *ngFor="let item of listaEspecies"
+                                      [value]="item.descripcion"
+                                    >
+                                      {{ item.descripcion }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="col-sm-12 col-md-6 col-lg-4"
+                            *ngIf="
+                              this.formRegistrarMascota.get('especieM')
+                                ?.value != ''
+                            "
+                          >
+                            <div class="form-group">
+                              <label>Raza</label>
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <select
+                                    class="form-control input"
+                                    formControlName="razaM"
+                                    [(ngModel)]="idRazaForm"
+                                  >
+                                    <option value="">Selecione raza</option>
+                                    <option
+                                      *ngFor="let item of listaRazas"
+                                      [value]="item.idRaza"
+                                    >
+                                      {{ item.descripcion }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                              <label>Sexo de la mascota</label>
+                              <div class="input-group">
+                                <select
+                                  class="form-control input-lg"
+                                  formControlName="sexoM"
+                                >
+                                  <option value="">Selecionar sexo</option>
+                                  <option value="Macho">Macho</option>
+                                  <option value="Hembra">Hembra</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="col-sm-4 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label>Tatuaje </label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                formControlName="tatuajeM"
+                                placeholder="Ingrese el tatuaje si la mascota lo tiene."
+                              />
+                            </div>
+                          </div>
+                          <div class="col-sm-4 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label>Conducta</label>
+                              <div class="input-group">
+                                <select
+                                  class="form-control input-lg"
+                                  formControlName="conductaM"
+                                >
+                                  <option value="">Selecionar conducta</option>
+                                  <option value="CONFIADO">Confiado</option>
+                                  <option value="DESCONFIADO">
+                                    Desconfiado
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-lg-12">
+                          <div class="input-group mb-12">
+                            <span
+                              class="input-group-text"
+                              id="inputGroup-sizing-default"
+                              >Foto
+                            </span>
+                            <app-input-img
+                              (change)="onFileSelected($event)"
+                            ></app-input-img>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Cerrar
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        (click)="guardarMascota()"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                        [disabled]="!formRegistrarMascota.valid"
+                      >
+                        Guardar datos
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+
+          <!-- modal para actualizar duenos  -->
+          <div class="modal fade" id="modalActualizarDueno">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header colorVerdeBackground">
+                  <h4 class="modal-title colorVerdeLetras padding-right">
+                    Actualizar datos del dueño
+                  </h4>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="formActualizarDueno">
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Nombre</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Ingrese el nombre del due&ntilde;o"
+                            formControlName="editarNombreDueno"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Apellido Paterno</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Ingrese el apellido paterno"
+                            formControlName="editarApellidoPat"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Apellido materno</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Ingrese el apellido materno"
+                            formControlName="editarApellidoMat"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="form-group">
+                          <label>Teléfono o celular</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Ingrese el teléfono"
+                            formControlName="editarCelular"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                          <label>Dirección</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="editarDireccion"
+                            placeholder="Ingrese la dirección de su domicilio"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-6 col-md-6 col-lg-12">
+                        <div class="form-group">
+                          <label>Correo</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            formControlName="editarCorreo"
+                            placeholder="Ingrese un correo"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-between">
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Cerrar
+                      </button>
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        (click)="actualizarDatosDueno()"
+                        data-dismiss="modal"
+                      >
+                        Guardar datos
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

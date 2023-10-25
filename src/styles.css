@@ -53,6 +53,12 @@
 }
 
 
+input.ng-invalid.ng-touched{
+  border-bottom: 2px solid rgb(248, 123, 112);
+}
+input.ng-valid.ng-touched{
+  border: solid 2px rgb(244, 248, 246);
+}
 
 
 .centrar {
@@ -86,5 +92,12 @@
   padding-left: 50px ;
   margin-left: 50px;
   text-align: center;
-
 }
+.custom-hr {
+  border: none; /* Quita el estilo predeterminado de la línea */
+  border-top: 3px solid #16817A; /* Cambia el color de la línea */
+  margin-top: 10px; /* Ajusta el margen superior */
+  margin-bottom: 10px; /* Ajusta el margen inferior */
+}
+
+

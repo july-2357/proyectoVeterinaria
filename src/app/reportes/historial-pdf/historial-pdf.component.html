@@ -1,0 +1,264 @@
+<button
+  type="button"
+  class="btn btn-block bg-danger"
+  data-toggle="modal"
+  data-target="#modalReporteHistorial"
+>
+  <i class="nav-icon fas fa-solid fa-file-pdf"></i>
+  Historial PDF
+</button>
+<div class="modal fade" id="modalReporteHistorial">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verMasModalLabel"></h5>
+        <div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="generarPDF()"
+            data-dismiss="modal"
+          >
+            Descargar
+          </button>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div id="content" #reportContent>
+          <div class="cuadro">
+            <div class="row">
+              <div class="col-12 text-center d-flex align-items-center">
+                <!-- División izquierda para el logo -->
+                <div style="flex: 0 0 auto">
+                  <img
+                    src="../../../assets/dist/img/logoPdf.png"
+                    alt="user-avatar"
+                    class="img-fluid"
+                    style="width: 150px"
+                  />
+                </div>
+                <div style="flex: 1">
+                  <h5 class="custom-title">
+                    <strong> Veterinaria My Puppy Planet </strong>
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <hr class="custom-hr" />
+            <div class="row">
+              <div class="col-9">
+                <div class="row" *ngIf="datosMascota">
+                  <div class="col-12">
+                    <h6 class="text-sm"><b>Datos de la mascota</b></h6>
+                    <div class="text-muted">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <p class="text-sm">
+                            <b>Nombre: </b>{{ datosMascota.nombreMascota }}
+                          </p>
+                        </div>
+                        <div class="col-sm-4">
+                          <p class="text-sm">
+                            <b>Especie: </b>{{ datosMascota.nombreMascota }}
+                          </p>
+                        </div>
+                        <div class="col-sm-4">
+                          <p class="text-sm">
+                            <b>Raza: </b>{{ datosMascota.raza?.descripcion }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <p class="text-sm">
+                            <b>Sexo: </b>{{ datosMascota.sexo }}
+                          </p>
+                        </div>
+                        <div class="col-sm-4">
+                          <p class="text-sm">
+                            <b>Color: </b>{{ datosMascota.color }}
+                          </p>
+                        </div>
+                        <div class="col-sm-4">
+                          <p class="text-sm">
+                            <b>Edad: </b
+                            >{{
+                              calcularEdad(datosMascota.fecha_nacimiento).anios
+                            }}
+                            años
+                            {{
+                              calcularEdad(datosMascota.fecha_nacimiento).meses
+                            }}
+                            meses
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="datosMascota">
+                  <div class="col-12">
+                    <h6 class="text-sm"><b>Datos del dueño</b></h6>
+                    <div class="text-muted">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <p class="text-sm">
+                            <b>Nombre: </b>{{ datosMascota.dueno?.nombres }}
+                            {{ datosMascota.dueno?.apellidoPaterno }}
+                            {{ datosMascota.dueno?.apellidoMaterno }}
+                          </p>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="text-sm">
+                            <b>Dirección: </b
+                            >{{ datosMascota.dueno?.direccion }}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <p class="text-sm">
+                            <b>Teléfono: </b>{{ datosMascota.dueno?.telefono }}
+                          </p>
+                        </div>
+                        <div class="col-sm-6">
+                          <p class="text-sm">
+                            <b>Correo electrónico: </b
+                            >{{ datosMascota.dueno?.correo }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3">
+                <img
+                  [src]="datosMascota.foto"
+                  alt="user-avatar"
+                  class="profile-user-img img-fluid"
+                  style="width: 80px"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Consultas -->
+          <div class="row">
+            <div class="col-12">
+              <h6 class="h6 text-center text-muted"><b>Consultas</b></h6>
+              <table class="table table-sm table-bordered">
+                <thead class="text-muted">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Motivo de la consulta</th>
+                    <th scope="col">Diagnóstico</th>
+                    <th scope="col">Tratamiento</th>
+                    <th scope="col">Fecha de la consulta</th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm">
+                  <tr *ngFor="let item of listaConsultas; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item.motivo_consulta }}</td>
+                    <td>{{ item.diagnostico_consulta }}</td>
+                    <td>{{ item.tratamiento }}</td>
+                    <td>{{ item.fecha_registro_consulta }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Vacunas -->
+          <div class="row">
+            <div class="col-12">
+              <h6 class="h6 text-center text-muted"><b>Vacunas</b></h6>
+              <table class="table table-sm table-bordered">
+                <thead class="text-muted">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Datos de la vacuna</th>
+                    <th scope="col">Laboratorio</th>
+                    <th scope="col">Fecha de vacunación</th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm">
+                  <tr *ngFor="let item of listaVacunas; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item.descripcion_vacuna }}</td>
+                    <td>{{ item.laboratorio }}</td>
+                    <td>{{ item.fecha_vacunacion }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Desparacitaciones -->
+          <div class="row">
+            <div class="col-12">
+              <h6 class="text-center text-muted"><b>Despasitaciones</b></h6>
+              <table class="table table-sm table-bordered">
+                <thead class="text-muted">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo desparasitación</th>
+                    <th scope="col">Vía</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Principio activo</th>
+                    <th scope="col">Fecha de desparasitación</th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm">
+                  <tr
+                    *ngFor="let item of listaDesparacitaciones; let i = index"
+                  >
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item.tipo_desparacitacion }}</td>
+                    <td>{{ item.via_desparacitcion }}</td>
+                    <td>{{ item.producto_desparacitacion }}</td>
+                    <td>{{ item.principio_activo }}</td>
+                    <td>{{ item.fecha_desparacitacion }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!--  Cirugias -->
+          <div class="row">
+            <div class="col-12">
+              <h6 class="text-center text-muted"><b>Cirugias</b></h6>
+              <table class="table table-sm table-bordered">
+                <thead class="text-muted">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo de cirugia</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Observaciones adicionales</th>
+                    <th scope="col">Fecha de cirugia</th>
+                  </tr>
+                </thead>
+                <tbody class="text-sm">
+                  <tr *ngFor="let item of listaCirugias; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ item.tipo_cirugia }}</td>
+                    <td>{{ item.descripcion_cirugia }}</td>
+                    <td>{{ item.fecha_cirugia }}</td>
+                    <td>{{ item.observaciones_cirugia }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->

@@ -1,0 +1,374 @@
+<a
+  class="btn btn-danger btn-sm btnEliminarmascota"
+  idMascota=""
+  data-toggle="modal"
+  data-target="#primeraConsulta"
+>
+  <i class="fas fa-trash"> </i>
+</a>
+
+<div class="modal fade" id="primeraConsulta">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #16817a">
+        <h4 class="modal-title" style="color: #ffffff">Datos adicionales {{idMascota}}</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formPrimeraConsulta">
+          <div class="form-row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group centrar">
+                <div class="pregunta">Condicion corporal</div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="condicionDelgado"
+                    formControlName="condicionCorporal"
+                    name="condicionCorporal"
+                    value="Delgado"
+                  />
+                  <label class="form-check-label" for="condicionDelgado"
+                    >Delgado</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="condicionNormal"
+                    formControlName="condicionCorporal"
+                    name="condicionCorporal"
+                    value="Normal"
+                  />
+                  <label class="form-check-label" for="condicionNormal"
+                    >Normal</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="condicionObeso"
+                    formControlName="condicionCorporal"
+                    name="condicionCorporal"
+                    value="Obeso"
+                  />
+                  <label class="form-check-label" for="condicionObeso"
+                    >Obeso</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group centrar">
+                <div class="pregunta">Estado reproductivo</div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="estadoCastrado"
+                    formControlName="estadoReproductivo"
+                    name="estadoReproductivo"
+                    value="Castrado"
+                  />
+                  <label class="form-check-label" for="estadoCastrado"
+                    >Castrado</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="estadoGestacion"
+                    formControlName="estadoReproductivo"
+                    name="estadoReproductivo"
+                    value="Gestacion"
+                  />
+                  <label class="form-check-label" for="estadoGestacion"
+                    >Gestacion</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="estadoLactancia"
+                    formControlName="estadoReproductivo"
+                    name="estadoReproductivo"
+                    value="Lactancia"
+                  />
+                  <label class="form-check-label" for="estadoLactancia"
+                    >Lactancia</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <div class="form-group centrar">
+                <div class="pregunta">Habitad</div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="habitadCasa"
+                    formControlName="habitad"
+                    name="habitad"
+                    value="Casa"
+                  />
+                  <label class="form-check-label" for="habitadCasa">Casa</label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="habitadDepartamento"
+                    formControlName="habitad"
+                    name="habitad"
+                    value="Departamento"
+                  />
+                  <label class="form-check-label" for="habitadDepartamento"
+                    >Departamento</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    id="habitadPatio"
+                    formControlName="habitad"
+                    name="habitad"
+                    value="Patio"
+                  />
+                  <label class="form-check-label" for="habitadPatio"
+                    >Patio</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group centrar">
+                <div class="pregunta">¿Desparacitaciones?</div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="desparacitacionSi"
+                        formControlName="desparacitacion"
+                        name="desparacitacion"
+                        value="SI"
+                      />
+                      <label class="form-check-label" for="desparacitacionSi"
+                        >Si</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="desparacitacionNo"
+                        formControlName="desparacitacion"
+                        name="desparacitacion"
+                        value="NO"
+                      />
+                      <label class="form-check-label" for="desparacitacionNo"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="form-group"
+                  *ngIf="
+                    formPrimeraConsulta.get('desparacitacion')?.value === 'SI'
+                  "
+                >
+                  <label class="pregunta"
+                    >¿Cuál fue la ultima desparacitación?</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="detalleDesparacitacion"
+                  />
+                  <label>Fecha de la última desparacitacion</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="fechaUltimadesparacitacion"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group centrar">
+                <div class="pregunta">¿Vacunaciones?</div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="vacunacionSi"
+                        formControlName="vacunacion"
+                        name="vacunacion"
+                        value="SI"
+                      />
+                      <label class="form-check-label" for="vacunacionSi"
+                        >Si</label
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="vacunacionNo"
+                        formControlName="vacunacion"
+                        name="vacunacion"
+                        value="NO"
+                      />
+                      <label class="form-check-label" for="vacunacionNo"
+                        >No</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="form-group"
+                  *ngIf="formPrimeraConsulta.get('vacunacion')?.value === 'SI'"
+                >
+                  <label>¿Cuáles son sus vacunas?</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="detalleVacunas"
+                  />
+                  <div class="form-group">
+                    <label for="opciones">Selecciona opciones:</label>
+                    <select class="form-control" formControlName="detalleVacunas" multiple>
+                      <option value="opcion1">Opción 1</option>
+                      <option value="opcion2">Opción 2</option>
+                      <option value="opcion3">Opción 3</option>
+                      <!-- Agrega más opciones según sea necesario -->
+                    </select>
+                  </div>
+                  <div class="form-group" *ngIf="formPrimeraConsulta.get('detalleVacunas')?.value.length > 0">
+                    <label>Opciones seleccionadas:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="getSelectedOptionsText()"
+                      readonly
+                    />
+                  </div>
+
+                  <!-- <div class="form-group">
+                    <label>Fecha de la ultima vacuna</label>
+                    <select
+                      class="select2"
+                      multiple="multiple"
+                      data-placeholder="Select a State"
+                      style="width: 100%"
+                    >
+                      <option>Alabama</option>
+                      <option>Alaska</option>
+                      <option>California</option>
+                      <option>Delaware</option>
+                      <option>Tennessee</option>
+                      <option>Texas</option>
+                      <option>Washington</option>
+                    </select>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <div class="form-group centrar">
+                <div class="pregunta">Convive con otros animales?</div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="conviveSi"
+                        formControlName="convivenciaConAnimales"
+                        name="convivenciaConAnimales"
+                        value="SI"
+                      />
+                      <label class="form-check-label" for="conviveSi">Si</label>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="conviveNO"
+                        formControlName="convivenciaConAnimales"
+                        name="convivenciaConAnimales"
+                        value="NO"
+                      />
+                      <label class="form-check-label" for="conviveNO">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="form-group"
+                  *ngIf="
+                    formPrimeraConsulta.get('convivenciaConAnimales')?.value ===
+                    'SI'
+                  "
+                >
+                  <label>Cuales?</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="detalleConvivencia"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="guardarPrimeraConsulta()"
+            >
+              Guardar datos
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

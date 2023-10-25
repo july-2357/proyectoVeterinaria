@@ -1,6 +1,6 @@
 .fotoPrevisualizacion {
-  width: 75px; /* Ancho deseado para la previsualización */
-  height: 75px; /* Altura deseada para la previsualización */
+  width: 90px; /* Ancho deseado para la previsualización */
+  height: 90px; /* Altura deseada para la previsualización */
   border: 1px solid #ccc;
   overflow: hidden;
   display: flex;

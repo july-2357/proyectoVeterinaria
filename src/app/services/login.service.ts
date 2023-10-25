@@ -5,17 +5,16 @@ import { crearLogin } from '../modelos/login.model.ts.module';
   providedIn: 'root',
 })
 export class LoginService {
-
-  async enviarLoginService(correo: string, contrasena: string) {
-    const loginData:crearLogin = { email:correo, password:contrasena };
-
-    let crear = `https://localhost:7101/api/Cuentas/login`;
-    let resultado= await this.http.post<any>(crear,loginData).toPromise();
-    return resultado;
+  async enviarLoginService(cuerpo: FormData) {
+    try {
+      let crear = `https://localhost:7101/api/Cuentas/login`;
+      let resultado = await this.http.post<any>(crear, cuerpo).toPromise();
+      return resultado;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
   }
 
-  constructor(private http:HttpClient) {
-
-
-  }
+  constructor(private http: HttpClient) {}
 }

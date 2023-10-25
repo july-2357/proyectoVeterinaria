@@ -1,0 +1,17 @@
+.img-preview {
+  width: 150px; /* Ajusta el ancho máximo de la imagen al contenedor */
+  height: 150px; /* Permite que la altura se ajuste automáticamente para mantener la proporción de la imagen */
+  border: 2px solid #ddd; /* Agrega un borde alrededor de la imagen */
+  border-radius: 5px; /* Agrega esquinas redondeadas al borde */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
+  margin: 5px 0; /* Agrega un margen superior e inferior a la imagen */
+  display: block; /* Hace que la imagen sea un elemento de bloque para controlar su alineación y márgenes */
+}
+.camera-preview {
+  width: 150px; /* Ancho deseado */
+  height: 150px; /* Alto deseado */
+  border: 2px solid #50c8d1; /* Agrega un borde alrededor de la imagen */
+  border-radius: 5px; /* Agrega esquinas redondeadas al borde */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega una sombra suave */
+  margin: 5px 0; /* Agrega un margen superior e inferior a la imagen */
+}

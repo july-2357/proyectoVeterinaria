@@ -9,8 +9,8 @@
           <!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Usuario</li>
+              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+              <li class="breadcrumb-item active">Usuarios</li>
             </ol>
           </div>
           <!-- /.col -->
@@ -24,7 +24,7 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="card card-solid">
+        <div class="card">
           <!-- /.Cabecera buscar -->
           <div class="card headerCardConsultas">
             <div class="card-header">
@@ -32,17 +32,14 @@
                 <div class="row">
                   <div class="col-md-6 col-sm-5">
                     <div class="input-group mb-3">
-                      <!--  -->
                       <input
                         type="text"
                         class="form-control rounded-0"
-                        placeholder="Buscar usuario"
+                        placeholder="Buscar usuario por nombre"
+                        [(ngModel)]="buscarTexto"
+                        (input)="buscarUsuario()"
                       />
-                      <span class="input-group-append">
-                        <button type="button" class="btn btn-info btn-flat">
-                          Buscar!
-                        </button>
-                      </span>
+
                     </div>
                   </div>
                   <div class="col-md-3">
@@ -52,8 +49,8 @@
                       data-toggle="modal"
                       data-target="#modal-lg"
                     >
-                      <i class="nav-icon fas fa-solid fa-user-plus"></i>
-                      Nuevo veterinario
+                      <i class="nav-icon fas fa-plus"></i>
+                      Nuevo usuario
                     </button>
                   </div>
                   <div class="col-md-3">
@@ -69,6 +66,7 @@
               </div>
             </div>
           </div>
+
           <!-- /.Modal registrar usuario -->
           <div class="modal fade" id="modal-lg">
             <div class="modal-dialog modal-lg">
@@ -87,7 +85,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form [formGroup]="formRegistrar">
+                  <form [formGroup]="formRegistrar" errorTailor>
                     <div class="row">
                       <div class="col-sm-12 col-md-12 col-lg-6">
                         <div class="form-group">
@@ -97,7 +95,12 @@
                             class="form-control"
                             placeholder="Ingrese nombre"
                             formControlName="primerNombreU"
+                            (blur)="showNombresError = true"
                           />
+                          <app-error-message
+                            [error]="formRegistrar.get('primerNombreU')?.errors"
+                            [showError]="showNombresError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-12 col-lg-6">
@@ -108,7 +111,15 @@
                             class="form-control"
                             placeholder=""
                             formControlName="primerApellidoU"
+                            (blur)="showapellidoPError = true"
                           />
+
+                          <app-error-message
+                            [error]="
+                              formRegistrar.get('primerApellidoU')?.errors
+                            "
+                            [showError]="showapellidoPError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
@@ -121,18 +132,30 @@
                             class="form-control"
                             placeholder=""
                             formControlName="segundoApellidoU"
+                            (blur)="showapellidoMError = true"
                           />
+                          <app-error-message
+                            [error]="
+                              formRegistrar.get('segundoApellidoU')?.errors
+                            "
+                            [showError]="showapellidoMError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-12 col-md-12 col-lg-6">
                         <div class="form-group">
                           <label>Carnet</label>
                           <input
-                            type="text"
+                            type="number"
                             class="form-control"
                             placeholder=""
                             formControlName="carnet"
+                            (blur)="showcarnetError = true"
                           />
+                          <app-error-message
+                            [error]="formRegistrar.get('carnet')?.errors"
+                            [showError]="showcarnetError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
@@ -141,13 +164,19 @@
                         <div class="form-group">
                           <label>Célular / Teléfono</label>
                           <input
-                            type="number"
+                            type="text"
                             class="form-control"
                             placeholder=""
                             formControlName="celular"
+                            (blur)="showcelularError = true"
                           />
+                          <app-error-message
+                            [error]="formRegistrar.get('celular')?.errors"
+                            [showError]="showcelularError"
+                          ></app-error-message>
                         </div>
                       </div>
+
                       <div class="col-sm-6 col-md-6 col-lg-6">
                         <div class="form-group">
                           <label>Dirección</label>
@@ -156,7 +185,12 @@
                             class="form-control"
                             formControlName="direccion"
                             placeholder=""
+                            (blur)="showadireccionError = true"
                           />
+                          <app-error-message
+                            [error]="formRegistrar.get('direccion')?.errors"
+                            [showError]="showadireccionError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
@@ -169,7 +203,13 @@
                             class="form-control"
                             formControlName="correo"
                             placeholder="Ingrese un nombre de usuario para ingresar al sistema"
+                            (blur)="verCorreoError = true"
                           />
+
+                          <app-error-message
+                            [error]="formRegistrar.get('correo')?.errors"
+                            [showError]="verCorreoError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-6 col-md-6 col-lg-4">
@@ -180,7 +220,12 @@
                             class="form-control"
                             formControlName="contrasena"
                             placeholder="Ingrese una contraseña para ingresar al sistema"
+                            (blur)="showPasswordError = true"
                           />
+                          <app-error-message
+                            [error]="formRegistrar.get('contrasena')?.errors"
+                            [showError]="showPasswordError"
+                          ></app-error-message>
                         </div>
                       </div>
                       <div class="col-sm-6 col-md-6 col-lg-4">
@@ -193,37 +238,15 @@
                             formControlName="roles"
                           >
                             <option>Roles</option>
-                            <option value="veterinario">Admin</option>
-                            <option value="Usuario">Veterinario</option>
-                            <option value="Veterinario">Vendedor</option>
+
+                            <option value="Veterinario">Veterinario</option>
+                            <option value="Recepcionista">Recepcionista</option>
                           </select>
                         </div>
                       </div>
                     </div>
 
                     <div class="row">
-                      <!-- <div class="col-sm-6 col-md-6 col-lg-12">
-                        <div class="form-group">
-                          <label>Subir foto del usuario a registrar</label>
-                          <input
-                            type="file"
-                            class="nuevaFoto"
-                            formControlName="foto"
-                          />
-                          <p class="help-block">Peso máximo de la foto 2MB</p>
-                          <img
-                            src="vistas/assets/dist/img/avatar3.png"
-                            class="img-thumbnail previsualizar"
-                            width="100px"
-                          />
-                        </div>
-                      </div> -->
-
-                      <!-- <div>
-                        <label for="imagen">Imagen:</label>
-                        <input type="file" formControlName="imagen" id="imagen" (change)="onFileSelected($event)" accept="image/*">
-                      </div> -->
-
                       <div class="col-12">
                         <div class="input-group mb-3">
                           <span
@@ -250,6 +273,8 @@
                         type="button"
                         (click)="guardar()"
                         class="btn btn-primary"
+                        data-dismiss="modal"
+                        [disabled]="!formRegistrar.valid"
                       >
                         Guardar datos
                       </button>
@@ -257,15 +282,161 @@
                   </form>
                 </div>
               </div>
-              <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
           </div>
+    <!-- /.Mostrar usuarios registrados -->
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div
+                  class="card-body table-responsive p-0"
 
-          <!-- MODAL PARA EDITAR USUARIOS-->
+                >
+                  <table class="table table-head-fixed text-nowrap">
+                    <thead>
+                      <tr>
+                        <th style="width: 1%">N°</th>
+                        <th style="width: 20%">Nombres y apellidos</th>
+                        <th style="width: 15%">Direccion</th>
+                        <th style="width: 15%">Correo</th>
+                        <th style="width: 15%">Telefono</th>
+                        <th style="width: 15%">Foto</th>
+                        <th style="width: 25%">Acciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <div *ngIf="noHayResultados">
+                        No se encontraron resultados.
+                      </div>
+                      <tr *ngFor="let item of listaUsuarios| paginate: { itemsPerPage: 10, currentPage: pagina };  let i = index">
+                        <td>{{i+1}}</td>
+
+                        <td>
+                          {{ item.nombres }} {{ item.apellidoPaterno }}
+                          {{ item.apellidoMaterno }}
+                        </td>
+                        <td>{{ item.direccion }}</td>
+                        <td>{{ item.correo }}</td>
+                        <td>{{ item.celular }}</td>
+                        <td>
+                          <img
+                            alt="Avatar"
+                            class="table-avatar"
+                            style="width: 50px; height:50px"
+                            [src]="
+                              item.fotografia
+                                ? item.fotografia
+                                : '../../../assets/dist/img/userVeterinario.png'
+                            "
+                          />
+                        </td>
+                        <td>
+                          <a
+                            class="btn bg-maroon btn-sm"
+                            data-toggle="modal"
+                            data-target="#asigarRol"
+                            href="javascript:void(0);"
+                            (click)="abrirModalAsignarRol(item)"
+                          >
+                            <i class="fas fa-add"> </i>
+                            Asignar rol
+                          </a>
+                          <a class="btn btn-success btn-sm" href="#">
+                            <i class="fas fa-pencil-alt"> </i>
+                            Actualizar datos
+                          </a>
+                        </td>
+                        <!-- Modal asignar rol -->
+                        <div class="modal fade" id="asigarRol">
+                          <div
+                            class="modal-dialog modal-dialog-centered modal-s"
+                          >
+                            <div class="modal-content">
+                              <div class="modal-body">
+                                <form [formGroup]="formAsignarRol">
+                                  <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                      <input
+                                        type="text"
+                                        style="display: none"
+                                        class="form-control"
+                                        formControlName="idUsuario"
+                                        [value]="
+                                          formAsignarRol.get('idUsuario')?.value
+                                        "
+                                      />
+                                      <div class="form-group">
+                                        <label>Usuario</label>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          [placeholder]="item.nombres"
+                                          formControlName="nombreUsuario"
+                                          readOnly
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                      <div class="form-group">
+                                        <label>Asignar rol</label>
+                                        <span class="input-group-addon"></span>
+                                        <select
+                                          class="form-control input-lg"
+                                          formControlName="rol"
+                                        >
+                                          <option value="Veterinario">
+                                            Veterinario
+                                          </option>
+                                          <option value="Recepcionista">
+                                            Recepcionista
+                                          </option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer justify-content-between">
+                                <button
+                                  type="button"
+                                  class="btn btn-danger"
+                                  data-dismiss="modal"
+                                >
+                                  Cerrar
+                                </button>
+                                <button
+                                  type="button"
+                                  (click)="asignarRol()"
+                                  class="btn btn-primary"
+                                  data-dismiss="modal"
+                                >
+                                  Guardar datos
+                                </button>
+                              </div>
+                            </div>
+                            <!-- /.modal-content -->
+                          </div>
+                        </div>
+                        <div *ngIf="noHayResultados" class="text-center" >
+                          <h4>No se encontraron resultados.</h4>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="d-flex justify-content-center">
+                    <pagination-controls (pageChange)="pagina=$event"></pagination-controls>
+
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
         </div>
       </div>
-      <!-- /.container-fluid -->
+
     </div>
   </div>
 </section>

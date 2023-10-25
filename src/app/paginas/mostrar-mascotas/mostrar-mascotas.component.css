@@ -1,0 +1,12 @@
+.custom-title {
+  font-size: 24px; /* Cambia este valor al tamaño deseado */
+  letter-spacing: 3px; /* Cambia este valor al espaciado deseado */
+  color: #16817A; /* Cambia este valor al color deseado */
+  margin-bottom: 10px; /* Cambia este valor al margen deseado */
+}
+.custom-hr {
+  border: none; /* Quita el estilo predeterminado de la línea */
+  border-top: 3px solid #16817A; /* Cambia el color de la línea */
+  margin-top: 10px; /* Ajusta el margen superior */
+  margin-bottom: 10px; /* Ajusta el margen inferior */
+}

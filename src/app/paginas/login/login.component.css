@@ -1,6 +1,12 @@
-
+/* .container-loginS {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../../../assets/dist/img/fondo.png);
+}
 .container {
-  background-color: #fff;
+  background-color: #dce9e8;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
@@ -9,11 +15,13 @@
 
 h1 {
   text-align: center;
+  color: #ccc;
 }
 
 label {
   display: block;
   margin-bottom: 10px;
+  color: #fff;
 }
 
 input[type="text"],
@@ -27,15 +35,43 @@ input[type="password"] {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: #fa744f;
   border: none;
   color: #fff;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   border-radius: 3px;
+  margin-top: 15px;
+
 }
 
 button:hover {
   background-color: #45a049;
+} */
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url(../../../assets/dist/img/fondoN.png);
+/* background-color: #0d5953; */
+}
+
+/* Estilo para ajustar el ancho del card-body */
+.custom-card-body {
+  width: 300px; /* Ajusta el valor según tus necesidades */
+  background-color: #1e7972;
+}
+.custom-heading {
+  font-size: 24px; /* Tamaño de fuente personalizado */
+  color: #fcfbfb; /* Color de texto personalizado */
+  font-weight: bold; /* Negrita */
+  /* Otros estilos que desees aplicar */
+}
+.custom-link {
+  color: #a5f0eb; /* Cambia el color a tu preferencia, por ejemplo, naranja */
+  text-decoration: underline;
 }

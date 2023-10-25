@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookieService:CookieService) { }
 
   ngOnInit(): void {
+  }
+  esRol(rol: string): boolean {
+    const roles = this.cookieService.get('rol');
+    return roles === rol;
   }
 
 }

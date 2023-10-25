@@ -31,3 +31,6 @@
   margin: 0px 0px 5px 5px; /* Espacio arriba y abajo de 10px, sin espacio a los lados */
   padding: 10px; /* Espacio interno de 10px en todas las direcciones */
 }
+.custom-card-header {
+  background-color: #3fa2ad !important;/* Cambia el color a tu preferencia */
+}

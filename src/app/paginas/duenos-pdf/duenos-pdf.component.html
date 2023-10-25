@@ -1,0 +1,169 @@
+<button
+  type="button"
+  class="btn btn-block bg-danger"
+  data-toggle="modal"
+  data-target="#modalEditarMascota"
+><i class="nav-icon fas fa-solid fa-file-pdf"></i>
+Generar PDF
+</button>
+<div class="modal fade" id="modalEditarMascota">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="verMasModalLabel">
+
+        </h5>
+          <button
+          type="button"
+          class="btn btn-danger "
+          (click)="generarPDF2()"
+          data-dismiss="modal"
+        >
+          Descargar
+        </button>
+
+
+      </div>
+      <div class="modal-body">
+        <section class="content">
+          <div class="container-fluid">
+            <div id="content" #reportContent>
+              <div class="row">
+                <div class="col-12 text-center d-flex align-items-center">
+                  <div style="flex: 0 0 auto">
+                    <img
+                      src="../../../assets/dist/img/logoPdf.png"
+                      alt="user-avatar"
+                      class="img-fluid"
+                      style="width: 150px"
+                    />
+                  </div>
+                  <div style="flex: 1">
+                    <h4 class="custom-title">
+                      <strong> Veterinaria My Puppy Plannet </strong>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+              <hr class="custom-hr" />
+              <div class="text-center mb-4">
+                <h5 class="custom-title">
+                  <i class="fas fa-user"></i><strong> Dueño: </strong>
+                  {{ datosDueno?.nombres }}
+                  {{ datosDueno?.apellidoPaterno }}
+                  {{ datosDueno?.apellidoMaterno }}
+                </h5>
+              </div>
+              <div class="row invoice-info">
+                <div class="col-sm-3 invoice-col">
+                  <strong
+                    ><i class="fas fa-solid fa-phone"></i> Teléfono</strong
+                  >
+
+                  <p class="text-muted">
+                    {{ datosDueno?.telefono }}
+                  </p>
+                </div>
+                <div class="col-sm-3 invoice-col">
+                  <i class="fas fa-regular fa-envelope"></i>
+                  <strong> Correo electrónico</strong>
+                  <p class="text-muted">
+                    {{ datosDueno?.correo }}
+                  </p>
+                </div>
+                <div class="col-sm-3 invoice-col">
+                  <i class="fas fa-map-marker-alt mr-1"></i>
+                  <strong> Dirección</strong>
+                  <p class="text-muted">
+                    {{ datosDueno?.direccion }}
+                  </p>
+                </div>
+                <div class="col-sm-3 invoice-col">
+                  <i class="fas fa-solid fa-hashtag"></i>
+                  <strong> Mascotas registradas</strong>
+                  <p class="text-muted">
+                    {{ listaMascotas?.length }}
+                  </p>
+                </div>
+              </div>
+              <hr class="custom-hr" />
+              <div class="row">
+                <div
+                  class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column"
+                  *ngFor="let item of listaMascotas"
+                >
+                  <div class="card bg-light d-flex flex-fill">
+                    <div class="card-header text-muted border-bottom-0"></div>
+                    <div class="card-body pt-0">
+                      <div class="row">
+                        <div class="col-7">
+                          <h2 class="lead">
+                            <b>Mascota: {{ item.nombreMascota }} </b>
+                          </h2>
+
+                          <ul class="ml-4 mb-0 fa-ul text-muted">
+                            <li class="small">
+                              <b>Edad: </b
+                              >{{
+                                calcularEdad(item.fecha_nacimiento).anios
+                              }}
+                              años
+
+                              {{
+                                calcularEdad(item.fecha_nacimiento).meses
+                              }}
+                              meses
+                            </li>
+                            <li class="small">
+                              <b>Color: </b>{{ item.color }}
+                            </li>
+                            <li class="small">
+                              <b>Conducta: </b>{{ item.conducta }}
+                            </li>
+                            <li class="small"><b>Sexo: </b>{{ item.sexo }}</li>
+                            <li
+                              class="small"
+                              *ngIf="
+                                item?.raza.idEspecie === 1 ||
+                                item.raza?.idEspecie === 2
+                              "
+                            >
+                              <b>Especie: </b>
+                              {{
+                                item?.raza.idEspecie === 1 ? "Canino" : "Felino"
+                              }}
+                            </li>
+                            <li class="small">
+                              <b>Raza: </b>{{ item?.raza.descripcion }}
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-5 text-center">
+                          <img
+                            [src]="
+                              item.foto
+                                ? item?.foto
+                                : item?.raza.idEspecie === 1
+                                ? '../../../assets/dist/img/avatarPerro.png'
+                                : '../../../assets/dist/img/avatarGato.png'
+                            "
+                            alt="user-avatar"
+                            class="img-circle img-fluid"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!--  -->

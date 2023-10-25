@@ -1,0 +1,202 @@
+<button
+type="button"
+class="btn btn-block bg-gradient-info"
+data-toggle="modal"
+data-target="#modalEditarMascota"
+>
+ Actualizar datos
+</button>
+ <!-- Editar Mascota -->
+ <div class="modal fade" id="modalEditarMascota">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #16817a">
+        <h4 class="modal-title" style="color: #ffffff">
+          Actualizar datos
+        </h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formActualizarMascota">
+          <div class="form-row">
+            <div class="col-sm-12 col-md-6 col-lg-12">
+              <div class="form-row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+
+                  <div class="form-group">
+                    <label>Nombre de la mascota</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editarnombreM"
+                      placeholder="Ingrese el nombre de la mascota"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Dueño</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editarduenoM"
+                      placeholder="Ingrese el nombre de la mascota"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+
+                  <div class="form-group">
+                    <label>Color</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editarcolorM"
+                      placeholder="Ingrese color(es) de la mascota"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <div class="form-group">
+                    <label>Años</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editaredadAnios"
+                      placeholder="año"
+                      (change)="calcularFechaNacimientoEditar()"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <div class="form-group">
+                    <label>Meses</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editaredadMeses"
+                      placeholder="meses"
+                      (change)="calcularFechaNacimientoEditar()"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <div class="form-group">
+                    <label>Fecha de nacimiento</label>
+
+                    <input
+                      type="date"
+                      class="form-control"
+                      formControlName="editarfechaNac"
+                      placeholder="Ingrese fecha nac"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label>Especie</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editarespecieM"
+                      placeholder="Ingrese fecha nac"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label>Raza</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editarrazaM"
+                      placeholder="Ingrese fecha nac"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                  <div class="form-group">
+                    <label>Sexo de la mascota</label>
+                    <div class="input-group">
+                      <select
+                        class="form-control input-lg"
+                        formControlName="editarsexoM"
+                      >
+                        <option value="">Selecionar sexo</option>
+                        <option value="Macho">Macho</option>
+                        <option value="Hembra">Hembra</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-sm-4 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Tatuaje (Opcional)</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="editartatuajeM"
+                      placeholder="Ingrese el tatuaje si la mascota lo tiene."
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Conducta</label>
+                    <div class="input-group">
+                      <select
+                        class="form-control input-lg"
+                        formControlName="editarconductaM"
+                      >
+                        <option value="">Selecionar sexo</option>
+                        <option value="CONFIADO">Confiado</option>
+                        <option value="DESCONFIADO">Desconfiado</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="actualizarMascota()"
+              data-dismiss="modal"
+              aria-label="Close"
+              [disabled]="!formActualizarMascota.valid"
+            >
+              Guardar datos
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

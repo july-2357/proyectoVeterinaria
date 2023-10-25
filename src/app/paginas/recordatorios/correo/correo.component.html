@@ -1,0 +1,76 @@
+<button
+  type="button"
+  class="btn btn-sm bg-gradient-info "
+  data-toggle="modal"
+  data-target="#enviarCorreo"
+>
+  <i class="nav-icon fas fa-solid fa-plus"></i> Enviar correo
+</button>
+<div class="modal fade" id="enviarCorreo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #16817a">
+        <h4 class="modal-title" style="color: #ffffff">
+          Enviar correo de notificación
+        </h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formEnviarCorreo" errorTailor>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group">
+                <label>Dirección de correo electrónico</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ingrese nombre"
+                  formControlName="correoElectronico"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group">
+                <label>Asunto</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  formControlName="asuntoCorreo"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="form-group">
+                <label for="inputMessage">Message</label>
+                <textarea
+                  id="inputMessage"
+                  class="form-control"
+                  rows="5"
+                  formControlName="mensaje"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

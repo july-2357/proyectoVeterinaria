@@ -2,10 +2,16 @@
   <button type="button" (click)="fileInput.click()" class="btn btn-info">
     Seleccionar Imagen
   </button>
-  <input type="file" class="form-control-file"  hidden #fileInput (change)="change($event)" />
+  <input
+    type="file"
+    class="form-control-file"
+    hidden
+    #fileInput
+    (change)="change($event)"
+  />
 </div>
 
-<div>
+<div col-9>
   <div *ngIf="imagenBase64">
     <img [src]="imagenBase64" class="fotoPrevisualizacion" />
   </div>

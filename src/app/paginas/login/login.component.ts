@@ -2,6 +2,9 @@ import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +13,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   formIngresar: FormGroup;
+  isLoggin$: Observable<boolean>;
+  private isAuthenticated = false;
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   construirFormulario() {
@@ -29,20 +35,44 @@ export class LoginComponent implements OnInit {
 
   async ingresar() {
     if (this.formIngresar.valid) {
-      let respuesta = await this.loginService.enviarLoginService(
-        this.formIngresar.get('correo')?.value,
-        this.formIngresar.get('contrasena')?.value
-      );
-      if (respuesta.token) {
-        localStorage.setItem('token',respuesta.token);
-        this.router.navigate(['principal/inicio']);
+      let loginEnviar: any = {
+        email: this.formIngresar.get('correo')?.value,
+        password: this.formIngresar.get('contrasena')?.value,
+      };
 
-      }
-
+      console.log(this.formIngresar.value);
+      console.log('--------------');
+      let respuesta = await this.loginService.enviarLoginService(loginEnviar);
+      console.log('--------------');
       console.log(respuesta);
+      if (respuesta.token) {
+        var token = respuesta.token;
+        const tokenParts = respuesta.token.split('.');
+        const decodedClaims = JSON.parse(atob(tokenParts[1]));
+        this.cookieService.set('rol', decodedClaims.role, 1, '/');
+        this.isAuthenticated = true;
+        localStorage.setItem('idLoginUsuario', decodedClaims.Id);
+        console.log('el rol es: ' + decodedClaims.role);
+        this.router.navigate(['principal/inicio']);
+      }
     } else {
-      alert('Formulario Invalido');
+      // alert('Formulario Invalido');
+      Swal.fire({
+        icon: 'error',
+        title: '¡Error!',
+        text: 'Debe llenar los campos para ingresar.',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Cerrar',
+      });
+
       console.log(this.formIngresar);
     }
+  }
+  logout() {
+    // Realizar la lógica de cierre de sesión aquí, como limpiar tokens o datos de usuario
+    this.isAuthenticated = false;
+  }
+  isAuthenticatedUser() {
+    return this.isAuthenticated;
   }
 }
