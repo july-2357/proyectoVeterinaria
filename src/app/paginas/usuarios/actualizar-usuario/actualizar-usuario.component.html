@@ -1,0 +1,174 @@
+<a
+  href="#"
+  class="btn bg-teal btn-block"
+  data-toggle="modal"
+  data-target="#registrarMascota"
+  ><b>Actualizar datos </b></a
+>
+<!-- /.Modal registrar usuario -->
+<div class="modal fade" id="registrarMascota">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #16817a">
+        <h4 class="modal-title" style="color: aliceblue">
+          Actualizar datos del usuario
+        </h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <form *ngIf="formActualizarUsuario" [formGroup]="formActualizarUsuario" errorTailor>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="form-group">
+                <label>Nombre(s)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ingrese nombre"
+                  formControlName="primerNombreU"
+                  (blur)="showNombresError = true"
+                />
+                <app-error-message
+                  [error]="formActualizarUsuario.get('primerNombreU')?.errors"
+                  [showError]="showNombresError"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="form-group">
+                <label>Apellido Paterno</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  formControlName="primerApellidoU"
+                  (blur)="showapellidoPError = true"
+                />
+
+                <app-error-message
+                  [error]="formActualizarUsuario.get('primerApellidoU')?.errors"
+                  [showError]="showapellidoPError"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="form-group">
+                <label>Apellido materno</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  formControlName="segundoApellidoU"
+                  (blur)="showapellidoMError = true"
+                />
+                <app-error-message
+                  [error]="
+                    formActualizarUsuario.get('segundoApellidoU')?.errors
+                  "
+                  [showError]="showapellidoMError"
+                ></app-error-message>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="form-group">
+                <label>Carnet</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder=""
+                  formControlName="carnet"
+                  (blur)="showcarnetError = true"
+                />
+                <app-error-message
+                  [error]="formActualizarUsuario.get('carnet')?.errors"
+                  [showError]="showcarnetError"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="form-group">
+                <label>Célular / Teléfono</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  formControlName="celular"
+                  (blur)="showcelularError = true"
+                />
+                <app-error-message
+                  [error]="formActualizarUsuario.get('celular')?.errors"
+                  [showError]="showcelularError"
+                ></app-error-message>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <div class="form-group">
+                <label>Dirección</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="direccion"
+                  placeholder=""
+                  (blur)="showadireccionError = true"
+                />
+                <app-error-message
+                  [error]="formActualizarUsuario.get('direccion')?.errors"
+                  [showError]="showadireccionError"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-4">
+              <div class="form-group">
+                <label>Correo electrónico</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="correo"
+                  placeholder="Ingrese un nombre de usuario para ingresar al sistema"
+                  (blur)="verCorreoError = true"
+                />
+
+                <app-error-message
+                  [error]="formActualizarUsuario.get('correo')?.errors"
+                  [showError]="verCorreoError"
+                ></app-error-message>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button
+              type="button"
+              (click)="actualizarUsuario()"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              [disabled]="!formActualizarUsuario.valid"
+            >
+              Guardar datos
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

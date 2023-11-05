@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-3">
         <!-- Profile Image -->
-        <div class="card card-primary lineaArriba" >
+        <div class="card card-primary lineaArriba">
           <div class="card-body box-profile">
             <div class="text-center">
               <h3 class="profile-username text-center">
@@ -14,19 +14,21 @@
               <img
                 class="profile-user-img img-fluid img-circle"
                 [src]="datosUsuario?.fotografia"
-                [src]="datosUsuario?.fotografia ? datosUsuario?.fotografia : 'assets/dist/img/avatar2.png'"
-
+                [src]="
+                  datosUsuario?.fotografia
+                    ? datosUsuario?.fotografia
+                    : 'assets/dist/img/avatar2.png'
+                "
                 alt="User profile picture"
               />
               <a href="#" class="btn bg-teal btn-block"
                 ><b>Actualizar foto</b></a
               >
 
-              <p class="text-muted text-center">Rol: {{rolusuario}}</p>
+              <p class="text-muted text-center">Rol: {{ rolusuario }}</p>
 
-              <a href="#" class="btn bg-teal btn-block"
-                ><b>Actualizar datos</b></a
-              >
+
+              <app-actualizar-usuario></app-actualizar-usuario>
             </div>
           </div>
         </div>
@@ -87,8 +89,6 @@
                 </li>
               </ul>
             </div>
-
-
           </div>
         </div>
       </div>

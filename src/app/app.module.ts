@@ -38,7 +38,7 @@ import { RecordatorioComponent } from './paginas/recordatorios/recordatorio/reco
 import { MascotasNotificacionesComponent } from './paginas/recordatorios/mascotas-notificaciones/mascotas-notificaciones.component'; // Importa CookieService desde ngx-cookie-service
 import { CamaraComponent } from './elementos/camara/camara.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-
+import { ActualizarUsuarioComponent } from './paginas/usuarios/actualizar-usuario/actualizar-usuario.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +64,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     RecordatorioComponent,
     MascotasNotificacionesComponent,
     SafeHtmlPipe,
+    ActualizarUsuarioComponent
 
   ],
   imports: [

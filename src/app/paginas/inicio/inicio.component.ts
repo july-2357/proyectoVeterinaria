@@ -34,7 +34,8 @@ export class InicioComponent implements OnInit {
     private duenosService: DuenosService,
     private mascotasService: MascotasService,
     private datePipe: DatePipe,
-    private consultas: ConsultasMService,private router:Router
+    private consultas: ConsultasMService,
+    private router: Router
   ) {
     this.fecha = this.datePipe.transform(this.fechaActual, 'yyyy-MM-dd');
   }
@@ -69,12 +70,14 @@ export class InicioComponent implements OnInit {
         this.nMascotas = this.listaMascotas.length;
         for (let i = 0; i < this.listaMascotas.length; i++) {
           const mascota = this.listaMascotas[i];
-          const fecha =this.datePipe.transform(mascota.fecha_cre, 'yyyy-MM-dd');
-          if(fecha===this.fecha){
+          const fecha = this.datePipe.transform(
+            mascota.fecha_cre,
+            'yyyy-MM-dd'
+          );
+          if (fecha === this.fecha) {
             this.ultimasMascotas.push(mascota);
           }
         }
-
       }
     } catch (error) {}
   }
