@@ -9,7 +9,6 @@ export class ErrorMessageComponent {
   @Input() error: any;
   @Input() showError: boolean;
 
-
   getErrorMessage(): string {
     if (this.error) {
       if (this.error.required) {
@@ -24,27 +23,37 @@ export class ErrorMessageComponent {
         if (this.error.pattern.requiredPattern === '^[A-Za-z\\s]*$') {
           return 'Este campo solo acepta letras.';
         } else if (
-          this.error.pattern.requiredPattern ===
-          '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'
+          this.error.pattern.requiredPattern === '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$'
         ) {
           return 'La contraseña no es válida';
-        }else if (
-          this.error.pattern.requiredPattern ===
-          '^[1-9][0-9]*$'
-        ) {
-          return 'Debe ser un dato numérico';
         } else if (
-          this.error.pattern.requiredPattern ===
-          '^[0-9]+([,.][0-9]+)?$'
+          this.error.pattern.requiredPattern === '^(?!0*[.,]?0*$)\\d+(?:[.,]\\d+)?$'
+        ) {
+          return 'Debe ser un dato numérico mayor a 0';
+        } else if (
+          this.error.pattern.requiredPattern === '^(?=.*[1-9])d*$'
+        ) {
+          return 'Debe ser un numero positivo';
+        } else if (
+          this.error.pattern.requiredPattern === '^[0-9]{7,8}$'
+        ) {
+          return 'El formato del celular no es válido';
+        }else if (
+          this.error.pattern.requiredPattern === '^[1-9][0-9]{6,7}$'
+        ) {
+          return 'El formato del carnet no es válido';
+        }  else if (
+          this.error.pattern.requiredPattern === '^[0-9]+([,.][0-9]+)?$'
         ) {
           return 'Debe ser un dato numérico o decimal';
-        }else {
+        } else {
           return 'El formato no es válido.';
         }
       }
     }
     return '';
-
-
   }
+
 }
+
+//

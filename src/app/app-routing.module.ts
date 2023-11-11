@@ -18,10 +18,11 @@ import { RegistrarMascotasComponent } from './paginas/mascotas/registrar-mascota
 import { VigilanteGuard } from './guardianes/vigilante.guard';
 import { CorreoComponent } from './paginas/recordatorios/correo/correo.component';
 import { MascotasNotificacionesComponent } from './paginas/recordatorios/mascotas-notificaciones/mascotas-notificaciones.component';
+import { EsLoginGuard } from './guardianes/es-login.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta predeterminada, redirige a /home
-  { path: 'login', component: LoginComponent },
+  { path: 'login', canActivate:[EsLoginGuard],component: LoginComponent },
 
   {
     path: 'principal',
@@ -29,22 +30,22 @@ const routes: Routes = [
     canActivate:[VigilanteGuard],
     component: PrincipalComponent,
     children: [
-      { path: 'inicio', component: InicioComponent},
-      { path: 'listarDuenos', component: ListarduenosComponent  },
+      { path: 'inicio',canActivate:[VigilanteGuard], component: InicioComponent},
+      { path: 'listarDuenos', canActivate:[VigilanteGuard],component: ListarduenosComponent  },
       {
-        path: 'mascotas',
+        path: 'mascotas',canActivate:[VigilanteGuard],
         component: MascotasComponent,
       },
-      { path: 'historial', component: HistorialComponent },
-      { path: 'mostrarMascotas', component: MostrarMascotasComponent },
-      { path: 'consultas', component: ConsultasComponent },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'perfilUsuario', component: PerfilUsuarioComponent },
-      { path: 'primeraConsulta', component: PrimeraConsultaComponent },
-      { path: 'duenos', component: DuenosPdfComponent },
-      { path: 'registromascota', component: RegistrarMascotasComponent },
-      { path: 'recordatorio', component: MascotasNotificacionesComponent },
-      { path: 'mascotasPDF', component: ListaMascotasPdfComponent },
+      { path: 'historial', canActivate:[VigilanteGuard],component: HistorialComponent },
+      { path: 'mostrarMascotas',canActivate:[VigilanteGuard], component: MostrarMascotasComponent },
+      { path: 'consultas',canActivate:[VigilanteGuard], component: ConsultasComponent },
+      { path: 'usuarios',canActivate:[VigilanteGuard], component: UsuariosComponent },
+      { path: 'perfilUsuario', canActivate:[VigilanteGuard],component: PerfilUsuarioComponent },
+      { path: 'primeraConsulta', canActivate:[VigilanteGuard],component: PrimeraConsultaComponent },
+      { path: 'duenos', canActivate:[VigilanteGuard],component: DuenosPdfComponent },
+      { path: 'registromascota',canActivate:[VigilanteGuard], component: RegistrarMascotasComponent },
+      { path: 'recordatorio',canActivate:[VigilanteGuard], component: MascotasNotificacionesComponent },
+      { path: 'mascotasPDF',canActivate:[VigilanteGuard], component: ListaMascotasPdfComponent },
 
     ],
 

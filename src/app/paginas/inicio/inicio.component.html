@@ -39,7 +39,7 @@
           ></span>
           <div class="info-box-content">
             <span class="info-box-text">Consutas Realizadas</span>
-            <span class="info-box-number">{{ 30 }}</span>
+            <span class="info-box-number">{{ nConsultas }}</span>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@
           ></span>
           <div class="info-box-content">
             <span class="info-box-text">Usuarios registrados</span>
-            <span class="info-box-number">{{ nDuenos }}</span>
+            <span class="info-box-number">{{ nUsuarios }}</span>
           </div>
         </div>
       </div>
@@ -82,10 +82,19 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+            <ngx-spinner type="ball-scale-multiple">
+              <div
+                class="spinner"
+                bdOpacity="0.6"
+                bdColor=" rgba(117, 227, 231, 0.8)"
+              ></div>
+              <div class="textSpinner">Cargando datos ...</div>
+            </ngx-spinner>
             <div class="tab-content p-0">
               <div class="row">
                 <div class="col-sm-12 col-12">
-                  <app-graficos></app-graficos>
+                  <canvas id="myChart"></canvas>
+
                 </div>
               </div>
               <div class="row">
@@ -101,25 +110,39 @@
           <div class="col-12">
             <div class="card card-solid">
               <div class="card-header">
-                <h3 class="card-title">
-                  <i class="fas fa-money-bill"></i> Ventas de hoy
-                </h3>
+                <div class="card-title">
+                  <div>
+                    <i class="fas fa-money-bill"></i> Ventas por
+                    <b>{{ tiempo }}</b>
+                  </div>
+                </div>
                 <div class="float-right">
-                  <!-- Utiliza mb-3 para agregar espacio hacia abajo -->
                   <button
                     class="btn btn-info ml-2"
+                    [ngClass]="{
+                      'btn-info': contenidoSeleccionado === 'dia',
+                      'btn-secondary': contenidoSeleccionado !== 'dia'
+                    }"
                     (click)="cambiarContenido('dia')"
                   >
                     Ventas del día
                   </button>
                   <button
                     class="btn btn-info ml-2"
+                    [ngClass]="{
+                      'btn-info': contenidoSeleccionado === 'mes',
+                      'btn-secondary': contenidoSeleccionado !== 'mes'
+                    }"
                     (click)="cambiarContenido('mes')"
                   >
                     Ventas del mes
                   </button>
                   <button
                     class="btn btn-info ml-2"
+                    [ngClass]="{
+                      'btn-info': contenidoSeleccionado === 'anio',
+                      'btn-secondary': contenidoSeleccionado !== 'anio'
+                    }"
                     (click)="cambiarContenido('anio')"
                   >
                     Ventas del año
@@ -176,12 +199,10 @@
                   <div
                     class="col-lg-3 col-sm-4 col-md-4 d-flex flex-column"
                     *ngFor="let item of ultimasMascotas"
-                    style="margin-top: 5px;"
+                    style="margin-top: 5px"
                   >
-                    <div
-                      class="bordeImagen"
-                    >
-                      <div  (click)="navegarVentanaHistorial(item)">
+                    <div class="bordeImagen">
+                      <div (click)="navegarVentanaHistorial(item)">
                         <img
                           [src]="
                             item.foto
@@ -190,7 +211,7 @@
                               ? '../../../assets/dist/img/avatarPerro.png'
                               : '../../../assets/dist/img/avatarGato.png'
                           "
-                         class="imagenFija"
+                          class="imagenFija"
                         />
                         <div class="text-center textImagen">
                           {{ item.nombreMascota }}
@@ -198,7 +219,7 @@
                       </div>
                     </div>
                   </div>
-                  <br>
+                  <br />
                 </div>
               </div>
             </div>

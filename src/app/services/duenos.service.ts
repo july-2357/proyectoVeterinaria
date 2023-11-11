@@ -50,5 +50,15 @@ export class DuenosService {
       throw  error;
     }
   }
+  async eliminarDuenoServices(duenoId: number) {
+    const url = `https://localhost:7101/api/Duenos/EliminarDueno/${duenoId}`;
+    try {
+      const resultado = await this.http.delete<any>(url).toPromise();
+      return resultado;
+    } catch (error) {
+      console.error('Error al eliminar', error);
+      throw error;
+    }
+  }
   constructor(private http: HttpClient) {}
 }

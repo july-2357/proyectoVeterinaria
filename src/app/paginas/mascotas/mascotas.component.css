@@ -1,6 +1,6 @@
-.cod{
+.cod {
   font-size: 13px;
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   color: rgb(155, 154, 154);
 }
 .imagen-container {
@@ -8,12 +8,16 @@
   height: 140px; /* Alto deseado */
   overflow: hidden; /* Para recortar la imagen si es más grande que el contenedor */
   padding-top: 5px;
-
 }
 
 .imagen-container img {
   width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
   height: 100%; /* La imagen ocupa el 100% del alto del contenedor */
   object-fit: contain; /* Controla cómo la imagen se ajusta dentro del contenedor */
-
+}
+.pregunta {
+  color: #578072;
+  font-size: 15px;
+  padding: 5px 0;
+  font-weight: bold;
 }

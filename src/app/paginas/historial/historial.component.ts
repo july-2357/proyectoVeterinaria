@@ -11,7 +11,8 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./historial.component.css'],
 })
 export class HistorialComponent implements OnInit {
-  @ViewChild(ActualizarMascotaComponent) actualizarMascota: ActualizarMascotaComponent;
+  @ViewChild(ActualizarMascotaComponent)
+  actualizarMascota: ActualizarMascotaComponent;
   datosMascota: any = {};
   listaConsultas: any = [];
   listaVacunas: any = [];
@@ -21,52 +22,52 @@ export class HistorialComponent implements OnInit {
   detalleVacuna: any;
   detalleDesparacitacion: any;
   detalleConsulta: any;
-  detalleCirugia:any;
+  detalleCirugia: any;
   vacunaSeleccionada: number | null = null;
   desparacitacionSeleccionada: number | null = null;
   consultaSeleccionada: number | null = null;
   cirugiaSeleccionada: number | null = null;
   idMascotaNumerico: number;
-  listaMascotas: any=[];
-  datos:any;
+  listaMascotas: any = [];
+  datos: any;
   constructor(
     private consultasService: ConsultasMService,
     private mascotasService: MascotasService,
-private cookieService:CookieService
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
     const idMascota = localStorage.getItem('idMascotaHistorial'); // Reemplaza con el ID de la mascota que deseas obtener
-      if (idMascota !== null) {
-        this.idMascotaNumerico = parseInt(idMascota, 10);}
+    if (idMascota !== null) {
+      this.idMascotaNumerico = parseInt(idMascota, 10);
+    }
     this.obtenerHistorial();
     this.obtenerMascotas();
-
   }
   async obtenerMascotas() {
     const idMascotaSeleccionada = this.idMascotaNumerico;
     let respuesta = await this.mascotasService.listarMascotasServices(); // mandar el servicio
     this.listaMascotas = respuesta.datos;
     this.datos = this.listaMascotas.find(
-      (mascota: any) => mascota.idMascota === idMascotaSeleccionada
+      (mascota: any) => mascota.mascota.idMascota === idMascotaSeleccionada
     );
-      }
+    this.datos =this.datos.mascota;
+  }
   async obtenerHistorial() {
     try {
-         const historial = await this.consultasService.obtenerHistorialMascota(
+      const historial = await this.consultasService.obtenerHistorialMascota(
         this.idMascotaNumerico
       );
       if (historial && historial.datos) {
         this.listaConsultas = historial.datos.listaConsultaMedica || [];
         this.listaVacunas = historial.datos.listaVacunas || [];
         this.listaDesparacitaciones = historial.datos.listaDesparaciones || [];
-        this.listaCirugias= historial.datos.listaCirugias || [];
+        this.listaCirugias = historial.datos.listaCirugias || [];
         console.log(this.listaCirugias);
       } else {
         console.warn('Datos de historial no válidos:', historial);
       }
-    }
-     catch (error) {
+    } catch (error) {
       console.error('Error al obtener el historial:', error);
     }
   }
@@ -98,14 +99,16 @@ private cookieService:CookieService
   openModalDesparacitaciones(itemId: number) {
     this.desparacitacionSeleccionada = itemId;
     this.detalleDesparacitacion = this.listaDesparacitaciones.find(
-      (desparacitacion: any) => desparacitacion.id_desparacitacion === this.desparacitacionSeleccionada
+      (desparacitacion: any) =>
+        desparacitacion.id_desparacitacion === this.desparacitacionSeleccionada
     );
     console.log(this.detalleDesparacitacion);
   }
   openModalConsultas(itemId: number) {
     this.consultaSeleccionada = itemId;
     this.detalleConsulta = this.listaConsultas.find(
-      (consulta: any) => consulta.id_consulta_medica === this.consultaSeleccionada
+      (consulta: any) =>
+        consulta.id_consulta_medica === this.consultaSeleccionada
     );
     console.log(this.detalleConsulta);
   }

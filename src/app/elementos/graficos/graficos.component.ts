@@ -30,7 +30,7 @@ export class GraficosComponent implements OnInit {
     this.RenderChart();
   }
   RenderChart() {
-      setTimeout(() => {
+    setTimeout(() => {
       var myChart = new Chart('myChart', {
         type: 'bar',
         data: {
@@ -64,7 +64,7 @@ export class GraficosComponent implements OnInit {
         },
         options: {},
       });
-    }, 1000);
+    }, 1500);
   }
   async obtenerConsultas() {
     try {

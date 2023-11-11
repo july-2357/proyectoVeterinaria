@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PrimeraConsultaComponent implements OnInit {
   formPrimeraConsulta: FormGroup;
   opcionesSeleccionadas: string[] = [];
-  @Input() idMascota!: any;
+  @Input() idMascota: number;
 
   constructor(private formBuilder: FormBuilder) {}
   construirFormularioPrimeraConsulta() {
@@ -30,14 +30,10 @@ export class PrimeraConsultaComponent implements OnInit {
 
   ngOnInit(): void {
     this.construirFormularioPrimeraConsulta();
-    console.log("idMascota");
+    console.log('idMascota');
     console.log(this.idMascota);
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['idMascota']) {
-      console.log('Valor de idMascota en el componente hijo:', this['idMascota']);
-    }
-  }
+
   guardarPrimeraConsulta() {
     if (this.formPrimeraConsulta.valid) {
       let primeraConsulta: any = {

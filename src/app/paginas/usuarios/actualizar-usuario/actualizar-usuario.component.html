@@ -7,7 +7,7 @@
 >
 <!-- /.Modal registrar usuario -->
 <div class="modal fade" id="registrarMascota">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #16817a">
         <h4 class="modal-title" style="color: aliceblue">
@@ -22,8 +22,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" >
-        <form *ngIf="formActualizarUsuario" [formGroup]="formActualizarUsuario" errorTailor>
+      <div class="modal-body">
+        <form
+          *ngIf="formActualizarUsuario"
+          [formGroup]="formActualizarUsuario"
+          errorTailor
+        >
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-6">
               <div class="form-group">
@@ -82,7 +86,7 @@
               <div class="form-group">
                 <label>Carnet</label>
                 <input
-                  type="number"
+                  type="text"
                   class="form-control"
                   placeholder=""
                   formControlName="carnet"
@@ -130,31 +134,9 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-4">
-              <div class="form-group">
-                <label>Correo electrónico</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="correo"
-                  placeholder="Ingrese un nombre de usuario para ingresar al sistema"
-                  (blur)="verCorreoError = true"
-                />
 
-                <app-error-message
-                  [error]="formActualizarUsuario.get('correo')?.errors"
-                  [showError]="verCorreoError"
-                ></app-error-message>
-              </div>
-            </div>
-          </div>
           <div class="modal-footer justify-content-between">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
               Cerrar
             </button>
             <button
@@ -164,7 +146,7 @@
               data-dismiss="modal"
               [disabled]="!formActualizarUsuario.valid"
             >
-              Guardar datos
+              Actualizar datos
             </button>
           </div>
         </form>

@@ -39,6 +39,8 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.auth.logout();
     // Redirigir al usuario a la página de inicio de sesión o a la página pública
+    localStorage.clear();
     this.router.navigate(['/login']);
+
   }
 }

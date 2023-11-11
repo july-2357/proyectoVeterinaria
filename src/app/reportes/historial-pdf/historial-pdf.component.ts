@@ -6,10 +6,9 @@ import * as html2pdf from 'html2pdf.js';
 @Component({
   selector: 'app-historial-pdf',
   templateUrl: './historial-pdf.component.html',
-  styleUrls: ['./historial-pdf.component.css']
+  styleUrls: ['./historial-pdf.component.css'],
 })
 export class HistorialPdfComponent implements OnInit {
-
   @ViewChild('reportContent') reportContent: ElementRef;
   datosMascota: any = {};
 
@@ -21,15 +20,18 @@ export class HistorialPdfComponent implements OnInit {
   detalleVacuna: any;
   detalleDesparacitacion: any;
   detalleConsulta: any;
-  detalleCirugia:any;
+  detalleCirugia: any;
   vacunaSeleccionada: number | null = null;
   desparacitacionSeleccionada: number | null = null;
   consultaSeleccionada: number | null = null;
   cirugiaSeleccionada: number | null = null;
   idMascotaNumerico: number;
-  listaMascotas: any=[];
+  listaMascotas: any = [];
 
-  constructor(private mascotasService:MascotasService, private consultasService:ConsultasMService) { }
+  constructor(
+    private mascotasService: MascotasService,
+    private consultasService: ConsultasMService
+  ) {}
 
   @Input() idMascota: number;
 
@@ -42,13 +44,13 @@ export class HistorialPdfComponent implements OnInit {
     let respuesta = await this.mascotasService.listarMascotasServices(); // mandar el servicio
     this.listaMascotas = respuesta.datos;
     this.datosMascota = this.listaMascotas.find(
-      (mascota: any) => mascota.idMascota === idMascotaSeleccionada
+      (mascota: any) => mascota.mascota.idMascota === idMascotaSeleccionada
     );
-      }
+  }
   async obtenerHistorial() {
     try {
-         const historial = await this.consultasService.obtenerHistorialMascota(
-          this.idMascota
+      const historial = await this.consultasService.obtenerHistorialMascota(
+        this.idMascota
       );
       console.log(historial);
       if (historial && historial.datos) {
@@ -56,30 +58,26 @@ export class HistorialPdfComponent implements OnInit {
         this.listaVacunas = historial.datos?.listaVacunas || [];
         this.listaDesparacitaciones = historial.datos?.listaDesparaciones || [];
         this.listaCirugias = historial.datos?.listaCirugias || [];
-
       } else {
         console.warn('Datos de historial no válidos:', historial);
       }
-    }
-     catch (error) {
+    } catch (error) {
       console.error('Error al obtener el historial:', error);
     }
   }
-  generarPDF(){
+  generarPDF() {
     const options = {
       margin: 10,
       filename: 'informe.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
     };
     const content = this.reportContent.nativeElement;
     html2pdf().from(content).set(options).save();
   }
   calcularEdad(fechaNacimiento: string): { anios: number; meses: number } {
-    // Obtener la fecha de nacimiento como objeto Date directamente desde la cadena de fecha
     const fechaNac = new Date(fechaNacimiento);
-
     const fechaActual = new Date();
 
     const edadEnMilisegundos = fechaActual.getTime() - fechaNac.getTime();

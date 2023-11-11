@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="content-header">
       <div class="container- fluid">
-        <div class="row ">
+        <div class="row">
           <div class="col-sm-6">
             <h5 class="m-0">Mascotas</h5>
           </div>
@@ -19,7 +19,14 @@
       </div>
       <!-- /.container-fluid -->
     </div>
-
+    <ngx-spinner type="ball-scale-multiple">
+      <div
+        class="spinner"
+        bdOpacity="0.6"
+        bdColor=" rgba(117, 227, 231, 0.8)"
+      ></div>
+      <div class="textSpinner">Cargando datos ...</div>
+    </ngx-spinner>
     <div class="card">
       <div class="card-header headerCardConsultas">
         <div class="row">
@@ -41,10 +48,10 @@
             <app-lista-mascotas-pdf></app-lista-mascotas-pdf>
           </div>
           <div class="col-6">
-            <div class="input-group input-group-sm ">
+            <div class="input-group input-group-sm">
               <input
                 type="text"
-                class="form-control "
+                class="form-control"
                 [(ngModel)]="buscarTexto"
                 (input)="buscarMascota()"
                 placeholder="Buscar mascota por nombre"
@@ -52,7 +59,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- /.tarjeta de datos de la mascota -->
@@ -71,38 +77,51 @@
                 <div class="row">
                   <div class="col-7">
                     <h2 class="lead">
-                      <b>Mascota: {{ item.nombreMascota }}</b>
+                      <b>Mascota: {{ item.mascota.nombreMascota }}</b>
                     </h2>
 
                     <ul class="ml-2 mb-0 fa-ul text-muted">
                       <li class="small">
                         <b>Dueño: </b>
-                        {{ item.dueno.nombres }}
-                        {{ item.dueno.apellidoPaterno }}
-                        {{ item.dueno.apellidoMaterno }}
+                        {{ item.mascota?.dueno.nombres }}
+                        {{ item.mascota?.dueno.apellidoPaterno }}
+                        {{ item.mascota?.dueno.apellidoMaterno }}
                       </li>
                       <li class="small">
                         <b>Edad: </b
-                        >{{ calcularEdad(item.fecha_nacimiento).anios }} años
+                        >{{
+                          calcularEdad(item.mascota?.fecha_nacimiento).anios
+                        }}
+                        años
 
-                        {{ calcularEdad(item.fecha_nacimiento).meses }} meses
+                        {{ calcularEdad(item.mascota?.fecha_nacimiento).meses }}
+                        meses
                       </li>
-                      <li class="small"><b>Color: </b>{{ item.color }}</li>
                       <li class="small">
-                        <b>Conducta: </b>{{ item.conducta }}
+                        <b>Color: </b>{{ item.mascota?.color }}
                       </li>
-                      <li class="small"><b>Sexo: </b>{{ item.sexo }}</li>
+                      <li class="small">
+                        <b>Conducta: </b>{{ item.mascota?.conducta }}
+                      </li>
+                      <li class="small">
+                        <b>Sexo: </b>{{ item.mascota?.sexo }}
+                      </li>
                       <li
                         class="small"
                         *ngIf="
-                          item.raza.idEspecie === 1 || item.raza.idEspecie === 2
+                          item.mascota?.raza?.idEspecie === 1 ||
+                          item.mascota?.raza?.idEspecie === 2
                         "
                       >
                         <b>Especie: </b>
-                        {{ item.raza.idEspecie === 1 ? "CANINO" : "FELINO" }}
+                        {{
+                          item.mascota?.raza?.idEspecie === 1
+                            ? "CANINO"
+                            : "FELINO"
+                        }}
                       </li>
                       <li class="small">
-                        <b>Raza: </b>{{ item.raza.descripcion }}
+                        <b>Raza: </b>{{ item.mascota?.raza?.descripcion }}
                       </li>
                     </ul>
                   </div>
@@ -111,16 +130,16 @@
                       class="btn btn-sm btn-outline-info"
                       data-toggle="modal"
                       data-target="#modalActualizarFoto"
-                      (click)="abrirActualizarFoto(item)"
+                      (click)="abrirActualizarFoto(item.mascota)"
                     >
                       <i class="fas fa-camera"></i> Subir foto
                     </a>
                     <div class="imagen-container">
                       <img
                         [src]="
-                          item.foto
-                            ? item?.foto
-                            : item?.raza.idEspecie === 1
+                          item.mascota.foto
+                            ? item?.mascota.foto
+                            : item?.mascota.raza.idEspecie === 1
                             ? '../../../assets/dist/img/avatarPerro.png'
                             : '../../../assets/dist/img/avatarGato.png'
                         "
@@ -129,18 +148,28 @@
                       />
                     </div>
                     <div class="cod">
-                      <b>Cod. Mascota: {{ item.cod_mascota }}</b>
+                      <b>Cod. Mascota: {{ item.mascota.cod_mascota }}</b>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card-footer" style="">
                 <div class="float-right">
-                  &nbsp;
+                  <!-- <a
+                    class="btn btn-success btn-sm btnEliminarmascota"
+                    idMascota=""
+                    data-toggle="modal"
+                    data-target="#primeraConsulta"
+                    (click)="abrirModalPrimeraConsulta(item.mascota.idMascota)"
+                    *ngIf="(esRol('Administrador') || esRol('Veterinario') )&& !item.primeraConsulta"
+                  >
+                    Primera consulta
+                  </a> -->
+
                   <a
                     class="btn btn-success btn-sm btnRegistrarConsulta"
                     idMascota=""
-                    (click)="navegarVentanaDestino(item)"
+                    (click)="navegarVentanaDestino(item.mascota)"
                     *ngIf="esRol('Administrador') || esRol('Veterinario')"
                   >
                     Nueva consulta
@@ -149,7 +178,7 @@
                   <a
                     class="btn btn-primary bg-indigo btn-sm btnHistorial"
                     idMascota=""
-                    (click)="navegarVentanaHistorial(item)"
+                    (click)="navegarVentanaHistorial(item.mascota)"
                   >
                     Historial
                   </a>
@@ -160,10 +189,19 @@
                     idMascota=""
                     data-toggle="modal"
                     data-target="#modalEditarMascota"
-                    (click)="abrirModalEditarMascota(item.idMascota)"
+                    (click)="abrirModalEditarMascota(item.mascota.idMascota)"
                     *ngIf="esRol('Administrador') || esRol('Veterinario')"
                   >
-                    Editar
+                    <i class="fas fa-pen"> </i>
+                  </a>
+                  &nbsp;
+                  <a
+                    class="btn btn-danger btn-sm"
+                    href="javascript:void(0);"
+                    (click)="eliminarMascota(item.mascota.idMascota)"
+                    *ngIf="esRol('Administrador') || esRol('Veterinario')"
+                  >
+                    <i class="fas fa-trash"> </i>
                   </a>
                 </div>
               </div>
@@ -173,10 +211,11 @@
         <div class="d-flex justify-content-center">
           <pagination-controls
             (pageChange)="pagina = $event"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
           ></pagination-controls>
         </div>
       </div>
-
       <!-- Registar Mascota -->
       <div class="modal fade" id="registrarMascota">
         <div class="modal-dialog modal-lg">
@@ -210,7 +249,6 @@
                             placeholder="Ingrese el nombre de la mascota"
                             (blur)="verNombreError = true"
                             [(ngModel)]="textoEnMayusculas"
-                            (input)="convertirAMayusculas()"
                           />
 
                           <app-error-message
@@ -260,7 +298,6 @@
                             class="form-control"
                             formControlName="colorM"
                             (blur)="verColorError = true"
-                            (input)="convertirAMayusculas()"
                           />
 
                           <app-error-message
@@ -316,6 +353,7 @@
                             class="form-control"
                             formControlName="fechaNac"
                             (blur)="verEdadError = true"
+                            readonly
                           />
 
                           <app-error-message
@@ -403,7 +441,6 @@
                             class="form-control"
                             formControlName="tatuajeM"
                             placeholder="Ingrese el tatuaje si la mascota lo tiene."
-                            (input)="convertirAMayusculas()"
                           />
                         </div>
                       </div>
@@ -460,9 +497,6 @@
                           ></app-camara>
                         </div>
                       </div>
-                      <!-- <div class="col-lg-12">
-
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -521,7 +555,6 @@
                             class="form-control"
                             formControlName="editarnombreM"
                             placeholder="Ingrese el nombre de la mascota"
-                            (input)="convertirAMayusculas()"
                           />
                         </div>
                       </div>
@@ -548,7 +581,6 @@
                             class="form-control"
                             formControlName="editarcolorM"
                             placeholder="Ingrese color(es) de la mascota"
-                            (input)="convertirAMayusculas()"
                           />
                         </div>
                       </div>
@@ -588,6 +620,7 @@
                             formControlName="editarfechaNac"
                             placeholder="Ingrese fecha nac"
                             readonly
+                            (change)="calcularFechaNacimiento()"
                           />
                         </div>
                       </div>
@@ -626,8 +659,8 @@
                               formControlName="editarsexoM"
                             >
                               <option value="">Selecionar sexo</option>
-                              <option value="Macho">Macho</option>
-                              <option value="Hembra">Hembra</option>
+                              <option value="MACHO">MACHO</option>
+                              <option value="HEMBRA">HEMBRA</option>
                             </select>
                           </div>
                         </div>
@@ -654,8 +687,8 @@
                               formControlName="editarconductaM"
                             >
                               <option value="">Selecionar sexo</option>
-                              <option value="CONFIADO">Confiado</option>
-                              <option value="DESCONFIADO">Desconfiado</option>
+                              <option value="CONFIADO">CONFIADO</option>
+                              <option value="DESCONFIADO">DESCONFIADO</option>
                             </select>
                           </div>
                         </div>
@@ -663,26 +696,26 @@
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer justify-content-between">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-dismiss="modal"
-                  >
-                    Cerrar
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    (click)="actualizarMascota()"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                    [disabled]="!formActualizarMascota.valid"
-                  >
-                    Guardar datos
-                  </button>
-                </div>
               </form>
+              <div class="modal-footer justify-content-between">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="actualizarMascota()"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  [disabled]="!formActualizarMascota.valid"
+                >
+                  Guardar datos
+                </button>
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -756,6 +789,387 @@
                 (click)="actualizarFotoMascota(mascotaFotoSeleccionada)"
                 data-dismiss="modal"
                 aria-label="Close"
+              >
+                Guardar datos
+              </button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- Registrar Primera consulta  -->
+      <div class="modal fade" id="primeraConsulta">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #16817a">
+              <h4 class="modal-title" style="color: #ffffff">
+                Datos básicos mascota
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                (click)="resetFormPrimeraConsulta()"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="formPrimeraConsulta">
+                <div class="form-group">
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    formControlName="idMascota"
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group centrar">
+                      <div class="pregunta">Condicion corporal</div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="condicionDelgado"
+                          formControlName="condicionCorporal"
+                          name="condicionCorporal"
+                          value="Delgado"
+                        />
+                        <label class="form-check-label" for="condicionDelgado"
+                          >Delgado</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="condicionNormal"
+                          formControlName="condicionCorporal"
+                          name="condicionCorporal"
+                          value="Normal"
+                        />
+                        <label class="form-check-label" for="condicionNormal"
+                          >Normal</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="condicionObeso"
+                          formControlName="condicionCorporal"
+                          name="condicionCorporal"
+                          value="Obeso"
+                        />
+                        <label class="form-check-label" for="condicionObeso"
+                          >Obeso</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group centrar">
+                      <div class="pregunta">Estado reproductivo</div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="estadoCastrado"
+                          formControlName="estadoReproductivo"
+                          name="estadoReproductivo"
+                          value="Castrado"
+                        />
+                        <label class="form-check-label" for="estadoCastrado"
+                          >Castrado</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="estadoGestacion"
+                          formControlName="estadoReproductivo"
+                          name="estadoReproductivo"
+                          value="Gestacion"
+                        />
+                        <label class="form-check-label" for="estadoGestacion"
+                          >Gestacion</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="estadoLactancia"
+                          formControlName="estadoReproductivo"
+                          name="estadoReproductivo"
+                          value="Lactancia"
+                        />
+                        <label class="form-check-label" for="estadoLactancia"
+                          >Lactancia</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="estadoNinguno"
+                          formControlName="estadoReproductivo"
+                          name="estadoReproductivo"
+                          value="Ninguno"
+                        />
+                        <label class="form-check-label" for="estadoNinguno"
+                          >Ninguno</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group centrar">
+                      <div class="pregunta">Habitad</div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="habitadCasa"
+                          formControlName="habitad"
+                          name="habitad"
+                          value="Casa"
+                        />
+                        <label class="form-check-label" for="habitadCasa"
+                          >Casa</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="habitadDepartamento"
+                          formControlName="habitad"
+                          name="habitad"
+                          value="Departamento"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="habitadDepartamento"
+                          >Departamento</label
+                        >
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="habitadPatio"
+                          formControlName="habitad"
+                          name="habitad"
+                          value="Patio"
+                        />
+                        <label class="form-check-label" for="habitadPatio"
+                          >Patio</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group centrar">
+                      <div class="pregunta">¿Desparacitaciones?</div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="desparacitacionSi"
+                              formControlName="desparacitacion"
+                              name="desparacitacion"
+                              value="SI"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="desparacitacionSi"
+                              >Si</label
+                            >
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="desparacitacionNo"
+                              formControlName="desparacitacion"
+                              name="desparacitacion"
+                              value="NO"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="desparacitacionNo"
+                              >No</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group"
+                        [hidden]="
+                          formPrimeraConsulta.get('desparacitacion')?.value !==
+                          'SI'
+                        "
+                      >
+                        <div class="pregunta">
+                          ¿Cuál fue la ultima desparacitación?
+                        </div>
+                        <div>
+                          <select
+                            class="form-control input"
+                            formControlName="detalleDesparacitacion"
+                          >
+                            <option
+                              *ngFor="let desparacitacion of desparacitaciones"
+                              [value]="desparacitacion"
+                            >
+                              {{ desparacitacion }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group centrar">
+                      <div class="pregunta">¿Vacunaciones?</div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="vacunacionSi"
+                              formControlName="vacunacion"
+                              name="vacunacion"
+                              value="SI"
+                            />
+                            <label class="form-check-label" for="vacunacionSi"
+                              >Si</label
+                            >
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="vacunacionNo"
+                              formControlName="vacunacion"
+                              name="vacunacion"
+                              value="NO"
+                            />
+                            <label class="form-check-label" for="vacunacionNo"
+                              >No</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="form-group"
+                        [hidden]="
+                          formPrimeraConsulta.get('vacunacion')?.value !== 'SI'
+                        "
+                      >
+                        <div class="pregunta">¿Cuáles son las vacunas?</div>
+                        <select
+                          multiple
+                          class="form-control input"
+                          formControlName="detalleVacunas"
+                        >
+                          <option
+                            *ngFor="let vacuna of vacunas"
+                            [value]="vacuna"
+                          >
+                            {{ vacuna }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-sm-12 col-md-6 col-lg-6">
+                    <div class="form-group centrar">
+                      <div class="pregunta">Convive con otros animales?</div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="conviveSi"
+                              formControlName="convivenciaConAnimales"
+                              name="convivenciaConAnimales"
+                              value="SI"
+                            />
+                            <label class="form-check-label" for="conviveSi"
+                              >Si</label
+                            >
+                          </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              id="conviveNO"
+                              formControlName="convivenciaConAnimales"
+                              name="convivenciaConAnimales"
+                              value="NO"
+                            />
+                            <label class="form-check-label" for="conviveNO"
+                              >No</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        class="form-group"
+                        *ngIf="
+                          formPrimeraConsulta.get('convivenciaConAnimales')
+                            ?.value === 'SI'
+                        "
+                      >
+                        <div class="pregunta">Cuales?</div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="detalleConvivencia"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-dismiss="modal"
+                (click)="resetFormPrimeraConsulta()"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                aria-label="Close"
+                (click)="guardarPrimeraConsulta()"
               >
                 Guardar datos
               </button>

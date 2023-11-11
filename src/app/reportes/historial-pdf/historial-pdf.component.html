@@ -62,40 +62,47 @@
                       <div class="row">
                         <div class="col-sm-4">
                           <p class="text-sm">
-                            <b>Nombre: </b>{{ datosMascota.nombreMascota }}
+                            <b>Nombre: </b
+                            >{{ datosMascota.mascota?.nombreMascota }}
                           </p>
                         </div>
                         <div class="col-sm-4">
                           <p class="text-sm">
-                            <b>Especie: </b>{{ datosMascota.nombreMascota }}
+                            <b>Especie: </b
+                            >{{ datosMascota.mascota?.nombreMascota }}
                           </p>
                         </div>
                         <div class="col-sm-4">
                           <p class="text-sm">
-                            <b>Raza: </b>{{ datosMascota.raza?.descripcion }}
+                            <b>Raza: </b
+                            >{{ datosMascota.mascota?.raza?.descripcion }}
                           </p>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-sm-4">
                           <p class="text-sm">
-                            <b>Sexo: </b>{{ datosMascota.sexo }}
+                            <b>Sexo: </b>{{ datosMascota.mascota?.sexo }}
                           </p>
                         </div>
                         <div class="col-sm-4">
                           <p class="text-sm">
-                            <b>Color: </b>{{ datosMascota.color }}
+                            <b>Color: </b>{{ datosMascota.mascota?.color }}
                           </p>
                         </div>
                         <div class="col-sm-4">
                           <p class="text-sm">
                             <b>Edad: </b
                             >{{
-                              calcularEdad(datosMascota.fecha_nacimiento).anios
+                              calcularEdad(
+                                datosMascota.mascota?.fecha_nacimiento
+                              ).anios
                             }}
                             años
                             {{
-                              calcularEdad(datosMascota.fecha_nacimiento).meses
+                              calcularEdad(
+                                datosMascota.mascota?.fecha_nacimiento
+                              ).meses
                             }}
                             meses
                           </p>
@@ -111,28 +118,30 @@
                       <div class="row">
                         <div class="col-sm-6">
                           <p class="text-sm">
-                            <b>Nombre: </b>{{ datosMascota.dueno?.nombres }}
-                            {{ datosMascota.dueno?.apellidoPaterno }}
-                            {{ datosMascota.dueno?.apellidoMaterno }}
+                            <b>Nombre: </b
+                            >{{ datosMascota.mascota?.dueno?.nombres }}
+                            {{ datosMascota.mascota?.dueno?.apellidoPaterno }}
+                            {{ datosMascota.mascota?.dueno?.apellidoMaterno }}
                           </p>
                         </div>
                         <div class="col-sm-6">
                           <p class="text-sm">
                             <b>Dirección: </b
-                            >{{ datosMascota.dueno?.direccion }}
+                            >{{ datosMascota.mascota?.dueno?.direccion }}
                           </p>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-sm-6">
                           <p class="text-sm">
-                            <b>Teléfono: </b>{{ datosMascota.dueno?.telefono }}
+                            <b>Teléfono: </b
+                            >{{ datosMascota.mascota?.dueno?.telefono }}
                           </p>
                         </div>
                         <div class="col-sm-6">
                           <p class="text-sm">
                             <b>Correo electrónico: </b
-                            >{{ datosMascota.dueno?.correo }}
+                            >{{ datosMascota.mascota?.dueno?.correo }}
                           </p>
                         </div>
                       </div>
@@ -142,10 +151,10 @@
               </div>
               <div class="col-3">
                 <img
-                [src]="
-                  datosMascota.foto
-                      ? datosMascota?.foto
-                      : datosMascota?.idEspecie === 1
+                  [src]="
+                    datosMascota?.mascota?.foto
+                      ? datosMascota?.mascota?.foto
+                      : datosMascota?.mascota?.idEspecie === 1
                       ? '../../../assets/dist/img/avatarPerro.png'
                       : '../../../assets/dist/img/avatarGato.png'
                   "

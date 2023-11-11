@@ -20,13 +20,13 @@
     <div class="card">
       <div class="card-header headerCardConsultas">
         <div class="row">
-
           <div class="col-md-3">
             <button
               type="button"
               class="btn btn-block bg-gradient-info"
               data-toggle="modal"
-              data-target="#modalDueno"  *ngIf="esRol('Administrador') || esRol('Veterinario')"
+              data-target="#modalDueno"
+              *ngIf="esRol('Administrador') || esRol('Veterinario')"
             >
               <i class="nav-icon fas fa-solid fa-plus"></i> Registrar Dueño
             </button>
@@ -44,7 +44,6 @@
                 (input)="buscarDueno()"
                 placeholder="Buscar dueño por nombre"
               />
-
             </div>
           </div>
         </div>
@@ -87,12 +86,20 @@
                     <td>
                       <div class="d-inline-block">
                         <a
-                          class="btn btn-success btn-sm"
+                          class="btn btn-info btn-sm"
                           href="javascript:void(0);"
                           (click)="abrirVentanaMascotas(item.idDuenos)"
                         >
                           <i class="fas fa-eye"> </i>
-                          Ver mas
+                          Ver información
+                        </a>&nbsp;
+                        <a
+                          class="btn btn-danger btn-sm"
+                          href="javascript:void(0);"
+                          (click)="eliminarDueno(item.idDuenos)"
+                        >
+                          <i class="fas fa-trash"></i>
+
                         </a>
                       </div>
                     </td>
@@ -101,7 +108,7 @@
               </table>
               <div class="d-flex justify-content-center">
                 <pagination-controls
-                  (pageChange)="p = $event"
+                  (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"
                 ></pagination-controls>
               </div>
             </div>
@@ -137,8 +144,6 @@
                       class="form-control"
                       formControlName="nombreD"
                       (blur)="verNombreError = true"
-                      [(ngModel)]="textoEnMayusculas"
-                      (input)="convertirAMayusculas()"
                     />
                     <app-error-message
                       [error]="formRegistrarDueno.get('nombreD')?.errors"
@@ -154,8 +159,6 @@
                       class="form-control"
                       formControlName="apellidoPD"
                       (blur)="verApellidoPError = true"
-                      [(ngModel)]="textoEnMayusculas"
-                      (input)="convertirAMayusculas()"
                     />
                     <app-error-message
                       [error]="formRegistrarDueno.get('apellidoPD')?.errors"
@@ -174,7 +177,6 @@
                       formControlName="apellidoMD"
                       (blur)="verApellidoMError = true"
 
-                      (input)="convertirAMayusculas()"
                     />
                     <app-error-message
                       [error]="formRegistrarDueno.get('apellidoMD')?.errors"
@@ -190,16 +192,13 @@
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Ingrese el teléfono"
                       formControlName="celularD"
                       (blur)="verCelularError = true"
-
                     />
                     <app-error-message
                       [error]="formRegistrarDueno.get('celularD')?.errors"
                       [showError]="verCelularError"
                     ></app-error-message>
-
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -209,10 +208,7 @@
                       type="text"
                       class="form-control"
                       formControlName="direccionD"
-                      placeholder="Ingrese la dirección de su domicilio"
                       (blur)="verDireccionError = true"
-                      [(ngModel)]="textoEnMayusculas"
-                      (input)="convertirAMayusculas()"
                     />
                     <app-error-message
                       [error]="formRegistrarDueno.get('direccionD')?.errors"
@@ -239,28 +235,22 @@
                     ></app-error-message>
                   </div>
                 </div>
-
               </div>
             </form>
-              <div class="modal-footer justify-content-between">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Cerrar
-                </button>
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  (click)="guardarDueno()"
-                  data-dismiss="modal"
-                  [disabled]="!formRegistrarDueno.valid"
-                >
-                  Guardar datos
-                </button>
-              </div>
-
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="guardarDueno()"
+                data-dismiss="modal"
+                [disabled]="!formRegistrarDueno.valid"
+              >
+                Guardar datos
+              </button>
+            </div>
           </div>
         </div>
       </div>

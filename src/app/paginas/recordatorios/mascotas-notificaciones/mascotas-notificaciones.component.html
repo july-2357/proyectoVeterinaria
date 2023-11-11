@@ -20,10 +20,18 @@
       </div>
       <!-- /.container-fluid -->
     </div>
+    <ngx-spinner type="ball-scale-multiple">
+      <div
+        class="spinner"
+        bdOpacity="0.6"
+        bdColor=" rgba(117, 227, 231, 0.8)"
+      ></div>
+      <div class="textSpinner">Enviando mensaje...</div>
+    </ngx-spinner>
 
     <div class="row">
-      <!-- PARA LAS VACUNAS -->
       <section class="col-sm-3 col-lg-12 connectedSortable">
+        <!-- PARA LAS VACUNAS -->
         <div class="card">
           <div class="card-header">
             <h3 class="card-title text-center">
@@ -64,6 +72,16 @@
                       <li class="small">
                         <b>Revacunación: </b>
                         {{ item.vacuna.fecha_revacunacion }}
+
+                        <div class="dias">
+                          (Faltan
+                          {{
+                            calcularDiasfaltantes(
+                              item.vacuna.fecha_revacunacion
+                            )
+                          }}
+                          días)
+                        </div>
                       </li>
                     </ul>
                     <button
@@ -122,6 +140,15 @@
                       <li class="small">
                         <b>Proxima visita: </b>
                         {{ item.desparacitacion.fecha_proxima_desparacitacion }}
+                        <div class="dias">
+                          (Faltan
+                          {{
+                            calcularDiasfaltantes(
+                              item.desparacitacion.fecha_proxima_desparacitacion
+                            )
+                          }}
+                          días)
+                        </div>
                       </li>
                     </ul>
                     <button
@@ -180,6 +207,15 @@
                       <li class="small">
                         <b>Proxima consulta: </b>
                         {{ item.consulta.fecha_prox_visita }}
+                        <div class="dias">
+                          (Faltan
+                          {{
+                            calcularDiasfaltantes(
+                              item.consulta.fecha_prox_visita
+                            )
+                          }}
+                          días)
+                        </div>
                       </li>
                     </ul>
                     <button

@@ -1,19 +1,17 @@
 <button
-type="button"
-class="btn btn-block bg-gradient-info"
-data-toggle="modal"
-data-target="#modalEditarMascota"
+  type="button"
+  class="btn btn-block bg-gradient-info"
+  data-toggle="modal"
+  data-target="#modalEditarMascota"
 >
- Actualizar datos
+  Actualizar datos
 </button>
- <!-- Editar Mascota -->
- <div class="modal fade" id="modalEditarMascota">
+<!-- Editar Mascota -->
+<div class="modal fade" id="modalEditarMascota">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #16817a">
-        <h4 class="modal-title" style="color: #ffffff">
-          Actualizar datos
-        </h4>
+        <h4 class="modal-title" style="color: #ffffff">Actualizar datos</h4>
         <button
           type="button"
           class="close"
@@ -29,7 +27,6 @@ data-target="#modalEditarMascota"
             <div class="col-sm-12 col-md-6 col-lg-12">
               <div class="form-row">
                 <div class="col-sm-12 col-md-6 col-lg-6">
-
                   <div class="form-group">
                     <label>Nombre de la mascota</label>
                     <input
@@ -55,7 +52,6 @@ data-target="#modalEditarMascota"
               </div>
               <div class="form-row">
                 <div class="col-sm-12 col-md-6 col-lg-3">
-
                   <div class="form-group">
                     <label>Color</label>
                     <input
@@ -99,6 +95,7 @@ data-target="#modalEditarMascota"
                       class="form-control"
                       formControlName="editarfechaNac"
                       placeholder="Ingrese fecha nac"
+                      readonly
                     />
                   </div>
                 </div>
@@ -137,8 +134,8 @@ data-target="#modalEditarMascota"
                         formControlName="editarsexoM"
                       >
                         <option value="">Selecionar sexo</option>
-                        <option value="Macho">Macho</option>
-                        <option value="Hembra">Hembra</option>
+                        <option value="MACHO">Macho</option>
+                        <option value="HEMBRA">Hembra</option>
                       </select>
                     </div>
                   </div>
@@ -175,11 +172,7 @@ data-target="#modalEditarMascota"
             </div>
           </div>
           <div class="modal-footer justify-content-between">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
               Cerrar
             </button>
             <button

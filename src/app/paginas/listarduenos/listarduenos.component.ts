@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { DuenosService } from 'src/app/services/duenos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -28,13 +29,15 @@ export class ListarduenosComponent implements OnInit {
   verCorreoError = false;
   buscarTexto: string = '';
   listaDuenos: any = []; //   Variable global para guardar la inf
-  p: number=1;
+  p: number = 1;
   textoEnMayusculas: string = '';
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private duenosService: DuenosService, private cookieService:CookieService
+    private duenosService: DuenosService,
+    private cookieService: CookieService,
+    private toastr: ToastrService
   ) {}
 
   construirFormulario() {
@@ -47,13 +50,10 @@ export class ListarduenosComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('^[A-Za-z\\s]*$')],
       ],
-      apellidoMD: [' ', [Validators.pattern('^[A-Za-z\\s]*$')]],
-      celularD: [
-        ' ',
-        [Validators.required, Validators.minLength(7), Validators.maxLength(8)],
-      ],
-      direccionD: [' ', [Validators.required]],
-      correoD: [' ', [Validators.email]],
+      apellidoMD: ['', [Validators.pattern('^[A-Za-z\\s]*$')]],
+      celularD: ['', [Validators.pattern('^[0-9]{7,8}$')]],
+      direccionD: ['', [Validators.required]],
+      correoD: ['', [Validators.email]],
     });
   }
   resetForm() {
@@ -74,47 +74,79 @@ export class ListarduenosComponent implements OnInit {
   async guardarDueno() {
     if (this.formRegistrarDueno.valid) {
       let usuarioEnviar: any = {
-        nombres: this.formRegistrarDueno.get('nombreD')?.value,
-        apellidoPaterno: this.formRegistrarDueno.get('apellidoPD')?.value,
-        apellidoMaterno: this.formRegistrarDueno.get('apellidoMD')?.value,
+        nombres: this.formRegistrarDueno.get('nombreD')?.value.toUpperCase(),
+        apellidoPaterno: this.formRegistrarDueno.get('apellidoPD')?.value.toUpperCase(),
+        apellidoMaterno: this.formRegistrarDueno.get('apellidoMD')?.value.toUpperCase(),
         telefono: this.formRegistrarDueno.get('celularD')?.value,
         correo: this.formRegistrarDueno.get('correoD')?.value,
-        direccion: this.formRegistrarDueno.get('direccionD')?.value,
+        direccion: this.formRegistrarDueno.get('direccionD')?.value.toUpperCase(),
       };
       let respuesta = await this.duenosService.enviarCrearDuenoService(
         usuarioEnviar
       );
       if ((respuesta.statusCode = 200)) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Se registro al dueño',
-          showConfirmButton: true,
-          timer: 1500,
-        });
+        this.toastr.success(
+          'Se registro al dueño' +
+            this.formRegistrarDueno.get('nombreD')?.value +
+            ' ' +
+            this.formRegistrarDueno.get('apellidoPD')?.value +
+            ' ' +
+            this.formRegistrarDueno.get('apellidoMD')?.value,
+          'Proceso correcto!'
+        );
         this.obtenerDuenos();
         this.resetForm();
       } else {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          title: 'Revise los datos.',
-          showConfirmButton: true,
+          text: 'Revise sus datos, e intente nuevamente',
+          showConfirmButton: false,
+          width: '400px',
           timer: 1500,
         });
       }
-      console.log(respuesta);
     } else {
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'Revise los datos.',
-        showConfirmButton: true,
-        timer: 1500,
+        text: 'Los datos del formulario no son validos',
+        showConfirmButton: false,
+        width: '400px',
+        timer: 1300,
       });
     }
     this.resetForm();
   }
+
+  async eliminarDueno(idDueno: number) {
+    Swal.fire({
+      text: '¿Esta seguro de eliminar al dueño y sus mascotas?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      width: '350px',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        let respuesta = await this.duenosService.eliminarDuenoServices(idDueno);
+        if ((respuesta.statusCode = 200)) {
+          this.toastr.success('Se elimino al dueño.', 'Proceso correcto !');
+          this.obtenerDuenos();
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            text: 'Revise sus datos, e intente nuevamente',
+            showConfirmButton: false,
+            width: '400px',
+            timer: 1300,
+          });
+        }
+      }
+    });
+  }
+
   async obtenerDuenos() {
     try {
       // el back esta como quieres
@@ -165,8 +197,5 @@ export class ListarduenosComponent implements OnInit {
   esRol(rol: string): boolean {
     const roles = this.cookieService.get('rol');
     return roles === rol;
-  }
-  convertirAMayusculas() {
-    this.textoEnMayusculas = this.textoEnMayusculas.toUpperCase();
   }
 }

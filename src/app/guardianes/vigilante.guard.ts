@@ -23,8 +23,14 @@ export class VigilanteGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+      if(localStorage.getItem('idLoginUsuario')!=undefined  ||localStorage.getItem('idLoginUsuario')!=null ){
+        return true;
+      }else{
+        this.router.navigate(['/login']);
+        return false;
+      }
 
-   return true; //Se estadejando entrear (true)
+   //Se estadejando entrear (true)
    // return this.checkUserLogin(route);
   }
   checkUserLogin(route: ActivatedRouteSnapshot): boolean {

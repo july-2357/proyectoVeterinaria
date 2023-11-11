@@ -35,4 +35,23 @@ export class MascotasService {
       throw error;
     }
   }
+  async eliminarMascotaServices(idMascota: number) {
+    const url = `https://localhost:7101/api/Mascota/EliminarMascota/${idMascota}`;
+    try {
+      const resultado = await this.http.delete<any>(url).toPromise();
+      return resultado;
+    } catch (error) {
+      console.error('Error al eliminar', error);
+      throw error;
+    }
+  }
+  // async eliminarMascotaServices(idMascota: Number) {
+  //   try {
+  //     let listar=`https://localhost:7101/api/Mascota/EliminarMascota?mascotaId=${idMascota}`;
+  //     let resultado= await this.http.get<any>(listar).toPromise();
+  //     return resultado;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }

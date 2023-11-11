@@ -14,16 +14,15 @@
               <div class="text-center">
                 <h4>Mascota</h4>
                 <img
-                  class="profile-user-img img-fluid"
-                  [src]="
-                  datos.foto
-                      ? datos?.foto
-                      : datos?.idEspecie === 1
-                      ? '../../../assets/dist/img/avatarGato.png'
-                      : '../../../assets/dist/img/avatarPerro.png'
-                  "
-                  alt="User profile picture"
-                />
+                    class="profile-user-img img-fluid"
+                    [src]="
+                      datos.foto
+                        ? datos?.foto
+                        : datos?.raza.idEspecie === 1
+                        ? '../../../assets/dist/img/avatarPerro.png'
+                        : '../../../assets/dist/img/avatarGato.png'
+                    "
+                  />
               </div>
             </div>
             <h3
@@ -42,21 +41,26 @@
               </li>
               <li class="list-group-item">
                 <b>Edad</b>
-                <a class="float-right" style="color: #000000">{{ calcularEdad(datos.fecha_nacimiento).anios}} años {{ calcularEdad(datos.fecha_nacimiento).meses }} meses</a>
+                <a class="float-right" style="color: #000000"
+                  >{{ calcularEdad(datos?.fecha_nacimiento).anios }}
+                  años
+                  {{ calcularEdad(datos?.fecha_nacimiento).meses }}
+                  meses</a
+                >
               </li>
               <li class="list-group-item">
                 <b>Especie</b>
                 <a
                   class="float-right"
                   style="color: #000000"
-                  *ngIf="datos.raza.idEspecie === 1"
+                  *ngIf="datos?.raza?.idEspecie === 1"
                 >
                   Canino</a
                 >
                 <a
                   class="float-right"
                   style="color: #000000"
-                  *ngIf="datos.raza.idEspecie === 2"
+                  *ngIf="datos?.raza?.idEspecie === 2"
                 >
                   Felino</a
                 >
@@ -64,26 +68,30 @@
               <li class="list-group-item">
                 <b>Raza</b>
                 <a class="float-right" style="color: #000000">{{
-                  datos.raza.descripcion
+                  datos?.raza?.descripcion
                 }}</a>
               </li>
               <li class="list-group-item">
                 <b>Sexo</b>
                 <a class="float-right" style="color: #000000">{{
-                  datos.sexo
+                  datos?.sexo
                 }}</a>
               </li>
               <li class="list-group-item">
                 <b>Tatuaje</b>
                 <a class="float-right" style="color: #000000">{{
-                  datos.tatuaje
+                  datos?.tatuaje
                 }}</a>
               </li>
             </ul>
 
-            <app-actualizar-mascota [idMascota]="datos.idMascota"               *ngIf="esRol('Administrador') || esRol('Veterinario')"
+            <app-actualizar-mascota
+              [idMascota]="datos?.idMascota"
+              *ngIf="esRol('Administrador') || esRol('Veterinario')"
             ></app-actualizar-mascota>
-          <app-historial-pdf [idMascota]="datos.idMascota"></app-historial-pdf>
+            <app-historial-pdf
+              [idMascota]="datos?.idMascota"
+            ></app-historial-pdf>
           </div>
         </div>
       </div>
@@ -108,7 +116,7 @@
                   {{ datos.dueno.apellidoPaterno }}
                 </dd>
                 <dt class="col-sm-5">Dirección</dt>
-                <dd class="col-sm-7">{{datos.dueno.direccion}}</dd>
+                <dd class="col-sm-7">{{ datos.dueno.direccion }}</dd>
               </dl>
             </div>
 
@@ -132,8 +140,8 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#desparacitacion" data-toggle="tab"
-                  >Desparasitaciones </a
-                >
+                  >Desparasitaciones
+                </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#cirugias" data-toggle="tab"
@@ -205,12 +213,12 @@
                         Detalle Vacuna
                       </h5>
                       <button
-                      type="button"
-                      class="btn btn-danger"
-                      data-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Cerrar
+                      </button>
                     </div>
                     <div class="modal-body" *ngIf="detalleVacuna">
                       <div class="row">
@@ -261,7 +269,8 @@
                               <strong>Temperatura</strong>
                             </dt>
                             <dd class="col-sm-7 small">
-                              {{ detalleVacuna.datosControlFisico.temperatura }} ºC
+                              {{ detalleVacuna.datosControlFisico.temperatura }}
+                              ºC
                             </dd>
                             <dt class="col-sm-5 small">
                               <strong>Peso</strong>
@@ -275,7 +284,8 @@
                             <dd class="col-sm-7 small">
                               {{
                                 detalleVacuna.datosControlFisico.frecCardiaca
-                              }} LPM
+                              }}
+                              LPM
                             </dd>
                             <dt class="col-sm-5 small">
                               <strong>Frecuencia respiratoria</strong>
@@ -284,13 +294,13 @@
                               {{
                                 detalleVacuna.datosControlFisico
                                   .frecRespiratoria
-                              }} RPM
+                              }}
+                              RPM
                             </dd>
                           </dl>
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -351,12 +361,12 @@
                         Detalle Desparasitación
                       </h5>
                       <button
-                      type="button"
-                      class="btn btn-danger"
-                      data-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Cerrar
+                      </button>
                     </div>
                     <div class="modal-body" *ngIf="detalleDesparacitacion">
                       <div class="row">
@@ -437,7 +447,8 @@
                               {{
                                 detalleDesparacitacion.datosControlFisico
                                   .temperatura
-                              }} ºC
+                              }}
+                              ºC
                             </dd>
                             <dt class="col-sm-5 small">
                               <strong>Peso</strong>
@@ -445,7 +456,8 @@
                             <dd class="col-sm-7 small">
                               {{
                                 detalleDesparacitacion.datosControlFisico.peso
-                              }} KG
+                              }}
+                              KG
                             </dd>
                             <dt class="col-sm-5 small">
                               <strong>Frecuencia cardiaca</strong>
@@ -454,7 +466,8 @@
                               {{
                                 detalleDesparacitacion.datosControlFisico
                                   .frecCardiaca
-                              }} LPM
+                              }}
+                              LPM
                             </dd>
                             <dt class="col-sm-5 small">
                               <strong>Frecuencia respiratoria</strong>
@@ -463,7 +476,8 @@
                               {{
                                 detalleDesparacitacion.datosControlFisico
                                   .frecRespiratoria
-                              }} RPM
+                              }}
+                              RPM
                             </dd>
                           </dl>
                         </div>
@@ -486,10 +500,10 @@
                   </thead>
                   <tbody *ngFor="let item of listaCirugias; let i = index">
                     <tr>
-                      <td>{{i+1}}</td>
-                      <td>{{item.tipo_cirugia}}</td>
-                      <td>{{item.fecha_cirugia}}</td>
-                      <td>{{item.descripcion_cirugia}}</td>
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.tipo_cirugia }}</td>
+                      <td>{{ item.fecha_cirugia }}</td>
+                      <td>{{ item.descripcion_cirugia }}</td>
                       <td>
                         <button
                           class="btn btn-info btn-xs"
@@ -521,12 +535,12 @@
                         Detalle Cirugia
                       </h5>
                       <button
-                      type="button"
-                      class="btn btn-danger"
-                      data-dismiss="modal"
-                    >
-                      Cerrar
-                    </button>
+                        type="button"
+                        class="btn btn-danger"
+                        data-dismiss="modal"
+                      >
+                        Cerrar
+                      </button>
                     </div>
 
                     <div class="modal-body" *ngIf="detalleCirugia">
@@ -541,29 +555,29 @@
                           </div>
                         </div>
                         <div class="col-sm-9">
-                          <ul class="list-group list-group-unbordered sm-2" >
+                          <ul class="list-group list-group-unbordered sm-2">
                             <li class="list-group-item">
                               <b>Fecha de cirugia: </b>
                               <a class="float-right" style="color: #000000">
-                                {{detalleCirugia.fecha_cirugia}}
+                                {{ detalleCirugia.fecha_cirugia }}
                               </a>
                             </li>
                             <li class="list-group-item">
                               <b>Tipo de cirugia: </b>
                               <a class="float-right" style="color: #000000">
-                                {{detalleCirugia.tipo_cirugia}}
+                                {{ detalleCirugia.tipo_cirugia }}
                               </a>
                             </li>
                             <li class="list-group-item">
                               <b>Descripción: </b>
                               <a class="float-right" style="color: #000000">
-                                {{detalleCirugia.descripcion_cirugia}}
+                                {{ detalleCirugia.descripcion_cirugia }}
                               </a>
                             </li>
                             <li class="list-group-item">
                               <b>Observaciones adicionales:</b>
                               <a class="float-right" style="color: #000000">
-                                {{detalleCirugia.observaciones_cirugia}}
+                                {{ detalleCirugia.observaciones_cirugia }}
                               </a>
                             </li>
                           </ul>
@@ -581,23 +595,26 @@
                                 </dt>
                                 <dd class="col-sm-7 small">
                                   {{
-                                    detalleCirugia.datosAnamnecis.alteracionesRes
-                                    }}
+                                    detalleCirugia.datosAnamnecis
+                                      .alteracionesRes
+                                  }}
                                 </dd>
                                 <dt class="col-sm-5 small">
                                   <strong>Alteraciones neurológicas</strong>
                                 </dt>
                                 <dd class="col-sm-7 small">
                                   {{
-                                      detalleCirugia.datosAnamnecis
-                                        .alteracionesNeuro
-                                    }}
+                                    detalleCirugia.datosAnamnecis
+                                      .alteracionesNeuro
+                                  }}
                                 </dd>
                                 <dt class="col-sm-5 small">
                                   <strong>Problemas urinarios</strong>
                                 </dt>
                                 <dd class="col-sm-7 small">
-                                  {{ detalleCirugia.datosAnamnecis.problemasUr }}
+                                  {{
+                                    detalleCirugia.datosAnamnecis.problemasUr
+                                  }}
                                 </dd>
                                 <dt class="col-sm-5 small">
                                   <strong>Ingesta de agua</strong>
@@ -638,22 +655,27 @@
                                 </dt>
                                 <dd class="col-sm-7 small">
                                   {{
-                                detalleCirugia.datosControlFisico.temperatura
-                              }} ºC
+                                    detalleCirugia.datosControlFisico
+                                      .temperatura
+                                  }}
+                                  ºC
                                 </dd>
                                 <dt class="col-sm-5 small">
                                   <strong>Peso</strong>
                                 </dt>
                                 <dd class="col-sm-7 small">
-                                  {{ detalleCirugia.datosControlFisico.peso }} KG
+                                  {{ detalleCirugia.datosControlFisico.peso }}
+                                  KG
                                 </dd>
                                 <dt class="col-sm-5 small">
                                   <strong>Frecuencia cardiaca</strong>
                                 </dt>
                                 <dd class="col-sm-7 small">
                                   {{
-                                detalleCirugia.datosControlFisico.frecCardiaca
-                              }} LPM
+                                    detalleCirugia.datosControlFisico
+                                      .frecCardiaca
+                                  }}
+                                  LPM
                                 </dd>
                                 <dt class="col-sm-5 small">
                                   <strong>Frecuencia respiratoria</strong>
@@ -661,8 +683,9 @@
                                 <dd class="col-sm-7 small">
                                   {{
                                     detalleCirugia.datosControlFisico
-                                  .frecRespiratoria
-                              }} LPM
+                                      .frecRespiratoria
+                                  }}
+                                  LPM
                                 </dd>
                               </dl>
                             </div>
@@ -844,7 +867,8 @@
                               <dd class="col-sm-7 small">
                                 {{
                                   detalleConsulta.datosControlFisico.temperatura
-                                }} ºC
+                                }}
+                                ºC
                               </dd>
                               <dt class="col-sm-5 small">
                                 <strong>Peso</strong>
@@ -859,7 +883,8 @@
                                 {{
                                   detalleConsulta.datosControlFisico
                                     .frecCardiaca
-                                }} LPM
+                                }}
+                                LPM
                               </dd>
                               <dt class="col-sm-5 small">
                                 <strong>Frecuencia respiratoria</strong>
@@ -868,7 +893,8 @@
                                 {{
                                   detalleConsulta.datosControlFisico
                                     .frecRespiratoria
-                                }} RPM
+                                }}
+                                RPM
                               </dd>
                             </dl>
                           </div>
@@ -876,12 +902,9 @@
                       </div>
                     </div>
                   </div>
-
-
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

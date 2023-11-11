@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   formIngresar: FormGroup;
   isLoggin$: Observable<boolean>;
-  private isAuthenticated = false;
+  private autenticado = false;
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
@@ -27,7 +28,6 @@ export class LoginComponent implements OnInit {
       correo: ['', [Validators.required]],
       contrasena: ['', [Validators.required]],
     });
-    console.log(this.formIngresar);
   }
   ngOnInit(): void {
     this.construirFormulario();
@@ -40,39 +40,49 @@ export class LoginComponent implements OnInit {
         password: this.formIngresar.get('contrasena')?.value,
       };
 
-      console.log(this.formIngresar.value);
-      console.log('--------------');
       let respuesta = await this.loginService.enviarLoginService(loginEnviar);
-      console.log('--------------');
-      console.log(respuesta);
       if (respuesta.token) {
-        var token = respuesta.token;
         const tokenParts = respuesta.token.split('.');
         const decodedClaims = JSON.parse(atob(tokenParts[1]));
         this.cookieService.set('rol', decodedClaims.role, 1, '/');
-        this.isAuthenticated = true;
+        this.autenticado = true;
         localStorage.setItem('idLoginUsuario', decodedClaims.Id);
-        console.log('el rol es: ' + decodedClaims.role);
         this.router.navigate(['principal/inicio']);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          text: 'Bienvenido ' + decodedClaims.nombreUsuarioLogeado,
+          showConfirmButton: false,
+          width: '400px',
+          timer: 1300,
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          text: 'Datos incorrectos',
+          width: '350px',
+          showConfirmButton: false,
+          timer: 1300,
+        });
       }
     } else {
-      // alert('Formulario Invalido');
       Swal.fire({
         icon: 'error',
         title: '¡Error!',
         text: 'Debe llenar los campos para ingresar.',
-        confirmButtonColor: '#d33',
-        confirmButtonText: 'Cerrar',
+        width: '350px',
+        showConfirmButton: false,
+        timer: 1300,
       });
 
       console.log(this.formIngresar);
     }
   }
   logout() {
-    // Realizar la lógica de cierre de sesión aquí, como limpiar tokens o datos de usuario
-    this.isAuthenticated = false;
+    this.autenticado = false;
   }
   isAuthenticatedUser() {
-    return this.isAuthenticated;
+    return this.autenticado;
   }
 }

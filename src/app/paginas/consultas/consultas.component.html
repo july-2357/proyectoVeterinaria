@@ -44,7 +44,6 @@
                   >CIRUGIAS</a
                 >
               </li>
-
             </ul>
           </div>
 
@@ -511,11 +510,6 @@
                           <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Motivo de la consulta</label>
-                              <!-- <input
-                                type="text"
-                                class="form-control"
-                                formControlName="motivoConsulta"
-                              /> -->
                               <textarea
                                 id="inputMessage"
                                 class="form-control"
@@ -528,11 +522,11 @@
                             <div class="form-group">
                               <label>Diágnostico</label>
                               <textarea
-                              id="inputMessage"
-                              class="form-control"
-                              rows="2"
-                              formControlName="diagnosticoConsulta"
-                            ></textarea>
+                                id="inputMessage"
+                                class="form-control"
+                                rows="2"
+                                formControlName="diagnosticoConsulta"
+                              ></textarea>
                             </div>
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-4">
@@ -540,16 +534,15 @@
                               <label>Tratamiento</label>
 
                               <textarea
-                              id="inputMessage"
-                              class="form-control"
-                              rows="2"
-                              formControlName="tratamiento"
-                            ></textarea>
+                                id="inputMessage"
+                                class="form-control"
+                                rows="2"
+                                formControlName="tratamiento"
+                              ></textarea>
                             </div>
                           </div>
                         </div>
                         <div class="row">
-
                           <div class="col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                               <label>Precio</label>
@@ -557,8 +550,15 @@
                                 type="text"
                                 class="form-control"
                                 formControlName="precioConsulta"
-
+                                (blur)="verPrecioCError = true"
                               />
+                              <app-error-message
+                                [error]="
+                                  formRegistrarConsulta.get('precioConsulta')
+                                    ?.errors
+                                "
+                                [showError]="verPrecioCError"
+                              ></app-error-message>
                             </div>
                           </div>
 
@@ -886,14 +886,22 @@
                           />
                         </div>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="col-sm-12 col-md-6 col-lg-2">
                         <div class="form-group">
                           <label>Precio</label>
                           <input
                             type="text"
                             class="form-control"
                             formControlName="precioVacunacion"
+                            (blur)="verPrecioVError = true"
                           />
+                          <app-error-message
+                            [error]="
+                              formRegistrarVacuna.get('precioVacunacion')
+                                ?.errors
+                            "
+                            [showError]="verPrecioVError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
@@ -1127,7 +1135,16 @@
                             type="text"
                             class="form-control"
                             formControlName="precioDesparasitacion"
+                            (blur)="verPrecioDError = true"
                           />
+                          <app-error-message
+                            [error]="
+                              formRegistrarDesparacitacion.get(
+                                'precioDesparasitacion'
+                              )?.errors
+                            "
+                            [showError]="verPrecioDError"
+                          ></app-error-message>
                         </div>
                       </div>
                     </div>
@@ -1569,7 +1586,7 @@
                                     'frecuenciaRespiratoriaCirugia'
                                   )?.errors
                                 "
-                                [showError]="verFCCiError"
+                                [showError]="verFRCiError"
                               ></app-error-message>
                             </div>
                           </div>
@@ -1641,17 +1658,18 @@
                           </div>
                           <div class="col-sm-12 col-md-6 col-lg-8">
                             <div class="form-group">
-                              <label>Descripcion</label>
-                              <input
-                                type="text"
+                              <label>Descripción</label>
+                              <textarea
+                                id="inputMessage"
                                 class="form-control"
+                                rows="2"
                                 formControlName="descripcionCirugia"
-                              />
+                              ></textarea>
                             </div>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-sm-12 col-md-6 col-lg-8">
+                          <div class="col-sm-12 col-md-6 col-lg-6">
                             <div class="form-group">
                               <label>Observaciones adicionales</label>
                               <input
@@ -1672,14 +1690,22 @@
                               />
                             </div>
                           </div>
-                          <div class="col-sm-12 col-md-6 col-lg-8">
+                          <div class="col-sm-12 col-md-6 col-lg-2">
                             <div class="form-group">
                               <label>Precio</label>
                               <input
                                 type="text"
                                 class="form-control"
                                 formControlName="precioCirugia"
+                                (blur)="verPrecioCiError = true"
                               />
+                              <app-error-message
+                                [error]="
+                                  formRegistrarCirugia.get('precioCirugia')
+                                    ?.errors
+                                "
+                                [showError]="verPrecioCiError"
+                              ></app-error-message>
                             </div>
                           </div>
                         </div>
@@ -1802,7 +1828,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -1812,7 +1837,7 @@
           <div class="tarjeta">
             <div class="card lineaArriba">
               <div class="card-header">
-                <h3 class="card-title">INFORMACÓN DE LA MASCOTA</h3>
+                <h3 class="card-title">INFORMACIÓN DE LA MASCOTA</h3>
               </div>
               <div class="card-body">
                 <div class="text-center">
@@ -1826,6 +1851,15 @@
                         : '../../../assets/dist/img/avatarGato.png'
                     "
                   />
+                  <div>
+                    <a
+                      class="btn btn-primary bg-info btn-block btnHistorial"
+                      idMascota=""
+                      (click)="navegarVentanaHistorial(datosMascota)"
+                    >
+                      Historial
+                    </a>
+                  </div>
                 </div>
                 <dl class="row">
                   <dt class="col-sm-4">Mascota</dt>
@@ -1847,10 +1881,6 @@
                   <dd class="col-sm-8">
                     {{ datosMascota.sexo }}
                   </dd>
-                  <dt class="col-sm-4">Tatuaje</dt>
-                  <dd class="col-sm-8">
-                    {{ datosMascota.tatuaje }}
-                  </dd>
                   <dt class="col-sm-4">Especie</dt>
                   <dd class="col-sm-8" *ngIf="datosMascota.idEspecie === 1">
                     Canino
@@ -1866,7 +1896,7 @@
         <div *ngIf="!datosMascota">
           <div class="card lineaArriba">
             <div class="card-header">
-              <h3 class="card-title">INFORMACION DE LA MASCOTA</h3>
+              <h3 class="card-title">INFORMACIÓN DE LA MASCOTA</h3>
             </div>
 
             <div class="card-body">
@@ -1880,9 +1910,9 @@
                   >
                     <option
                       *ngFor="let item of listaMascotas"
-                      [value]="item.idMascota"
+                      [value]="item.mascota?.idMascota"
                     >
-                      {{ item.nombreMascota }}
+                      {{ item.mascota.nombreMascota }}
                     </option>
                   </select>
                 </div>
@@ -1899,6 +1929,15 @@
                         : '../../../assets/dist/img/avatarGato.png'
                     "
                   />
+                  <div>
+                    <a
+                      class="btn btn-primary bg-info btn-block btnHistorial"
+                      idMascota=""
+                      (click)="navegarVentanaHistorial(mascotaSeleccionada)"
+                    >
+                      Historial
+                    </a>
+                  </div>
                 </div>
                 <dl class="row">
                   <dt class="col-sm-4">Mascota</dt>
@@ -1926,10 +1965,6 @@
                   <dt class="col-sm-4">Sexo</dt>
                   <dd class="col-sm-8">
                     {{ mascotaSeleccionada?.sexo }}
-                  </dd>
-                  <dt class="col-sm-4">Tatuaje</dt>
-                  <dd class="col-sm-8">
-                    {{ mascotaSeleccionada?.tatuaje }}
                   </dd>
                   <dt class="col-sm-4">Especie</dt>
                   <dd

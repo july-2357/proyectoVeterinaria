@@ -3,27 +3,33 @@
   class="btn btn-block bg-danger btn-sm"
   data-toggle="modal"
   data-target="#modalReporteMascotas"
-> <i class="nav-icon fas fa-solid fa-file-pdf"></i>
- Mascotas registradas PDF
+>
+  <i class="nav-icon fas fa-solid fa-file-pdf"></i>
+  Mascotas registradas PDF
 </button>
 <div class="modal fade" id="modalReporteMascotas">
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="verMasModalLabel"> sadas</h5>
-        <div> <button
-          type="button"
-          class="btn btn-danger"
-          (click)="generarPDF()"
-          data-dismiss="modal"
-        >
-          Descargar
-        </button>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button></div>
-
-
+        <h5 class="modal-title" id="verMasModalLabel">sadas</h5>
+        <div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="generarPDF()"
+            data-dismiss="modal"
+          >
+            Descargar
+          </button>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
       </div>
       <div class="modal-body">
         <section class="content">
@@ -52,9 +58,9 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <p class="text">
-                        <b>Usuario: </b>{{ datosUsuario.nombres }}
-                        {{ datosUsuario.apellidoPaterno }}
-                        {{ datosUsuario.apellidoMaterno }}
+                        <b>Usuario: </b>{{ datosUsuario.mascota?.nombres }}
+                        {{ datosUsuario.mascota?.apellidoPaterno }}
+                        {{ datosUsuario.mascota?.apellidoMaterno }}
                       </p>
                     </div>
                     <div class="col-sm-6">
@@ -87,20 +93,30 @@
                   <tbody>
                     <tr *ngFor="let item of listaMascotas; let i = index">
                       <th scope="row">{{ i + 1 }}</th>
-                      <td>{{ item.nombreMascota }}</td>
+                      <td>{{ item.mascota?.nombreMascota }}</td>
                       <td>
-                        {{ item.raza.idEspecie === 1 ? "Canino" : "Felino" }}
+                        {{
+                          item.mascota?.raza?.idEspecie === 1
+                            ? "Canino"
+                            : "Felino"
+                        }}
                       </td>
-                      <td>{{ item.raza.descripcion }}</td>
-                      <td>{{ item.sexo }}</td>
+                      <td>{{ item.mascota?.raza?.descripcion }}</td>
+                      <td>{{ item.mascota?.sexo }}</td>
                       <td>
-                        {{ calcularEdad(item.fecha_nacimiento).anios }} años
-                        {{ calcularEdad(item.fecha_nacimiento).meses }} meses
+                        {{
+                          calcularEdad(item.mascota?.fecha_nacimiento).anios
+                        }}
+                        años
+                        {{
+                          calcularEdad(item.mascota?.fecha_nacimiento).meses
+                        }}
+                        meses
                       </td>
                       <td>
-                        {{ item.dueno?.nombres }}
-                        {{ item.dueno?.apellidoPaterno }}
-                        {{ item.dueno?.apellidoMaterno }}
+                        {{ item.mascota?.dueno?.nombres }}
+                        {{ item.mascota?.dueno?.apellidoPaterno }}
+                        {{ item.mascota?.dueno?.apellidoMaterno }}
                       </td>
                     </tr>
                   </tbody>
@@ -109,7 +125,6 @@
             </div>
           </div>
         </section>
-
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-actualizar-usuario',
@@ -10,6 +11,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class ActualizarUsuarioComponent implements OnInit {
   formActualizarUsuario: FormGroup;
+  idUsuario: any;
   // Variables para los errores
   showPasswordError = false;
   showNombresError = false;
@@ -50,76 +52,77 @@ export class ActualizarUsuarioComponent implements OnInit {
             ],
             carnet: [
               datosAntiguosUsuario.carnet,
-              [Validators.required, Validators.minLength(8)],
+              [Validators.required, Validators.pattern('^[1-9][0-9]*$')],
             ],
             celular: [
               datosAntiguosUsuario.celular,
               [
                 Validators.required,
-                Validators.minLength(7),
-                Validators.maxLength(8),
+                Validators.pattern('^[0-9]{7,8}$'),
               ],
             ],
             direccion: [datosAntiguosUsuario.direccion, [Validators.required]],
-            correo: [
-              datosAntiguosUsuario.correo,
-              [Validators.required, Validators.email],
-            ],
           });
-        } else {
-          // Manejo de errores si la respuesta no es 200
         }
       } catch (error) {
         console.error('Error al obtener datos de usuario', error);
-        // Manejo de errores
       }
     }
   }
-
   ngOnInit(): void {
     this.construirFormularioActualizarUsuario();
+    if (localStorage.getItem('idLoginUsuario')) {
+      this.idUsuario = localStorage.getItem('idLoginUsuario');
+    }
   }
 
   async actualizarUsuario() {
     if (this.formActualizarUsuario.valid) {
       let usuario: any = {
-        nombres: this.formActualizarUsuario.get('primerNombreU')?.value.toUpperCase(),
-        apellidoPaterno: this.formActualizarUsuario.get('primerApellidoU')?.value.toUpperCase(),
-        apellidoMaterno: this.formActualizarUsuario.get('segundoApellidoU')?.value.toUpperCase(),
+        nombres: this.formActualizarUsuario
+          .get('primerNombreU')
+          ?.value.toUpperCase(),
+        apellidoPaterno: this.formActualizarUsuario
+          .get('primerApellidoU')
+          ?.value.toUpperCase(),
+        apellidoMaterno: this.formActualizarUsuario
+          .get('segundoApellidoU')
+          ?.value.toUpperCase(),
         carnet: this.formActualizarUsuario.get('carnet')?.value.toUpperCase(),
-        celular: this.formActualizarUsuario.get('celular')?.value.toUpperCase(),
-        correo: this.formActualizarUsuario.get('correo')?.value.toUpperCase(),
-        direccion: this.formActualizarUsuario.get('direccion')?.value.toUpperCase(),
+        celular: this.formActualizarUsuario.get('celular')?.value,
+        correo: 'correo@gmail.com',
+        direccion: this.formActualizarUsuario
+          .get('direccion')
+          ?.value.toUpperCase(),
         idCuentaIdentity: localStorage.getItem('idLoginUsuario'),
-        fotografia:''
+        fotografia: null,
       };
-      console.log(usuario);
-      // let respuesta = await this.mascotasService.enviarCrearMascota(
-      //   mascotaEnviar
-      // );
-      // if ((respuesta.statusCode = 200)) {
-      //   Swal.fire({
-      //     position: 'center',
-      //     icon: 'success',
-      //     title: 'Se registro la mascota',
-      //     showConfirmButton: true,
-      //     timer: 1500,
-      //   });
-      //   this.obtenerMascotas();
-      //   this.resetForm();
-      // } else {
-      //   Swal.fire({
-      //     position: 'center',
-      //     icon: 'error',
-      //     title: 'Verifique los datos.',
-      //     showConfirmButton: true,
-      //     timer: 1500,
-      //   });
-      // }
+
+      let respuesta = await this.usuariosSevice.ActualizarDatosUsuarioService(
+        this.idUsuario,
+        false,
+        'opcional',
+        usuario
+      );
+      if (respuesta.statusCode === 200) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Se actualizaron los datos del usuario',
+          showConfirmButton: true,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Verifique los datos.',
+          showConfirmButton: true,
+          timer: 1500,
+        });
+      }
     } else {
       alert('Formulario Invalido');
-      console.log(this.formActualizarUsuario.value);
     }
-
   }
 }

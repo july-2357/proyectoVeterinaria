@@ -36,10 +36,18 @@ export class ConsultasMService {
     let resultado = await this.http.post<any>(crear, cuerpo).toPromise();
     return resultado;
   }
+  async enviarCrearPrimeraConsulta(cuerpo: FormData) {
+    try {
+      let crear = `https://localhost:7101/api/PrimeraConsulta/RegistrarPrimeraConsulta`;
+      let resultado = await this.http.post<any>(crear, cuerpo).toPromise();
+      return resultado;
+    } catch (error) {
+      console.error('Error al obtener el historial de mascota:', error);
+      throw error;
+    }
+  }
   async obtenerHistorialMascota(idMascota: number) {
     const url = `https://localhost:7101/api/ConsultaMedica/obtenerHistorialMascota?idMascota=${idMascota}`;
-
-
     try {
       const resultado = await this.http.get<any>(url).toPromise();
       return resultado;

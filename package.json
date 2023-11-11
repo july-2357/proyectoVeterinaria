@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.2.0",
+    "@angular/animations": "^14.3.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
@@ -28,6 +28,8 @@
     "ngx-cookie-service": "^14.0.0",
     "ngx-fullcalendar": "^5.0.0-alpha.1",
     "ngx-pagination": "^6.0.3",
+    "ngx-spinner": "^14.0.0",
+    "ngx-toastr": "^15.2.2",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",

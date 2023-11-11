@@ -5,6 +5,8 @@ import { MascotasService } from 'src/app/services/mascotas.service';
 import { ConsultasMService } from 'src/app/services/consultas-m.service';
 import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-consultas',
   templateUrl: './consultas.component.html',
@@ -27,21 +29,26 @@ export class ConsultasComponent implements OnInit {
   verFCVError = false;
   verFRVError = false;
   verPesoVError = false;
+  verPrecioVError = false;
+
   //errores de consultas
   verTempCError = false;
   verFCCError = false;
   verFRCError = false;
   verPesoCError = false;
+  verPrecioCError = false;
   //errores de desparacitaciones
   verTempDError = false;
   verFCDError = false;
   verFRDError = false;
   verPesoDError = false;
+  verPrecioDError = false;
   //errores de cirugias
   verTempCiError = false;
   verFCCiError = false;
   verFRCiError = false;
   verPesoCiError = false;
+  verPrecioCiError = false;
 
   //Para obtenet la fecha actual
   currentDate: string;
@@ -50,13 +57,13 @@ export class ConsultasComponent implements OnInit {
     private consultasService: ConsultasMService,
     private enviarDatosService: EnviarDatosService,
     private mascotasService: MascotasService,
-    private datePipe: DatePipe
+    private toastr: ToastrService,private router:Router
   ) {}
 
   ngOnInit(): void {
     if (this.enviarDatosService.getDatos() != null) {
       this.datosMascota = this.enviarDatosService.getDatos();
-
+      console.log(this.datosMascota);
       this.idMascota = this.datosMascota.idMascota;
     } else {
       this.datosMascota = '';
@@ -73,32 +80,36 @@ export class ConsultasComponent implements OnInit {
     this.enviarDatosService.limpiarDatos();
   }
   resetFormVac() {
-    this.formRegistrarVacuna.reset(); // Restablece el formulario a su estado inicial
+    this.formRegistrarVacuna.reset();
     this.verTempVError = false;
     this.verFCVError = false;
     this.verFRVError = false;
     this.verPesoVError = false;
+    this.verPrecioVError = false;
   }
   resetFormCon() {
-    this.formRegistrarConsulta.reset(); // Restablece el formulario a su estado inicial
+    this.formRegistrarConsulta.reset();
     this.verTempCError = false;
     this.verFCCError = false;
     this.verFRCError = false;
     this.verPesoCError = false;
+    this.verPrecioCError = false;
   }
   resetFormDes() {
-    this.formRegistrarDesparacitacion.reset(); // Restablece el formulario a su estado inicial
+    this.formRegistrarDesparacitacion.reset();
     this.verTempDError = false;
     this.verFCDError = false;
     this.verFRDError = false;
     this.verPesoDError = false;
+    this.verPrecioDError = false;
   }
   resetFormCir() {
-    this.formRegistrarCirugia.reset(); // Restablece el formulario a su estado inicial
+    this.formRegistrarCirugia.reset();
     this.verTempCiError = false;
     this.verFCCiError = false;
     this.verFRCiError = false;
     this.verPesoCiError = false;
+    this.verPrecioCiError = false;
   }
   construirFormularioConsulta() {
     this.formRegistrarConsulta = this.formBuilder.group({
@@ -129,14 +140,17 @@ export class ConsultasComponent implements OnInit {
       ],
       precioConsulta: [
         '',
-        [Validators.required, Validators.pattern('^[0-9]+([,.][0-9]+)?$')],
+        [
+          Validators.required,
+          Validators.pattern('^(?!0*[.,]?0*$)\\d+(?:[.,]\\d+)?$'),
+        ],
       ],
       /*Consulta medica */
       motivoConsulta: ['', [Validators.required]],
       diagnosticoConsulta: ['', [Validators.required]],
       tratamiento: ['', [Validators.required]],
       fechaConsulta: ['', [Validators.required]],
-      proxVisita: ['', [Validators.required]],
+      proxVisita: [''],
     });
   }
   construirFormularioVacuna() {
@@ -154,19 +168,19 @@ export class ConsultasComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('^[1-9][0-9]*$')],
       ],
-      pesoVacunas: [
-        '',
-        [Validators.pattern('^[0-9]+([,.][0-9]+)?$')],
-      ],
+      pesoVacunas: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$')]],
       /*Datos de  la vacuna */
       vacunaCanino: [''],
       vacunaFelino: [''],
       laboratorioVacuna: ['', []],
       fechadeVacunacion: ['', [Validators.required]],
-      fechadeREVacunacion: ['', [Validators.required]],
+      fechadeREVacunacion: [' '],
       precioVacunacion: [
         '',
-        [Validators.required, Validators.pattern('^[0-9]+([,.][0-9]+)?$')],
+        [
+          Validators.required,
+          Validators.pattern('^(?!0*[.,]?0*$)\\d+(?:[.,]\\d+)?$'),
+        ],
       ],
     });
   }
@@ -197,9 +211,12 @@ export class ConsultasComponent implements OnInit {
       fechaDesparacitacion: ['', [Validators.required]],
       precioDesparasitacion: [
         '',
-        [Validators.required, Validators.pattern('^[0-9]+([,.][0-9]+)?$')],
+        [
+          Validators.required,
+          Validators.pattern('^(?!0*[.,]?0*$)\\d+(?:[.,]\\d+)?$'),
+        ],
       ],
-      fechaProximaAplicacionDespa: ['', [Validators.required]],
+      fechaProximaAplicacionDespa: [''],
     });
   }
   construirFormularioCirugias() {
@@ -235,7 +252,10 @@ export class ConsultasComponent implements OnInit {
       observacionesCirugia: ['', [Validators.required]],
       precioCirugia: [
         '',
-        [Validators.required, Validators.pattern('^[0-9]+([,.][0-9]+)?$')],
+        [
+          Validators.required,
+          Validators.pattern('^(?!0*[.,]?0*$)\\d+(?:[.,]\\d+)?$'),
+        ],
       ],
       fechaCirugia: ['', [Validators.required]],
     });
@@ -243,6 +263,15 @@ export class ConsultasComponent implements OnInit {
   async guardarDesparacitacion() {
     if (this.idMascota != null) {
       if (this.formRegistrarDesparacitacion.valid) {
+        var fechaDesparacitacion = new Date(
+          this.formRegistrarDesparacitacion.get('fechaDesparacitacion')?.value
+        );
+        var fechaProximaAplicacionDespa = new Date(
+          this.formRegistrarDesparacitacion.get(
+            'fechaProximaAplicacionDespa'
+          )?.value
+        );
+        const fechaActual = new Date();
         let controlFisicoEnviar: any = {
           temperatura: this.formRegistrarDesparacitacion.get(
             'temperaturaDesparacitacion'
@@ -257,55 +286,138 @@ export class ConsultasComponent implements OnInit {
             ?.value,
           idMascota: this.idMascota,
         };
-        const idControlFisico = await this.registrarControlFisico(
-          controlFisicoEnviar
-        );
-        let desparacitacionEnviar: any = {
-          fecha_desparacitacion: this.formRegistrarDesparacitacion.get(
-            'fechaDesparacitacion'
-          )?.value,
-          fecha_proxima_desparacitacion: this.formRegistrarDesparacitacion.get(
-            'fechaProximaAplicacionDespa'
-          )?.value,
-          principio_activo:
-            this.formRegistrarDesparacitacion.get('principioActivo')?.value,
-          producto_desparacitacion: this.formRegistrarDesparacitacion.get(
-            'productoDesparacitacion'
-          )?.value,
-          precio:
-            this.formRegistrarDesparacitacion.get('precioDesparasitacion')?.value,
+        if (!fechaProximaAplicacionDespa) {
+          if (
+            fechaDesparacitacion <= fechaActual &&
+            fechaDesparacitacion <
+              new Date(
+                this.formRegistrarDesparacitacion.get(
+                  'fechaProximaAplicacionDespa'
+                )?.value
+              )
+          ) {
+            const idControlFisico = await this.registrarControlFisico(
+              controlFisicoEnviar
+            );
+            let desparacitacionEnviar: any = {
+              fecha_desparacitacion: this.formRegistrarDesparacitacion.get(
+                'fechaDesparacitacion'
+              )?.value,
+              fecha_proxima_desparacitacion:
+                this.formRegistrarDesparacitacion.get(
+                  'fechaProximaAplicacionDespa'
+                )?.value,
+              principio_activo: this.formRegistrarDesparacitacion
+                .get('principioActivo')
+                ?.value.toUpperCase(),
+              producto_desparacitacion: this.formRegistrarDesparacitacion
+                .get('productoDesparacitacion')
+                ?.value.toUpperCase(),
+              precio: this.formRegistrarDesparacitacion.get(
+                'precioDesparasitacion'
+              )?.value,
 
-          tipo_desparacitacion: this.formRegistrarDesparacitacion.get(
-            'tipoDesparacitacion'
-          )?.value,
-          via_desparacitcion:
-            this.formRegistrarDesparacitacion.get('viaDesparacitacion')?.value,
+              tipo_desparacitacion: this.formRegistrarDesparacitacion
+                .get('tipoDesparacitacion')
+                ?.value.toUpperCase(),
+              via_desparacitcion: this.formRegistrarDesparacitacion
+                .get('viaDesparacitacion')
+                ?.value.toUpperCase(),
+              id_control_fisico: idControlFisico,
+              id_mascota: this.idMascota,
+            };
+            let respuesta =
+              await this.consultasService.enviarCrearDesparacitacion(
+                desparacitacionEnviar
+              );
+            if ((respuesta.statusCode = 200)) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Se registro desparacitación',
+                showConfirmButton: false,
+                width: '350px',
+                timer: 1500,
+              });
+              this.resetFormDes();
+            }
+          } else if (
+            fechaDesparacitacion >
+            new Date(
+              this.formRegistrarDesparacitacion.get(
+                'fechaProximaAplicacionDespa'
+              )?.value
+            )
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en las fechas',
+              text: 'La fecha de próxima desparasitación debe ser posterior a la fecha de desparasitación actual.',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en la fecha de desparasitación',
+              text: 'La fecha de desparasitación debe ser menor o igual a la fecha actual.',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido',
+            });
+          }
+        } else {
+          const idControlFisico = await this.registrarControlFisico(
+            controlFisicoEnviar
+          );
+          let desparacitacionEnviar: any = {
+            fecha_desparacitacion: this.formRegistrarDesparacitacion.get(
+              'fechaDesparacitacion'
+            )?.value,
+            fecha_proxima_desparacitacion:
+              this.formRegistrarDesparacitacion.get(
+                'fechaProximaAplicacionDespa'
+              )?.value,
+            principio_activo:
+              this.formRegistrarDesparacitacion.get('principioActivo')?.value,
+            producto_desparacitacion: this.formRegistrarDesparacitacion
+              .get('productoDesparacitacion')
+              ?.value.toUpperCase(),
+            precio: this.formRegistrarDesparacitacion.get(
+              'precioDesparasitacion'
+            )?.value,
 
-          id_control_fisico: idControlFisico,
-          id_mascota: this.idMascota,
-        };
-        console.log(desparacitacionEnviar);
-        let respuesta = await this.consultasService.enviarCrearDesparacitacion(
-          desparacitacionEnviar
-        );
-        if ((respuesta.statusCode = 200)) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Se registro la desparacitacion',
-            showConfirmButton: true,
-            timer: 1500,
-          });
-          this.resetFormDes();
+            tipo_desparacitacion: this.formRegistrarDesparacitacion
+              .get('tipoDesparacitacion')
+              ?.value.toUpperCase(),
+            via_desparacitcion: this.formRegistrarDesparacitacion
+              .get('viaDesparacitacion')
+              ?.value.toUpperCase(),
+            id_control_fisico: idControlFisico,
+            id_mascota: this.idMascota,
+          };
+          let respuesta =
+            await this.consultasService.enviarCrearDesparacitacion(
+              desparacitacionEnviar
+            );
+          if ((respuesta.statusCode = 200)) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Se registro desparasitación',
+              showConfirmButton: false,
+              width: '350px',
+              timer: 1500,
+            });
+            this.resetFormDes();
+          }
         }
       }
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Debe seleccionar la mascota',
-        showConfirmButton: true,
-      });
+      this.toastr.error('De bebe seleccionar una mascota', 'Revise los datos!');
     }
   }
   async guardarCirugia() {
@@ -344,13 +456,16 @@ export class ConsultasComponent implements OnInit {
         );
 
         let cirugiaEnviar: any = {
-          tipo_cirugia: this.formRegistrarCirugia.get('tipoCirugia')?.value,
-          precio:this.formRegistrarCirugia.get('precioCirugia')?.value,
-          descripcion_cirugia:
-            this.formRegistrarCirugia.get('descripcionCirugia')?.value,
-          observaciones_cirugia: this.formRegistrarCirugia.get(
-            'observacionesCirugia'
-          )?.value,
+          tipo_cirugia: this.formRegistrarCirugia
+            .get('tipoCirugia')
+            ?.value.toUpperCase(),
+          precio: this.formRegistrarCirugia.get('precioCirugia')?.value,
+          descripcion_cirugia: this.formRegistrarCirugia
+            .get('descripcionCirugia')
+            ?.value.toUpperCase(),
+          observaciones_cirugia: this.formRegistrarCirugia
+            .get('observacionesCirugia')
+            ?.value.toUpperCase(),
           fecha_cirugia: this.formRegistrarCirugia.get('fechaCirugia')?.value,
           id_anamnesis: idAnamnesis,
           id_control_fisico: idControlFisico,
@@ -365,8 +480,9 @@ export class ConsultasComponent implements OnInit {
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Se registro la cirugia',
-            showConfirmButton: true,
+            title: 'Se registro cirugía',
+            showConfirmButton: false,
+            width: '350px',
             timer: 1500,
           });
         } else {
@@ -376,17 +492,19 @@ export class ConsultasComponent implements OnInit {
         console.log(this.formRegistrarConsulta.value);
       }
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Debe seleccionar la mascota',
-        showConfirmButton: true,
-      });
+      this.toastr.error('De bebe seleccionar una mascota', 'Revise los datos!');
     }
   }
   async guardarVacunas() {
     if (this.idMascota != null) {
       if (this.formRegistrarVacuna.valid) {
+        const fechaVacunacion = new Date(
+          this.formRegistrarVacuna.get('fechadeVacunacion')?.value
+        );
+        const fechaProximaAplicacionVacuna = new Date(
+          this.formRegistrarVacuna.get('fechadeREVacunacion')?.value
+        );
+        const fechaActual = new Date();
         let controlVacunaEnviar: any = {
           temperatura:
             this.formRegistrarVacuna.get('temperaturaVacunas')?.value,
@@ -397,56 +515,125 @@ export class ConsultasComponent implements OnInit {
             'frecuenciaRespiratoriaVacunas'
           )?.value,
           peso: this.formRegistrarVacuna.get('pesoVacunas')?.value,
-          precio:this.formRegistrarVacuna.get('pesoVaprecioVacuna')?.value,
+          precio: this.formRegistrarVacuna.get('pesoVaprecioVacuna')?.value,
           idMascota: this.idMascota,
         };
-        const idControlFisico = await this.registrarControlFisico(
-          controlVacunaEnviar
-        );
+        if (!fechaProximaAplicacionVacuna) {
+          if (
+            fechaVacunacion <= fechaActual &&
+            fechaVacunacion <
+              new Date(
+                this.formRegistrarVacuna.get('fechadeREVacunacion')?.value
+              )
+          ) {
+            const idControlFisico = await this.registrarControlFisico(
+              controlVacunaEnviar
+            );
 
-        let vacunaEnviar: any = {
-          descripcion_vacuna:
-            this.formRegistrarVacuna.get('vacunaCanino')?.value ||
-            this.formRegistrarVacuna.get('vacunaFelino')?.value,
-          laboratorio: this.formRegistrarVacuna.get('laboratorioVacuna')?.value,
-          fecha_vacunacion:
-            this.formRegistrarVacuna.get('fechadeVacunacion')?.value,
-          fecha_revacunacion: this.formRegistrarVacuna.get(
-            'fechadeREVacunacion'
-          )?.value,
-          precio:this.formRegistrarVacuna.get('precioVacunacion')?.value,
-          id_mascota: this.idMascota,
-          id_control_fisico: idControlFisico,
-        };
-        let respuesta = await this.consultasService.enviarCrearVacuna(
-          vacunaEnviar
-        );
-        if ((respuesta.statusCode = 200)) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Se registro la vacuna',
-            showConfirmButton: true,
-            timer: 1500,
-          });
-          this.resetFormVac();
+            let vacunaEnviar: any = {
+              descripcion_vacuna:
+                this.formRegistrarVacuna
+                  .get('vacunaCanino')
+                  ?.value.toUpperCase() ||
+                this.formRegistrarVacuna
+                  .get('vacunaFelino')
+                  ?.value.toUpperCase(),
+              laboratorio: this.formRegistrarVacuna
+                .get('laboratorioVacuna')
+                ?.value.toUpperCase(),
+              fecha_vacunacion:
+                this.formRegistrarVacuna.get('fechadeVacunacion')?.value,
+              fecha_revacunacion: this.formRegistrarVacuna.get(
+                'fechadeREVacunacion'
+              )?.value,
+              precio: this.formRegistrarVacuna.get('precioVacunacion')?.value,
+              id_mascota: this.idMascota,
+              id_control_fisico: idControlFisico,
+            };
+            let respuesta = await this.consultasService.enviarCrearVacuna(
+              vacunaEnviar
+            );
+            if ((respuesta.statusCode = 200)) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Se registro la vacuna',
+                showConfirmButton: false,
+                width: '350px',
+                timer: 1500,
+              });
+              this.resetFormVac();
+            }
+          } else if (
+            fechaVacunacion >
+            new Date(this.formRegistrarVacuna.get('fechadeREVacunacion')?.value)
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en las fechas',
+              text: 'La fecha de próxima vacuna debe ser posterior a la fecha de vacunación actual.',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en la fecha de Vacunación',
+              text: 'La fecha de vacunación debe ser menor o igual a la fecha actual.',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido',
+            });
+          }
+        } else {
+          const idControlFisico = await this.registrarControlFisico(
+            controlVacunaEnviar
+          );
+
+          let vacunaEnviar: any = {
+            descripcion_vacuna:
+              this.formRegistrarVacuna
+                .get('vacunaCanino')
+                ?.value.toUpperCase() ||
+              this.formRegistrarVacuna.get('vacunaFelino')?.value.toUpperCase(),
+            laboratorio: this.formRegistrarVacuna
+              .get('laboratorioVacuna')
+              ?.value.toUpperCase(),
+            fecha_vacunacion:
+              this.formRegistrarVacuna.get('fechadeVacunacion')?.value,
+            fecha_revacunacion: this.formRegistrarVacuna.get(
+              'fechadeREVacunacion'
+            )?.value,
+            precio: this.formRegistrarVacuna.get('precioVacunacion')?.value,
+            id_mascota: this.idMascota,
+            id_control_fisico: idControlFisico,
+          };
+          let respuesta = await this.consultasService.enviarCrearVacuna(
+            vacunaEnviar
+          );
+          if ((respuesta.statusCode = 200)) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Se registro la vacuna',
+              showConfirmButton: false,
+              width: '350px',
+              timer: 1500,
+            });
+            this.resetFormVac();
+          }
         }
-      } else {
-        console.log(this.formRegistrarConsulta.value);
       }
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Debe seleccionar la mascota',
-        showConfirmButton: true,
-      });
+      this.toastr.error('De bebe seleccionar una mascota', 'Revise los datos!');
     }
   }
   async guardarConsulta() {
     if (this.idMascota != null) {
       if (this.formRegistrarConsulta.valid) {
-        console.log(this.formRegistrarConsulta.value);
         let anamnesisEnviar: any = {
           apetito: this.formRegistrarConsulta.get('apetito')?.value,
           agua: this.formRegistrarConsulta.get('agua')?.value,
@@ -459,7 +646,6 @@ export class ConsultasComponent implements OnInit {
           problemasUr: this.formRegistrarConsulta.get('problemasUr')?.value,
           idMascota: this.idMascota,
         };
-        const idAnamnesis = await this.registrarAnamnesis(anamnesisEnviar);
 
         let controlFisicoEnviar: any = {
           temperatura: this.formRegistrarConsulta.get('temperaturaConsulta')
@@ -473,48 +659,122 @@ export class ConsultasComponent implements OnInit {
           peso: this.formRegistrarConsulta.get('pesoConsulta')?.value,
           idMascota: this.idMascota,
         };
-        const idControlFisico = await this.registrarControlFisico(
-          controlFisicoEnviar
+        var fechaConsulta = new Date(
+          this.formRegistrarConsulta.get('fechaConsulta')?.value
         );
-        let consultaEnviar: any = {
-          motivo_consulta:
-            this.formRegistrarConsulta.get('motivoConsulta')?.value,
-          diagnostico_consulta: this.formRegistrarConsulta.get(
-            'diagnosticoConsulta'
-          )?.value,
-          precio:this.formRegistrarConsulta.get('precioConsulta')?.value,
-          tratamiento: this.formRegistrarConsulta.get('tratamiento')?.value,
-          fecha_prox_visita:
-            this.formRegistrarConsulta.get('proxVisita')?.value,
-          fecha_registro_consulta:
-            this.formRegistrarConsulta.get('fechaConsulta')?.value,
-          id_anamnesis: idAnamnesis,
-          id_control_fisico: idControlFisico,
-          id_mascota: this.idMascota,
-        };
-        let respuesta = await this.consultasService.enviarCrearConsulta(
-          consultaEnviar
+        var fechaProximaConsulta = new Date(
+          this.formRegistrarConsulta.get('proxVisita')?.value
         );
-        if ((respuesta.statusCode = 200)) {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Se registro consulta',
-            showConfirmButton: true,
-            timer: 1500,
-          });
-          this.resetFormCon();
+        var fechaActual = new Date(); // Obtener la fecha actual
+        if (!fechaProximaConsulta) {
+          if (
+            fechaConsulta <= fechaActual &&
+            fechaConsulta <
+              new Date(this.formRegistrarConsulta.get('proxVisita')?.value)
+          ) {
+            const idAnamnesis = await this.registrarAnamnesis(anamnesisEnviar);
+            const idControlFisico = await this.registrarControlFisico(
+              controlFisicoEnviar
+            );
+            let consultaEnviar: any = {
+              motivo_consulta: this.formRegistrarConsulta
+                .get('motivoConsulta')
+                ?.value.toUpperCase(),
+              diagnostico_consulta: this.formRegistrarConsulta
+                .get('diagnosticoConsulta')
+                ?.value.toUpperCase(),
+              precio: this.formRegistrarConsulta.get('precioConsulta')?.value,
+              tratamiento: this.formRegistrarConsulta
+                .get('tratamiento')
+                ?.value.toUpperCase(),
+              fecha_prox_visita:
+                this.formRegistrarConsulta.get('proxVisita')?.value,
+              fecha_registro_consulta:
+                this.formRegistrarConsulta.get('fechaConsulta')?.value,
+              id_anamnesis: idAnamnesis,
+              id_control_fisico: idControlFisico,
+              id_mascota: this.idMascota,
+            };
+            let respuesta = await this.consultasService.enviarCrearConsulta(
+              consultaEnviar
+            );
+            if ((respuesta.statusCode = 200)) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Se registro consulta',
+                showConfirmButton: false,
+                width: '350px',
+                timer: 1500,
+              });
+              this.resetFormCon();
+            }
+          } else if (
+            fechaConsulta >
+            new Date(this.formRegistrarConsulta.get('proxVisita')?.value)
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en las fechas',
+              text: 'La fecha de próxima visita debe ser posterior a la fecha de consulta.',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en la Fecha Consulta',
+              text: 'La fecha de consulta debe ser menor o igual a la fecha actual.',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Entendido',
+            });
+          }
+        } else {
+          const idAnamnesis = await this.registrarAnamnesis(anamnesisEnviar);
+          const idControlFisico = await this.registrarControlFisico(
+            controlFisicoEnviar
+          );
+          let consultaEnviar: any = {
+            motivo_consulta: this.formRegistrarConsulta
+              .get('motivoConsulta')
+              ?.value.toUpperCase(),
+            diagnostico_consulta: this.formRegistrarConsulta
+              .get('diagnosticoConsulta')
+              ?.value.toUpperCase(),
+            precio: this.formRegistrarConsulta.get('precioConsulta')?.value,
+            tratamiento: this.formRegistrarConsulta
+              .get('tratamiento')
+              ?.value.toUpperCase(),
+            fecha_prox_visita:
+              this.formRegistrarConsulta.get('proxVisita')?.value,
+            fecha_registro_consulta:
+              this.formRegistrarConsulta.get('fechaConsulta')?.value,
+            id_anamnesis: idAnamnesis,
+            id_control_fisico: idControlFisico,
+            id_mascota: this.idMascota,
+          };
+          let respuesta = await this.consultasService.enviarCrearConsulta(
+            consultaEnviar
+          );
+          if ((respuesta.statusCode = 200)) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Se registro consulta',
+              showConfirmButton: false,
+              width: '350px',
+              timer: 1500,
+            });
+            this.resetFormCon();
+          }
         }
-      } else {
-        console.log(this.formRegistrarConsulta.value);
       }
     } else {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Debe seleccionar la mascota',
-        showConfirmButton: true,
-      });
+      this.toastr.error('De bebe seleccionar una mascota', 'Revise los datos!');
     }
   }
   async registrarControlFisico(controlFisicoEnviar: any) {
@@ -536,9 +796,11 @@ export class ConsultasComponent implements OnInit {
     let respuesta = await this.mascotasService.listarMascotasServices(); // mandar el servicio
     this.listaMascotas = respuesta.datos;
     this.mascotaSeleccionada = this.listaMascotas.find(
-      (mascota: any) => mascota.idMascota === idMascotaSeleccionada
+      (mascota: any) => mascota.mascota.idMascota === idMascotaSeleccionada
     );
-    this.idMascota = this.mascotaSeleccionada.idMascota;
+    console.log(this.mascotaSeleccionada);
+    this.mascotaSeleccionada = this.mascotaSeleccionada.mascota;
+    this.idMascota = this.mascotaSeleccionada?.idMascota;
   }
 
   calcularEdad(fechaNacimiento: string): { anios: number; meses: number } {
@@ -559,24 +821,25 @@ export class ConsultasComponent implements OnInit {
   }
   async obtenerMascotas() {
     try {
-      // el back esta como quieres
       let respuesta = await this.mascotasService.listarMascotasServices(); // mandar el servicio
 
       if ((respuesta.statusCode = 200)) {
         this.listaMascotas = respuesta.datos;
       }
-    } catch (error) {
-      // en caso de error
-      //  alert(JSON.stringify(error));
-    }
+    } catch (error) {}
   }
   mostrarDetallesMascota(event: Event) {
     const idMascotaSeleccionada = (event.target as HTMLSelectElement).value;
     if (idMascotaSeleccionada) {
       const idMascota = parseInt(idMascotaSeleccionada, 10);
-      //this.obtenerDetallesMascota(idMascota);
     } else {
-      // Maneja el caso cuando no se ha seleccionado ninguna mascota
+      console.log('No se selecciono mascota');
     }
+  }
+
+  navegarVentanaHistorial(mascota: any) {
+    localStorage.setItem('idMascotaHistorial', mascota.idMascota);
+    localStorage.setItem('idDuenoHistorial', mascota.idDueno);
+    this.router.navigate(['/principal/historial']);
   }
 }

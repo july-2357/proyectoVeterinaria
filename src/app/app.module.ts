@@ -25,7 +25,7 @@ import { RegistrarMascotasComponent } from './paginas/mascotas/registrar-mascota
 import { HistorialPdfComponent } from './reportes/historial-pdf/historial-pdf.component';
 import { ListaMascotasPdfComponent } from './reportes/lista-mascotas-pdf/lista-mascotas-pdf.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {Chart} from 'chart.js';
+import { Chart } from 'chart.js';
 import { registerables } from 'chart.js';
 Chart.register(...registerables);
 import { CommonModule } from '@angular/common';
@@ -39,6 +39,11 @@ import { MascotasNotificacionesComponent } from './paginas/recordatorios/mascota
 import { CamaraComponent } from './elementos/camara/camara.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ActualizarUsuarioComponent } from './paginas/usuarios/actualizar-usuario/actualizar-usuario.component';
+import { UsuariosPdfComponent } from './reportes/usuarios-pdf/usuarios-pdf.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,11 +69,10 @@ import { ActualizarUsuarioComponent } from './paginas/usuarios/actualizar-usuari
     RecordatorioComponent,
     MascotasNotificacionesComponent,
     SafeHtmlPipe,
-    ActualizarUsuarioComponent
-
+    ActualizarUsuarioComponent,
+    UsuariosPdfComponent,
   ],
   imports: [
-
     BrowserModule,
     CommonModule,
     AppRoutingModule,
@@ -87,6 +91,11 @@ import { ActualizarUsuarioComponent } from './paginas/usuarios/actualizar-usuari
         },
       },
     }),
+    BrowserAnimationsModule,
+
+    NgxSpinnerModule,
+    ToastrModule.forRoot(),
+
   ],
   providers: [DatePipe, CookieService],
   bootstrap: [AppComponent],

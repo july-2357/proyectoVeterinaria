@@ -17,16 +17,15 @@
                 [src]="
                   datosUsuario?.fotografia
                     ? datosUsuario?.fotografia
-                    : 'assets/dist/img/avatar2.png'
+                    : 'assets/dist/img/userVeterinario.png'
                 "
                 alt="User profile picture"
               />
-              <a href="#" class="btn bg-teal btn-block"
+              <!-- <a href="#" class="btn bg-teal btn-block"
                 ><b>Actualizar foto</b></a
-              >
+              > -->
 
               <p class="text-muted text-center">Rol: {{ rolusuario }}</p>
-
 
               <app-actualizar-usuario></app-actualizar-usuario>
             </div>
@@ -79,12 +78,6 @@
                   <b>Rol </b>
                   <a class="float-right" style="color: #000000"
                     >Administrador</a
-                  >
-                </li>
-                <li class="list-group-item">
-                  <b>Estado </b>
-                  <a class="float-right" style="color: #000000"
-                    >Activo Inactivo</a
                   >
                 </li>
               </ul>

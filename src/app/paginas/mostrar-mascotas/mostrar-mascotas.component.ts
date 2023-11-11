@@ -73,7 +73,7 @@ private cookieService:CookieService
           datosAntiguosDueno.apellidoMaterno,
           [Validators.required],
         ],
-        editarCelular: [datosAntiguosDueno.telefono, [Validators.required]],
+        editarCelular: [datosAntiguosDueno.telefono, [Validators.pattern('^[0-9]{7,8}$')]],
         editarDireccion: [datosAntiguosDueno.direccion, [Validators.required]],
         editarCorreo: [datosAntiguosDueno.correo, [Validators.required]],
       });

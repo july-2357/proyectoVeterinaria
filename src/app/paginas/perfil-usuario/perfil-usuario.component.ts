@@ -8,11 +8,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class PerfilUsuarioComponent implements OnInit {
   datosUsuario: any;
-  rolusuario:any;
+  rolusuario: any;
   constructor(private usuariosSevice: UsuariosService) {}
 
   ngOnInit(): void {
-   this.mostrarPerfil();
+    this.mostrarPerfil();
   }
   async mostrarPerfil() {
     try {
@@ -24,10 +24,9 @@ export class PerfilUsuarioComponent implements OnInit {
         let respuesta = await this.usuariosSevice.listarUsuariosService(
           usuario
         ); // mandar el servicio
-          this.rolusuario=respuesta.base64;
+        this.rolusuario = respuesta.base64;
         if ((respuesta.statusCode = 200)) {
           this.datosUsuario = respuesta.datos[0];
-          console.log(this.datosUsuario);
         }
       }
     } catch (error) {

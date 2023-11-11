@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-   </div>
+    </div>
 
     <div class="content">
       <div class="container-fluid">
@@ -29,23 +29,17 @@
                       type="button"
                       class="btn btn-block bg-gradient-info"
                       data-toggle="modal"
-                      data-target="#modal-lg"
+                      data-target="#nuevousuario"
                     >
                       <i class="nav-icon fas fa-plus"></i>
                       Nuevo usuario
                     </button>
                   </div>
                   <div class="col-md-3">
-                    <button
-                      type="button"
-                      class="btn btn-block bg-gradient-info"
-                    >
-                      <i class="nav-icon fas fa-solid fa-file-pdf"></i>
-                      Veterinarios Registrados
-                    </button>
+                    <app-usuarios-pdf></app-usuarios-pdf>
                   </div>
                   <div class="col-md-6 col-sm-5">
-                    <div class="input-group ">
+                    <div class="input-group">
                       <input
                         type="text"
                         class="form-control rounded-0"
@@ -53,7 +47,6 @@
                         [(ngModel)]="buscarTexto"
                         (input)="buscarUsuario()"
                       />
-
                     </div>
                   </div>
                 </div>
@@ -62,8 +55,8 @@
           </div>
 
           <!-- /.Modal registrar usuario -->
-          <div class="modal fade" id="modal-lg">
-            <div class="modal-dialog modal-lg">
+          <div class="modal fade" id="nuevousuario">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-header" style="background-color: #16817a">
                   <h4 class="modal-title" style="color: aliceblue">
@@ -87,7 +80,6 @@
                           <input
                             type="text"
                             class="form-control"
-                            placeholder="Ingrese nombre"
                             formControlName="primerNombreU"
                             (blur)="showNombresError = true"
                           />
@@ -103,7 +95,6 @@
                           <input
                             type="text"
                             class="form-control"
-                            placeholder=""
                             formControlName="primerApellidoU"
                             (blur)="showapellidoPError = true"
                           />
@@ -124,7 +115,6 @@
                           <input
                             type="text"
                             class="form-control"
-                            placeholder=""
                             formControlName="segundoApellidoU"
                             (blur)="showapellidoMError = true"
                           />
@@ -136,41 +126,6 @@
                           ></app-error-message>
                         </div>
                       </div>
-                      <div class="col-sm-12 col-md-12 col-lg-6">
-                        <div class="form-group">
-                          <label>Carnet</label>
-                          <input
-                            type="number"
-                            class="form-control"
-                            placeholder=""
-                            formControlName="carnet"
-                            (blur)="showcarnetError = true"
-                          />
-                          <app-error-message
-                            [error]="formRegistrar.get('carnet')?.errors"
-                            [showError]="showcarnetError"
-                          ></app-error-message>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12 col-md-12 col-lg-6">
-                        <div class="form-group">
-                          <label>Célular / Teléfono</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder=""
-                            formControlName="celular"
-                            (blur)="showcelularError = true"
-                          />
-                          <app-error-message
-                            [error]="formRegistrar.get('celular')?.errors"
-                            [showError]="showcelularError"
-                          ></app-error-message>
-                        </div>
-                      </div>
-
                       <div class="col-sm-6 col-md-6 col-lg-6">
                         <div class="form-group">
                           <label>Dirección</label>
@@ -178,7 +133,6 @@
                             type="text"
                             class="form-control"
                             formControlName="direccion"
-                            placeholder=""
                             (blur)="showadireccionError = true"
                           />
                           <app-error-message
@@ -189,6 +143,36 @@
                       </div>
                     </div>
                     <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="form-group">
+                          <label>Carnet</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="carnet"
+                            (blur)="showcarnetError = true"
+                          />
+                          <app-error-message
+                            [error]="formRegistrar.get('carnet')?.errors"
+                            [showError]="showcarnetError"
+                          ></app-error-message>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="form-group">
+                          <label>Célular / Teléfono</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="celular"
+                            (blur)="showcelularError = true"
+                          />
+                          <app-error-message
+                            [error]="formRegistrar.get('celular')?.errors"
+                            [showError]="showcelularError"
+                          ></app-error-message>
+                        </div>
+                      </div>
                       <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>Correo electrónico</label>
@@ -196,7 +180,7 @@
                             type="text"
                             class="form-control"
                             formControlName="correo"
-                            placeholder="Ingrese un nombre de usuario para ingresar al sistema"
+                            placeholder="Correo para ingresar al sistema"
                             (blur)="verCorreoError = true"
                           />
 
@@ -206,6 +190,8 @@
                           ></app-error-message>
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
                       <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="form-group">
                           <label>Contraseña</label>
@@ -213,13 +199,24 @@
                             type="password"
                             class="form-control"
                             formControlName="contrasena"
-                            placeholder="Ingrese una contraseña para ingresar al sistema"
+                            placeholder="Contraseña para ingresar al sistema"
                             (blur)="showPasswordError = true"
                           />
                           <app-error-message
                             [error]="formRegistrar.get('contrasena')?.errors"
                             [showError]="showPasswordError"
                           ></app-error-message>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label>Repetir contraseña</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            formControlName="contrasena2"
+                            placeholder="Repita la contraseña"
+                          />
                         </div>
                       </div>
                       <div class="col-sm-6 col-md-6 col-lg-4">
@@ -240,7 +237,6 @@
                       </div>
                     </div>
 
-
                     <div class="row">
                       <div class="col-12">
                         <div class="input-group mb-3">
@@ -256,37 +252,33 @@
                       </div>
                     </div>
                   </form>
-                    <div class="modal-footer justify-content-between">
-                      <button
-                        type="button"
-                        class="btn btn-danger"
-                        data-dismiss="modal"
-                      >
-                        Cerrar
-                      </button>
-                      <button
-                        type="button"
-                        (click)="guardar()"
-                        class="btn btn-primary"
-                        data-dismiss="modal"
-                        [disabled]="!formRegistrar.valid"
-                      >
-                        Guardar datos
-                      </button>
-                    </div>
-
+                  <div class="modal-footer justify-content-between">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      data-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
+                    <button
+                      type="button"
+                      (click)="guardar()"
+                      class="btn btn-primary"
+                      data-dismiss="modal"
+                      [disabled]="!formRegistrar.valid"
+                    >
+                      Guardar datos
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-    <!-- /.Mostrar usuarios registrados -->
+          <!-- /.Mostrar usuarios registrados -->
           <div class="row">
             <div class="col-12">
               <div class="card">
-                <div
-                  class="card-body table-responsive p-0"
-
-                >
+                <div class="card-body table-responsive p-0">
                   <table class="table table-head-fixed text-nowrap">
                     <thead>
                       <tr>
@@ -304,8 +296,15 @@
                       <div *ngIf="noHayResultados">
                         No se encontraron resultados.
                       </div>
-                      <tr *ngFor="let item of listaUsuarios| paginate: { itemsPerPage: 10, currentPage: pagina };  let i = index">
-                        <td>{{i+1}}</td>
+                      <tr
+                        *ngFor="
+                          let item of listaUsuarios
+                            | paginate
+                              : { itemsPerPage: 10, currentPage: pagina };
+                          let i = index
+                        "
+                      >
+                        <td>{{ i + 1 }}</td>
 
                         <td>
                           {{ item.nombres }} {{ item.apellidoPaterno }}
@@ -318,7 +317,7 @@
                           <img
                             alt="Avatar"
                             class="table-avatar"
-                            style="width: 50px; height:50px"
+                            style="width: 50px; height: 50px"
                             [src]="
                               item.fotografia
                                 ? item.fotografia
@@ -328,7 +327,7 @@
                         </td>
                         <td>
                           <a
-                            class="btn bg-maroon btn-sm"
+                            class="btn bg-info btn-sm"
                             data-toggle="modal"
                             data-target="#asigarRol"
                             href="javascript:void(0);"
@@ -337,9 +336,9 @@
                             <i class="fas fa-add"> </i>
                             Asignar rol
                           </a>
-                          <a class="btn btn-success btn-sm" href="#">
-                            <i class="fas fa-pencil-alt"> </i>
-                            Actualizar datos
+                          &nbsp;
+                          <a class="btn btn-danger btn-sm" href="#">
+                            <i class="fas fa-trash"> </i>
                           </a>
                         </td>
                         <!-- Modal asignar rol -->
@@ -357,16 +356,13 @@
                                         style="display: none"
                                         class="form-control"
                                         formControlName="idUsuario"
-                                        [value]="
-                                          formAsignarRol.get('idUsuario')?.value
-                                        "
                                       />
                                       <div class="form-group">
                                         <label>Usuario</label>
                                         <input
                                           type="text"
                                           class="form-control"
-                                          [placeholder]="item.nombres"
+
                                           formControlName="nombreUsuario"
                                           readOnly
                                         />
@@ -392,36 +388,33 @@
                                   </div>
                                 </form>
                               </div>
-                              <div class="modal-footer justify-content-between">
+                              <div class="modal-footer justify-content-center">
+
                                 <button
-                                  type="button"
-                                  class="btn btn-danger"
-                                  data-dismiss="modal"
-                                >
-                                  Cerrar
-                                </button>
-                                <button
-                                  type="button"
+                                  type="button "
                                   (click)="asignarRol()"
-                                  class="btn btn-primary"
+                                  class="btn btn-primary btn-sm"
                                   data-dismiss="modal"
                                 >
-                                  Guardar datos
+                                 Asignar rol
                                 </button>
                               </div>
                             </div>
                             <!-- /.modal-content -->
                           </div>
                         </div>
-                        <div *ngIf="noHayResultados" class="text-center" >
+                        <div *ngIf="noHayResultados" class="text-center">
                           <h4>No se encontraron resultados.</h4>
                         </div>
                       </tr>
                     </tbody>
                   </table>
                   <div class="d-flex justify-content-center">
-                    <pagination-controls (pageChange)="pagina=$event"></pagination-controls>
-
+                    <pagination-controls
+                      (pageChange)="pagina = $event"
+                      previousLabel="Anterior"
+                      nextLabel="Siguiente"
+                    ></pagination-controls>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -431,7 +424,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>

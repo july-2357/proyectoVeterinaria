@@ -1,49 +1,112 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit } from '@angular/core';
 import { DuenosService } from 'src/app/services/duenos.service';
 import { MascotasService } from 'src/app/services/mascotas.service';
 import { DatePipe } from '@angular/common';
 import { ConsultasMService } from 'src/app/services/consultas-m.service';
 import { Router } from '@angular/router';
+import { Chart } from 'chart.js';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css'],
 })
 export class InicioComponent implements OnInit {
-  listaDuenos: any = []; //   Variable global para guardar la inf
+  listaDuenos: any = [];
   listaMascotas: any = [];
+  listaUsuarios: any = [];
+  nUsuarios: string;
   ultimasMascotas: any = [];
   nDuenos: string;
   nMascotas: string;
-  fechaActual: Date | null = new Date(); // O null si no tienes una fecha inicial
+  nConsultas: any = 0;
+  fechaActual: Date | null = new Date();
   fecha: string | null;
   //variables para guardar las listas
   listaConsultas: any = [];
   listaVacunas: any = [];
   listaDesparacitaciones: any = [];
   listaCirugias: any = [];
+  //variables para guardar las listas
+  listaConsultasGeneral: any = [];
+  listaVacunasGeneral: any = [];
+  listaDesparacitacionesGeneral: any = [];
+  listaCirugiasGeneral: any = [];
   //Variables para las ventas
   ventasVacunas: number = 0;
   ventasConsultas: number = 0;
   ventasDesparacitaciones: number = 0;
   ventasCirugias: number = 0;
   precioDesparacitaciones: any;
-
+  tiempo: string;
   fechaHoy: Date;
+  contenidoSeleccionado: string = 'dia';
   constructor(
     private duenosService: DuenosService,
     private mascotasService: MascotasService,
     private datePipe: DatePipe,
     private consultas: ConsultasMService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
+    private usuariosService: UsuariosService
   ) {
     this.fecha = this.datePipe.transform(this.fechaActual, 'yyyy-MM-dd');
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.spinner.show();
     this.mostrarDuenos();
     this.mostrarMascotas();
+    this.obtenerUsuarios();
     this.ventasPorDia();
+    this.tiempo = 'DIA';
+    this.listaConsultasGeneral = await this.obtenerConsultas();
+    this.listaCirugiasGeneral = await this.obtenerCirugias();
+    this.listaDesparacitacionesGeneral = await this.obtenerDesparacitaciones();
+    this.listaVacunasGeneral = await this.obtenerVacunas();
+    this.nConsultas =
+      this.listaConsultas.length +
+      this.listaCirugias.length +
+      this.listaDesparacitaciones.length +
+      this.listaVacunas.length;
+    this.RenderChart();
+    this.spinner.hide();
+  }
+  RenderChart() {
+    var myChart = new Chart('myChart', {
+      type: 'bar',
+      data: {
+        labels: ['Tipos '],
+        datasets: [
+          {
+            label: 'Vacunas',
+            data: [this.listaVacunasGeneral.length],
+            borderWidth: 1,
+            backgroundColor: ['rgb(5, 59, 80)'],
+          },
+          {
+            label: 'Consultas',
+            data: [this.listaConsultasGeneral.length],
+            borderWidth: 1,
+            backgroundColor: ['rgb(23, 107, 135)'],
+          },
+          {
+            label: 'Desparasitaciones',
+            data: [this.listaDesparacitacionesGeneral.length],
+            borderWidth: 1,
+            backgroundColor: ['rgb(100, 204, 197)'],
+          },
+          {
+            label: 'Cirugias',
+            data: [this.listaCirugiasGeneral.length],
+            borderWidth: 1,
+            backgroundColor: ['rgb(250, 240, 230)'],
+          },
+        ],
+      },
+      options: {},
+    });
   }
   async mostrarDuenos() {
     try {
@@ -71,19 +134,22 @@ export class InicioComponent implements OnInit {
         for (let i = 0; i < this.listaMascotas.length; i++) {
           const mascota = this.listaMascotas[i];
           const fecha = this.datePipe.transform(
-            mascota.fecha_cre,
+            mascota.mascota.fecha_cre,
             'yyyy-MM-dd'
           );
           if (fecha === this.fecha) {
-            this.ultimasMascotas.push(mascota);
+            this.ultimasMascotas.push(mascota.mascota);
           }
         }
       }
     } catch (error) {}
   }
   async obtenerConsultas() {
+    this.spinner.show();
     try {
       let respuesta = await this.consultas.obtenerConsultas(); // mandar el servicio
+      this.spinner.hide();
+
       if ((respuesta.statusCode = 200)) {
         return respuesta.datos;
       }
@@ -121,13 +187,32 @@ export class InicioComponent implements OnInit {
       return error;
     }
   }
+  async obtenerUsuarios() {
+    try {
+      let respuesta = await this.usuariosService.listarUsuariosService(
+        'usuarios'
+      );
 
+      if (respuesta.statusCode === 200) {
+        this.listaUsuarios = respuesta.datos;
+        this.nUsuarios = this.listaUsuarios.length;
+      }
+    } catch (error) {
+      alert(JSON.stringify(error));
+    }
+  }
   cambiarContenido(contenido: string) {
     if (contenido === 'dia') {
+      this.contenidoSeleccionado = 'dia';
       this.ventasPorDia();
+      this.tiempo = 'DIA';
     } else if (contenido === 'mes') {
+      this.contenidoSeleccionado = 'mes';
+      this.tiempo = 'MES';
       this.ventasPorMes();
     } else if (contenido === 'anio') {
+      this.contenidoSeleccionado = 'anio';
+      this.tiempo = 'AÑO';
       this.ventasPorAnio();
     }
   }
@@ -205,10 +290,6 @@ export class InicioComponent implements OnInit {
           }
         }
       }
-      console.log(this.ventasCirugias);
-      console.log(this.ventasConsultas);
-      console.log(this.ventasDesparacitaciones);
-      console.log(this.ventasVacunas);
     } catch (error) {
       console.error('Error en ventasTiempo:', error);
     }
@@ -392,10 +473,6 @@ export class InicioComponent implements OnInit {
           }
         }
       }
-      console.log(this.ventasCirugias);
-      console.log(this.ventasConsultas);
-      console.log(this.ventasDesparacitaciones);
-      console.log(this.ventasVacunas);
     } catch (error) {
       console.error('Error en ventasTiempo:', error);
     }

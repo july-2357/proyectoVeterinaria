@@ -298,6 +298,7 @@
                                 class="form-control"
                                 formControlName="fechaNac"
                                 (blur)="verEdadError = true"
+                                readonly
                               />
 
                               <app-error-message
@@ -450,7 +451,7 @@
             <!-- /.modal-dialog -->
           </div>
 
-          <!-- modal para actualizar duenos  -->
+          <!-- Modal para actualizar duenos  -->
           <div class="modal fade" id="modalActualizarDueno">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -511,7 +512,7 @@
                         <div class="form-group">
                           <label>Teléfono o celular</label>
                           <input
-                            type="number"
+                            type="text"
                             class="form-control"
                             placeholder="Ingrese el teléfono"
                             formControlName="editarCelular"
